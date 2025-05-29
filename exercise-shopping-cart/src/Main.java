@@ -21,6 +21,9 @@ public class Main {
         double productCost = 2.56f;
         double productPrice = 4.99f;
         int productQuantity = 78;
+        String businessName;
+        String contactInformation;
+        String itemDescription;
 
         OrderStatus orderStatus = OrderStatus.PROCESSING;
         ShippingStatus shipStatus = ShippingStatus.TWO_DAY;
