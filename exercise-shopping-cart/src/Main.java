@@ -25,6 +25,11 @@ public class Main {
         double productCost = 2.56f;
         double productPrice = 4.99f;
         int productQuantity = 78;
+        String[] shippingAddresses = {"123 Main St", "456 Main St", "789 Main St"};
+        String[] productSizes = {"small", "medium", "large"};
+        String shipTo = "";
+        String size = "";
+
 
 
         while (true) {
@@ -56,8 +61,32 @@ public class Main {
             }
 
             System.out.println("\n\n");
+            System.out.println("Product Sizes:");
+            for (int i = 0; i < productSizes.length; i++) {
+                System.out.println(i+1 + ". " + productSizes[i]);
+            }
+            System.out.print("Enter size: ");
+            int sizeChoice = Integer.parseInt(io.nextLine());
+            size = productSizes[sizeChoice-1];
+
+
+            System.out.println("\n\n");
             System.out.print("Enter quantity: ");
             int quantity = Integer.parseInt(io.nextLine());
+
+
+
+
+            System.out.println("\n\n");
+            System.out.println("Shipping Addresses:");
+            for (int i = 0; i < shippingAddresses.length; i++) {
+                System.out.println(i+1 + ". " + shippingAddresses[i]);
+            }
+            System.out.print("Which address: ");
+            int shipToChoice = Integer.parseInt(io.nextLine());
+            shipTo = shippingAddresses[shipToChoice-1];
+
+
 
             System.out.println("\n\n");
             System.out.print("Enter Promo Code for free shipping: ");
