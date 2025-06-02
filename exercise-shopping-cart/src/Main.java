@@ -16,8 +16,10 @@ public class Main {
         FREE_SHIPPING
     }
 
+    static Scanner io = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Scanner io = new Scanner(System.in);
+
 
         // Product Details
         int productID = 1;
@@ -33,9 +35,8 @@ public class Main {
 
 
         while (true) {
-            // Exercise Shopping Cart Console IO
-            System.out.print("Are you tax exempt? (Y or y for yes, anything else for no): ");
-            String tax_response = io.nextLine();
+            // Tax Exempt
+            String tax_response = promptUserForString("Are you tax exempt? (Y or y for yes, anything else for no): ");
             Boolean taxExempt;
 
             if (tax_response.equals("y") || tax_response.equals("Y")) {
@@ -44,13 +45,15 @@ public class Main {
                 taxExempt = false;
             }
 
+
+            // Shipping Option
             System.out.println("\n\n");
             System.out.println("Which shipping option would you like?");
-            System.out.println("1. Standard (default)");
-            System.out.println("2. Two-Day");
-            System.out.println("3. Overnight");
-            System.out.print("Make a selection : ");
-            int shipSelection = Integer.parseInt(io.nextLine());
+            String[] shippingChoices = {"Standard (default)", "Two-Day", "Overnight"};
+            displayChoices(shippingChoices);
+
+
+            int shipSelection = promptUserForInt("Make a selection: ");
             ShippingStatus shipStatus = ShippingStatus.STANDARD;
             if (shipSelection == 2) {
                 shipStatus = ShippingStatus.TWO_DAY;
@@ -60,40 +63,35 @@ public class Main {
                 shipStatus = ShippingStatus.STANDARD;
             }
 
+
+            // Product Sizes
             System.out.println("\n\n");
             System.out.println("Product Sizes:");
-            for (int i = 0; i < productSizes.length; i++) {
-                System.out.println(i+1 + ". " + productSizes[i]);
-            }
-            System.out.print("Enter size: ");
-            int sizeChoice = Integer.parseInt(io.nextLine());
+            displayChoices(productSizes);
+            int sizeChoice = promptUserForInt("Enter size: ");
             size = productSizes[sizeChoice-1];
 
 
+            // Quantity
             System.out.println("\n\n");
-            System.out.print("Enter quantity: ");
-            int quantity = Integer.parseInt(io.nextLine());
+            int quantity = promptUserForInt("Enter quantity: ");
 
 
-
-
+            // Shipping Address
             System.out.println("\n\n");
             System.out.println("Shipping Addresses:");
-            for (int i = 0; i < shippingAddresses.length; i++) {
-                System.out.println(i+1 + ". " + shippingAddresses[i]);
-            }
-            System.out.print("Which address: ");
-            int shipToChoice = Integer.parseInt(io.nextLine());
+            displayChoices(shippingAddresses);
+            int shipToChoice = promptUserForInt("Which address: ");
             shipTo = shippingAddresses[shipToChoice-1];
 
 
-
+            // Promo Code
             System.out.println("\n\n");
-            System.out.print("Enter Promo Code for free shipping: ");
-            String promoCode = io.nextLine();
+            String promoCode = promptUserForString("Enter Promo Code for free shipping: ");
 
 
 
+            // Bill Calculations
             double billSubTotal = quantity * productPrice;
             double discount = 0;
             double taxRate;
@@ -162,4 +160,24 @@ public class Main {
 
 
     }
+
+    private static void displayChoices(String[] choices) {
+        for (int i = 0; i < choices.length; i++) {
+            System.out.println((i+1) + ". " + choices[i]);
+        }
+    }
+
+    private static String promptUserForString(String prompt) {
+        System.out.println(prompt);
+        return io.nextLine();
+    }
+
+    private static int promptUserForInt(String prompt) {
+        System.out.println(prompt);
+        return Integer.parseInt(io.nextLine());
+    }
+
+
+
+
 }
