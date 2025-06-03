@@ -11,19 +11,23 @@ public class Main {
     }
 
     private static String reactToLight(String color) {
+        color = color.toLowerCase();
+
         if (color.equals("red")) {
             return "stop";
         } else if (color.equals("yellow")) {
             return "slow down";
-        } else {
+        } else if (color.equals("green")) {
             return "continue";
+        } else {
+            return "stop";
         }
     }
 
 
     private static void runTests() {
-        String[] inputs = {"red", "yellow", "green"};
-        String[] outputs = {"stop", "slow down", "continue"};
+        String[] inputs = {"red", "yellow", "green", "RED", "aldjfakjd"};
+        String[] outputs = {"stop", "slow down", "continue", "stop", "stop"};
 
         for (int i = 0; i < inputs.length; i++) {
             String input = inputs[i];
