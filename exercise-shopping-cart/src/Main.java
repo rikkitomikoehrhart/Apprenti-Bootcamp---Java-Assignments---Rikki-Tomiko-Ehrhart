@@ -2,25 +2,11 @@ import java.util.Scanner;
 
 
 public class Main {
-    enum OrderStatus {
-        PENDING,
-        PROCESSING,
-        SHIPPED,
-        DELIVERED
-    }
-
-    enum ShippingStatus {
-        STANDARD,
-        TWO_DAY,
-        OVERNIGHT,
-        FREE_SHIPPING
-    }
-
     static Scanner io = new Scanner(System.in);
 
+
+
     public static void main(String[] args) {
-
-
         // Product Details
         int productID = 1;
         int productCategory = 2;
@@ -36,7 +22,7 @@ public class Main {
 
         while (true) {
             // Tax Exempt
-            String tax_response = promptUserForString("Are you tax exempt? (Y or y for yes, anything else for no): ");
+            String tax_response = promptUserForString("Are you tax exempt? (Y or y for yes, anything else for no): ", new String[]{"y", "Y", "n", "N"});
             Boolean taxExempt;
 
             if (tax_response.equals("y") || tax_response.equals("Y")) {
@@ -53,7 +39,7 @@ public class Main {
             displayChoices(shippingChoices);
 
 
-            int shipSelection = promptUserForInt("Make a selection: ");
+            int shipSelection = promptUserForInt("Make a selection: ", shippingChoices.length);
             ShippingStatus shipStatus = ShippingStatus.STANDARD;
             if (shipSelection == 2) {
                 shipStatus = ShippingStatus.TWO_DAY;
@@ -68,26 +54,26 @@ public class Main {
             System.out.println("\n\n");
             System.out.println("Product Sizes:");
             displayChoices(productSizes);
-            int sizeChoice = promptUserForInt("Enter size: ");
+            int sizeChoice = promptUserForInt("Enter size: ", productSizes.length);
             size = productSizes[sizeChoice-1];
 
 
             // Quantity
             System.out.println("\n\n");
-            int quantity = promptUserForInt("Enter quantity: ");
+            int quantity = promptUserForInt("Enter quantity: ", productQuantity);
 
 
             // Shipping Address
             System.out.println("\n\n");
             System.out.println("Shipping Addresses:");
             displayChoices(shippingAddresses);
-            int shipToChoice = promptUserForInt("Which address: ");
+            int shipToChoice = promptUserForInt("Which address: ", shippingAddresses.length);
             shipTo = shippingAddresses[shipToChoice-1];
 
 
             // Promo Code
             System.out.println("\n\n");
-            String promoCode = promptUserForString("Enter Promo Code for free shipping: ");
+            String promoCode = promptUserForString("Enter Promo Code for free shipping (or none): ", new String[]{"FREE", "none", "NONE", "None"});
 
 
 
@@ -148,17 +134,6 @@ public class Main {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     }
 
     private static void displayChoices(String[] choices) {
@@ -167,14 +142,58 @@ public class Main {
         }
     }
 
-    private static String promptUserForString(String prompt) {
+    private static String promptUserForString(String prompt, String[]validResponses) {
         System.out.println(prompt);
-        return io.nextLine();
+        String response;
+        while (true) {
+            try {
+                response = io.nextLine();
+                if (response == null || response.trim().isEmpty()) {
+                    throw new IllegalArgumentException("Your response cannot be blank");
+                }
+                boolean validResponse = false;
+                for (int i = 0; i < validResponses.length; i++) {
+                    if (response.equals(validResponses[i])) {
+                        validResponse = true;
+                    }
+                }
+
+                if (!validResponse) {
+                    throw new InvalidResponse("Invalid response.");
+                }
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Your response cannot be blank.");
+            } catch (InvalidResponse e) {
+                System.out.println("Your response is invalid.");
+            }
+        }
+
+
+        return response;
     }
 
-    private static int promptUserForInt(String prompt) {
-        System.out.println(prompt);
-        return Integer.parseInt(io.nextLine());
+    private static int promptUserForInt(String prompt, int validResponses) {
+        int response;
+
+        while (true) {
+            try {
+                System.out.println(prompt);
+                response = Integer.parseInt(io.nextLine());
+                if (response > validResponses || response <= 0) {
+                    throw new InvalidResponse("Your response is out of range.");
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number");
+                continue;
+            } catch (InvalidResponse e) {
+                System.out.println("Invalid selection.");
+                continue;
+            }
+        }
+
+        return response;
     }
 
 
