@@ -19,28 +19,35 @@ public class Main {
         // Welcome/Start Menu
         u.displayMessage("Welcome to the Locker App!");
 
-        // Main Menu Lists based off of if there are lockers left or not
-        String[] mainMenuLockersLeft = {"\n","What would you like to do next?", "\t\t1. Rent a Locker", "\t\t2. Access a Locker", "\t\t3. Release a Locker", "\t\t---", "\t\tAny other key to exit."};
-        String[] mainMenuNoLockersLeft = {"\n","What would you like to do next?", "\t\t1. **NO LOCKERS LEFT**", "\t\t2. Access a Locker", "\t\t3. Release a Locker", "\t\t---", "\t\tAny other key to exit."};
+
         while (true) {
+            // Main Menu List, checks if user can rent lock and changes options based
+            // on that result
             Result canRent = canRentLocker();
-            if (canRent.success) {
-                u.displayMessages(mainMenuLockersLeft);
-            } else {
-                u.displayMessages(mainMenuNoLockersLeft);
-            }
+            String[] mainMenu = {
+                    "\n",
+                    "What would you like to do next?",
+                    String.format("\t\t1. %s", canRent.success ? MenuOptions.RENT.getDescription() : "**NO LOCKERS LEFT**"),
+                    String.format("\t\t2. %s", MenuOptions.ACCESS.getDescription()),
+                    String.format("\t\t3. %s", MenuOptions.RELEASE.getDescription()),
+                    "\t\t---",
+                    "\t\tAny other number to exit."
+            };
+            u.displayMessages(mainMenu);
+
 
             // Grab user's choice
             int choice = u.promptUserForInt("Enter your choice: ");
+            MenuOptions option = MenuOptions.getMenuOptionFromValue(choice);
 
-            switch (choice) {
-                case 1:
+            switch (option) {
+                case RENT:
                     rentALocker();
                     continue;
-                case 2:
+                case ACCESS:
                     accessALocker();
                     continue;
-                case 3:
+                case RELEASE:
                     releaseALocker();
                     continue;
                 default:
