@@ -9,9 +9,10 @@ public class Locker {
 
     public Locker(int number) {
         this.number = number;
-        this.isOpen = false;
+        this.isOpen = false;        // All lockers start off closed
 
-        this.pin = generatePin();
+
+        this.pin = generatePin();   // Generate a PIN
     }
 
 
@@ -32,10 +33,6 @@ public class Locker {
 
 
     // SETS
-    public void setPin(String pin) {
-        this.pin = pin;
-    }
-
     public void setIsOpen() {
         this.isOpen = !this.isOpen;
     }
@@ -43,6 +40,13 @@ public class Locker {
 
     // OTHER
     private String generatePin() {
+        /*
+        *  Generate Pin creates a random 4 digit pin
+        *
+        *  ARGS: none
+        *  RETURNS:
+        *       - String newPin : a random 4 digit pin in String form
+        * */
         String newPin = "";
         for (int i = 0; i < 4; i++) {
             int number = random.nextInt(10);
