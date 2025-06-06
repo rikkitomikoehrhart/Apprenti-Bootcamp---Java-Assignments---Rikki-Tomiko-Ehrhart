@@ -14,26 +14,12 @@ public enum MenuOptions {
 
 
     // GETS
-    public int getValue() {
-        return value;
-    }
-
     public String getDescription() {
         return description;
     }
 
     // OTHER
     public static MenuOptions getMenuOptionFromValue(int value) {
-        /*
-        *  Get MenuOptions From Value returns the menu option enum
-        *  based on the value entered by the user or EXIT if any
-        *  other value
-        *
-        *  ARGS:
-        *       - int value : a user entered value used for navigating
-        *  RETURNS:
-        *       - MenuOption enum
-        * */
         for (MenuOptions option : values()) {
             if (option.value == value) {
                 return option;
