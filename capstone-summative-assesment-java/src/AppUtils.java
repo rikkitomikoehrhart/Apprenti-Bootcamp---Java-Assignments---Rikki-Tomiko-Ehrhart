@@ -1,36 +1,32 @@
 import java.util.Scanner;
 
 public class AppUtils {
-    private static Scanner io = new Scanner(System.in);
+    private static final Scanner io = new Scanner(System.in);
 
-    private static String wasOpenInstruction = "Locker is open. Please place the phone in the locker.";
-    private static String isOpenNowInstruction = "Locker is now open. Please remove the phone.";
-    private static String[] yeses = {"y", "Y"};
-    private static String areYouSure = "Are you sure? (y for yes, anything else for no): ";
-
-
+    private static final String wasOpenInstruction = "Locker is open. Please place the phone in the locker.";
+    private static final String isOpenNowInstruction = "Locker is now open. Please remove the phone.";
+    private static final String[] yeses = {"y", "Y"};
+    private static final String areYouSure = "Are you sure? (y for yes, anything else for no): ";
 
 
-    // Main Basic Display Functions
-    public static void displayMessage(String message) {
+    public void displayMessage(String message) {
         System.out.println(message);
     }
 
-    public static void displayMessages(String[] messages) {
+    public void displayMessages(String[] messages) {
         for (String message : messages) {
             displayMessage(message);
         }
     }
 
 
-    // Main Basic Prompt Functions
-    public static String promptUserForString(String prompt) {
+    public String promptUserForString(String prompt) {
         System.out.print(prompt);
 
         return io.nextLine();
     }
 
-    private static int promptUserForInt(String prompt) {
+    private int promptUserForInt(String prompt) {
         int response;
 
         while (true) {
@@ -40,70 +36,59 @@ public class AppUtils {
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid number.");
-                continue;
             }
         }
         return response;
     }
 
-
-    // Specialty Display Functions
-    public static void displayLockerAndPin(Locker locker) {
+    public void displayLockerAndPin(Locker locker) {
         displayMessages(
                 new String[]{
-                        "\n",
                         String.format(
-                                "Thank you. \nYou're locker number is \t\t%d \nand your pin is: \t\t\t\t%s",
-                                Main.locker.getLockerNumber() + 1,
-                                Main.locker.getPinNumber()
+                                "\nThank you. \nYou're locker number is \t\t%d \nand your pin is: \t\t\t\t%s",
+                                locker.getNumber() + 1,
+                                locker.getPin()
                         )
                 });
     }
 
-    public static void displayInstructionsMessageForOpenLocker(boolean isOpen) {
+    public void displayInstructionsMessageForOpenLocker(boolean isOpen) {
         displayMessage(isOpen ? wasOpenInstruction : isOpenNowInstruction);
     }
 
-
-    public static void displayReleasedLockerNotification(int lockerNumber) {
-        displayMessage("Thank you. Locker " + lockerNumber + " has been released and is available for use.");
+    public void displayReleasedLockerNotification(int lockerNumber) {
+        displayMessage("\nThank you. Locker " + lockerNumber + " has been released and is available for use.");
     }
 
-
-
     // Specialty Prompt Functions
-    public static void pressEnterToConfirmCloseLocker() {
+    public void pressEnterToConfirmCloseLocker() {
         displayMessage("And press enter to close locker.");
         promptUserForString(">>  ");
     }
 
-    public static Locker promptUserAndReturnLocker(String prompt) {
+    public Locker promptUserAndReturnLocker(String prompt, LockerService ls) {
         while (true) {
             try {
-                displayMessage("\n");
-                int lockerNumber = promptUserForInt("Enter the locker number you want to " + prompt + ": ");
-                Main.locker = Main.ls.getLocker(lockerNumber);
+                int lockerNumber = promptUserForInt("\nEnter the locker number you want to " + prompt + ": ");
+                Locker locker = ls.getLocker(lockerNumber);
 
-                Result result = Result.isLockerInUse(Main.locker);
+                Result result = Result.isLockerInUse(locker);
 
                 if (result.success) {
-                    return Main.locker;
+                    return locker;
                 } else {
                     displayMessage(result.message);
-                    continue;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("There isn't that many lockers. Please try again.");
-                continue;
             }
         }
     }
 
-    public MenuOptions mainMenu() {
-        Result canRent = Result.canRentLocker();
+    public MenuOptions mainMenu(LockerService ls) {
+        Result canRent = Result.canRentLocker(ls);
         String[] mainMenu = {
-                "\n",
-                "What would you like to do next?",
+                "\nWhat would you like to do next?",
                 String.format("\t\t1. %s", canRent.success ? MenuOptions.RENT.getDescription() : "**NO LOCKERS LEFT**"),
                 String.format("\t\t2. %s", MenuOptions.ACCESS.getDescription()),
                 String.format("\t\t3. %s", MenuOptions.RELEASE.getDescription()),
@@ -112,13 +97,11 @@ public class AppUtils {
         };
         displayMessages(mainMenu);
 
-        MenuOptions option = MenuOptions.getMenuOptionFromValue(promptUserForInt("Enter your choice: "));
-
-        return option;
+        return MenuOptions.getMenuOptionFromValue(promptUserForInt("Enter your choice: "));
     }
 
     public String promptUserForPin(Locker locker) {
-        return promptUserForString("Please enter the PIN to access locker " + (Main.locker.getLockerNumber() + 1) + ": ");
+        return promptUserForString("Please enter the PIN to access locker " + (locker.getNumber() + 1) + ": ");
     }
 
     public Result errorPromptToContinue() {

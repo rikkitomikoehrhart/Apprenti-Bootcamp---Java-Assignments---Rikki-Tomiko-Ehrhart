@@ -1,25 +1,22 @@
 public class Main {
-    static Locker locker = null;
-    static AppUtils appUtils = new AppUtils();
-    static LockerService ls = new LockerService(10);
-
-
     public static void main(String[] args) {
+        AppUtils appUtils = new AppUtils();
+        LockerService ls = new LockerService(10);
+
         appUtils.displayMessage("Welcome to the Locker App!");
 
-
         while (true) {
-            MenuOptions option = appUtils.mainMenu();
+            MenuOptions option = appUtils.mainMenu(ls);
 
             switch (option) {
                 case RENT:
-                    LockerActions.rentALocker();
+                    LockerActions.rentALocker(appUtils, ls);
                     continue;
                 case ACCESS:
-                    LockerActions.accessALocker();
+                    LockerActions.accessALocker(appUtils, ls);
                     continue;
                 case RELEASE:
-                    LockerActions.releaseALocker();
+                    LockerActions.releaseALocker(appUtils, ls);
                     continue;
                 default:
                     // EXIT

@@ -3,7 +3,7 @@ import java.util.Random;
 public class Locker {
     Random random = new Random();
 
-    private int number;
+    private final int number;
     private String pin;
     private boolean isOpen;
 
@@ -15,30 +15,22 @@ public class Locker {
         generatePin();   // Generate a PIN
     }
 
-
-
-    // GETS
-    public int getLockerNumber() {
+    public int getNumber() {
         return this.number;
     }
 
-    public String getPinNumber() {
+    public String getPin() {
         return this.pin;
     }
 
-    public boolean getIsOpen() {
+    public boolean isOpen() {
         return this.isOpen;
     }
 
-
-
-    // SETS
-    public void setIsOpen() {
+    public void toggleOpen() {
         this.isOpen = !this.isOpen;
     }
 
-
-    // OTHER
     private void generatePin() {
         for (int i = 0; i < 4; i++) {
             int number = random.nextInt(10);
@@ -46,6 +38,4 @@ public class Locker {
             this.pin += String.format("%d", number);
         }
     }
-
-
 }

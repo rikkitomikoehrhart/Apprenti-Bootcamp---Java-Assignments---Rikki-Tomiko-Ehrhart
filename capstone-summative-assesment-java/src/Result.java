@@ -7,10 +7,6 @@ public class Result {
         this.message = message;
     }
 
-
-
-
-    // Error Handling Functions
     public static Result isCorrectResponse(String response, String[] possibleResponses) {
         for (String possible: possibleResponses) {
             if (response.equals(possible)) {
@@ -21,8 +17,8 @@ public class Result {
         return new Result(false, response);
     }
 
-    public static Result canRentLocker() {
-        if (Main.ls.getNextAvailableLockerIndex() == -1) {
+    public static Result canRentLocker(LockerService ls) {
+        if (ls.getNextAvailableLockerIndex() == -1) {
             return new Result(false, "Sorry, we are out of lockers.");
         } else {
             return new Result(true, "There are still lockers left.");

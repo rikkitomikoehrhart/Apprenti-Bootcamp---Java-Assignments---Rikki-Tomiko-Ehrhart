@@ -12,13 +12,10 @@ public enum MenuOptions {
         this.description = description;
     }
 
-
-    // GETS
     public String getDescription() {
         return description;
     }
 
-    // OTHER
     public static MenuOptions getMenuOptionFromValue(int value) {
         for (MenuOptions option : values()) {
             if (option.value == value) {

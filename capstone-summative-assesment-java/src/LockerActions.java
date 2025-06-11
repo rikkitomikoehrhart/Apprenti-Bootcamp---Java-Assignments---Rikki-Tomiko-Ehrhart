@@ -1,48 +1,36 @@
 public class LockerActions {
-
-    // RENT
-    public static void rentALocker() {
-        Result result = Result.canRentLocker();
+    public static void rentALocker(AppUtils appUtils, LockerService ls) {
+        Result result = Result.canRentLocker(ls);
         if (result.success) {
-            Main.locker = Main.ls.assignLocker();
-            Main.appUtils.displayLockerAndPin(Main.locker);
+            Locker locker = ls.assignLocker();
+            appUtils.displayLockerAndPin(locker);
 
-            clearLockerVariable();
         } else {
-            Main.appUtils.displayMessage(result.message);
+            appUtils.displayMessage(result.message);
         }
     }
 
+    public static void accessALocker(AppUtils appUtils, LockerService ls) {
+        Locker locker = appUtils.promptUserAndReturnLocker("access", ls);
 
-    // ACCESS
-    public static void accessALocker() {
-        Main.locker = Main.appUtils.promptUserAndReturnLocker("access");
-
-        if (unlockLocker(Main.locker)) {
-            Main.appUtils.displayInstructionsMessageForOpenLocker(Main.locker.getIsOpen());
-            Main.appUtils.pressEnterToConfirmCloseLocker();
-            Main.locker.setIsOpen();
-        } else {
-            return;
+        if (unlockLocker(locker, appUtils)) {
+            appUtils.displayInstructionsMessageForOpenLocker(locker.isOpen());
+            appUtils.pressEnterToConfirmCloseLocker();
+            locker.toggleOpen();
         }
-
-        clearLockerVariable();
     }
 
+    public static void releaseALocker(AppUtils appUtils, LockerService ls) {
+        Locker locker = appUtils.promptUserAndReturnLocker("release", ls);
 
-
-    // RELEASE
-    public static void releaseALocker() {
-        Main.locker = Main.appUtils.promptUserAndReturnLocker("release");
-
-        if (!Main.locker.getIsOpen()) {
-            if (unlockLocker(Main.locker)) {
-                Main.locker.setIsOpen();
-                Result result = Main.appUtils.areYouSurePromptToContinue();
+        if (!locker.isOpen()) {
+            if (unlockLocker(locker, appUtils)) {
+                locker.toggleOpen();
+                Result result = appUtils.areYouSurePromptToContinue();
 
                 if (result.success) {
-                    Main.appUtils.displayInstructionsMessageForOpenLocker(true);
-                    Main.appUtils.pressEnterToConfirmCloseLocker();
+                    appUtils.displayInstructionsMessageForOpenLocker(true);
+                    appUtils.pressEnterToConfirmCloseLocker();
                 } else {
                     return;
                 }
@@ -50,39 +38,29 @@ public class LockerActions {
                 return;
             }
         } else {
-            Result result = Main.appUtils.areYouSurePromptToContinue();
+            Result result = appUtils.areYouSurePromptToContinue();
             if (!result.success) {
                 return;
             }
         }
 
-        Main.ls.releaseLocker(Main.locker);
-        Main.appUtils.displayReleasedLockerNotification(Main.locker.getLockerNumber() + 1);
-
-        clearLockerVariable();
+        ls.releaseLocker(locker);
+        appUtils.displayReleasedLockerNotification(locker.getNumber() + 1);
 
     }
 
-
-
-    // SETS
-    private static boolean unlockLocker(Locker locker) {
+    private static boolean unlockLocker(Locker locker, AppUtils appUtils) {
         while (true) {
-            Result result = Result.isCorrectResponse(Main.appUtils.promptUserForPin(locker), new String[] {locker.getPinNumber()});
+            Result result = Result.isCorrectResponse(appUtils.promptUserForPin(locker), new String[] {locker.getPin()});
             if (result.success){
                 return true;
             } else {
-                Result contResult = Main.appUtils.errorPromptToContinue();
-                if(contResult.success) {
-                    continue;
-                } else {
+                Result contResult = appUtils.errorPromptToContinue();
+                if(!contResult.success) {
                     return false;
                 }
             }
         }
     }
 
-    private static void clearLockerVariable() {
-        Main.locker = null;
-    }
 }
