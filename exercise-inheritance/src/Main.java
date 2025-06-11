@@ -1,13 +1,10 @@
 public class Main {
-    public static TerminalUtils utils = new TerminalUtils();
-
-
     public static void main(String[] args) {
         AddMediaCommand addMedia = new AddMediaCommand();
         RemoveMediaCommand removeMedia = new RemoveMediaCommand();
         PlayMediaCommand playMedia = new PlayMediaCommand();
         ListAllMediaCommand listMedia = new ListAllMediaCommand();
-
+        TerminalUtils utils = new TerminalUtils();
 
         utils.displayMessage("Welcome to the Media App.");
 
@@ -18,16 +15,16 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    addMedia.execute();
+                    addMedia.execute(utils);
                     continue;
                 case 2:
-                    removeMedia.execute();
+                    removeMedia.execute(utils);
                     continue;
                 case 3:
-                    playMedia.execute();
+                    playMedia.execute(utils);
                     continue;
                 case 4:
-                    listMedia.execute();
+                    listMedia.execute(utils);
                     continue;
                 default:
                     utils.displayMessage("Thank you. Have a nice day.");

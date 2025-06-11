@@ -2,7 +2,6 @@ public class Video extends Media {
     private int duration;
     private String resolution;
 
-    // GETS
     public int getDuration() {
         return this.duration;
     }
@@ -12,7 +11,6 @@ public class Video extends Media {
     }
 
 
-    // SETS
     public void setDuration(int duration) {
         this.duration = duration;
     }
@@ -22,7 +20,6 @@ public class Video extends Media {
     }
 
 
-    // ABSTRACTS
     @Override
     void play() {
         System.out.println("Playing video '" + this.getName() + "' using video player software");

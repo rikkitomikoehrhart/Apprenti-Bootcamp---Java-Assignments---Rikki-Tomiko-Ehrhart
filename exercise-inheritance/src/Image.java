@@ -2,8 +2,6 @@ public class Image extends Media {
     private String dimensions;
     private String fileFormat;
 
-
-    // GETS
     public String getDimensions() {
         return dimensions;
     }
@@ -13,7 +11,6 @@ public class Image extends Media {
     }
 
 
-    // SETS
     public void setDimensions(String dimensions) {
         this.dimensions = dimensions;
     }
@@ -23,7 +20,6 @@ public class Image extends Media {
     }
 
 
-    // ABSTRACTS
     @Override
     void play() {
         System.out.println("Displaying image '" + this.getName() + "' using image viewer software");

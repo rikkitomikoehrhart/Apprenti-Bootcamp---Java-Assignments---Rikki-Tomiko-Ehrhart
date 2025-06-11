@@ -1,12 +1,10 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TerminalUtils {
     Scanner io = new Scanner(System.in);
 
 
-    // OUTPUT
     public void displayMessage(String message) {
         System.out.println(message);
     }
@@ -24,7 +22,6 @@ public class TerminalUtils {
 
 
 
-    // INPUTS
     public String getString(String prompt) {
         String answer = "";
         while (true) {
@@ -58,9 +55,7 @@ public class TerminalUtils {
 
 
 
-    // MENU FUNCTIONS
     public void displayMenu() {
-        displayMessage("\n\n");
         displayMessage("=====================");
         displayMessage("1. Add Media");
         displayMessage("2. Remove Media");

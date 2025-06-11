@@ -2,8 +2,6 @@ public class Audio extends Media {
     private int duration;
     private String artist;
 
-
-    // GETS
     public int getDuration() {
         return duration;
     }
@@ -12,8 +10,6 @@ public class Audio extends Media {
         return artist;
     }
 
-
-    // SETS
     public void setDuration(int duration) {
         this.duration = duration;
     }
@@ -22,8 +18,6 @@ public class Audio extends Media {
         this.artist = artist;
     }
 
-
-    // ABSTRACTS
     @Override
     void play() {
         System.out.println("Playing audio '" + this.getName() + "' using audio player software");
