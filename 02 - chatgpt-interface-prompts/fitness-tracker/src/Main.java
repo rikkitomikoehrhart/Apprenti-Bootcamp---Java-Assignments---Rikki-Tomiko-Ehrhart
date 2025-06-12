@@ -21,5 +21,15 @@ public class Main {
                 new Swimming(),
                 new Dance(),
         };
+
+        for (Tracker tracker : workouts) {
+            System.out.println("==========================");
+            System.out.println("Workout: " + tracker.getClass().getName());
+            tracker.startExercise();
+            tracker.endExercise();
+
+            System.out.println("\tCalories burned: " + tracker.caloriesBurned());
+            System.out.println("==========================\n");
+        }
     }
 }
