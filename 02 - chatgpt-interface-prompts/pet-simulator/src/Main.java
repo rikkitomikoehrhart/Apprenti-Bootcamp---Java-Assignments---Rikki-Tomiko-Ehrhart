@@ -13,6 +13,18 @@
 
 public class Main {
     public static void main(String[] args) {
+        Pet dog = new Dog("Joe", "Chihwennie", 16);
+        Pet cat = new Cat("Hades", "Black", 8);
+        Pet parrot = new Parrot("Dudley", new String[]{"hello", "goodbye", "dog", "cat"}, 30);
+
+        Pet[] pets = new Pet[]{dog, cat, parrot};
+
+        for (Pet pet : pets) {
+            System.out.println(pet.makeSound());
+            System.out.println(pet.doAction());
+            System.out.println("\n");
+        }
+
 
     }
 }
