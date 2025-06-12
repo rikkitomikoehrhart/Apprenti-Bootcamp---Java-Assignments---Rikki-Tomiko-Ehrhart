@@ -1,11 +1,8 @@
 public class Running implements Tracker {
-    private int mph;
     private int caloriesPerMile;
     private int miles;
 
-    public Running (int mph) {
-        this.mph = mph;
-
+    public Running () {
         caloriesPerMile = 100;
         miles = 0;
     }
