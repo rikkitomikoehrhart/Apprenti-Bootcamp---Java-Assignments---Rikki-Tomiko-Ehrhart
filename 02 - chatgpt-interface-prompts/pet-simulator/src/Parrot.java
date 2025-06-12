@@ -1,11 +1,11 @@
-public class Cat implements Pet {
+public class Parrot implements Pet {
     private String name;
-    private String breed;
+    private String[] wordsKnown;
     private int age;
 
-    public Cat (String name, String breed, int age) {
+    public Parrot (String name, String[] wordsKnown, int age) {
         this.name = name;
-        this.breed = breed;
+        this.wordsKnown = wordsKnown;
         this.age = age;
     }
 
@@ -13,20 +13,20 @@ public class Cat implements Pet {
         return name;
     }
 
-    public String getBreed() {
-        return breed;
-    }
-
     public int getAge() {
         return age;
+    }
+
+    public String[] getWordsKnown() {
+        return wordsKnown;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setBreed(String breed) {
-        this.breed = breed;
+    public void setWordsKnown(String[] wordsKnown) {
+        this.wordsKnown = wordsKnown;
     }
 
     public void setAge(int age) {
@@ -35,11 +35,11 @@ public class Cat implements Pet {
 
     @Override
     public String makeSound() {
-        return "Meooow";
+        return "KWAK-hello!";
     }
 
     @Override
     public String doAction() {
-        return String.format("%s stares at you, judgingly.", this.name);
+        return String.format("%s flutters it's wings.", this.name);
     }
 }
