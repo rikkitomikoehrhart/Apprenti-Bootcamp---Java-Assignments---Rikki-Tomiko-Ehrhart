@@ -1,5 +1,5 @@
 public interface Tracker {
-    int[] startExercise();
+    void startExercise();
     int caloriesBurned();
-    int[] endExercise();
+    void endExercise();
 }
