@@ -13,6 +13,22 @@ public class SorceressGirlCard implements MagicalGirlCard {
         health = random.nextInt(110) + 40;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int attackMinusDefense) {
+        this.health -= attackMinusDefense;
+    }
+
+    public int processAttack(Random random) {
+        return (random.nextInt(3) + 1) * attackPower;
+    }
+
+    public int processDefense(Random random) {
+        return (random.nextInt(3) + 1) * defensePower;
+    }
+
     @Override
     public int attackMove(Random random) {
         return attackPower;
