@@ -1,10 +1,5 @@
 package org.example;
-import org.example.spells.ConjurationSpell;
-import org.example.spells.EvocationSpell;
-import org.example.spells.ExitSpell;
-import org.example.spells.IllusionSpell;
-import org.example.spells.TransmutationSpell;
-
+import org.example.spells.*;
 import java.util.ArrayList;
 
 public class SpellBook {
@@ -19,13 +14,17 @@ public class SpellBook {
     }
 
     public void tryIncantation(String incantation) {
-        for (Spell spell : spells) {
-            if (spell.getIncantation().equals(incantation)) {
-                spell.cast();
-                return;
+        if (incantation.equalsIgnoreCase("help")) {
+            help();
+        } else {
+            for (Spell spell : spells) {
+                if (spell.getIncantation().equalsIgnoreCase(incantation)) {
+                    spell.cast();
+                    return;
+                }
             }
+            System.out.println("The spell fizzled out! Try again.");
         }
-        System.out.println("The spell fizzled out! Try again.");
     }
 
     public void help() {
