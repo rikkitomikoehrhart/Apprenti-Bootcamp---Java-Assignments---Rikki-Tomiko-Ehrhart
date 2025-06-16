@@ -13,29 +13,33 @@ public class SorceressGirlCard implements MagicalGirlCard {
         health = random.nextInt(110) + 40;
     }
 
+    @Override
     public int getHealth() {
         return health;
     }
 
+    @Override
     public void setHealth(int attackMinusDefense) {
         this.health -= attackMinusDefense;
     }
 
+    @Override
     public int processAttack(Random random) {
         return (random.nextInt(3) + 1) * attackPower;
     }
 
+    @Override
     public int processDefense(Random random) {
         return (random.nextInt(3) + 1) * defensePower;
     }
 
     @Override
-    public int attackMove(Random random) {
+    public int attackMove() {
         return attackPower;
     }
 
     @Override
-    public int defenseMove(Random random) {
+    public int defenseMove() {
         return defensePower;
     }
 
@@ -46,6 +50,6 @@ public class SorceressGirlCard implements MagicalGirlCard {
 
     @Override
     public String getQuip() {
-        return "Magic isn't far. Luckily, neither am I.";
+        return "Magic isn't fair. Luckily, neither am I.";
     }
 }
