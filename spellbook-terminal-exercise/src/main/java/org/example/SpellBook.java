@@ -28,7 +28,7 @@ public class SpellBook {
     }
 
     public void help() {
-        System.out.println("Spell\t\t\t\tIncantation\t\t\t\tDescription");
+        System.out.printf("%-20s | %-18s | %s%n", "Spell", "Incantation", "Description");
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
 
         for (Spell spell : spells) {

@@ -26,6 +26,6 @@ public class ExitSpell implements Spell {
 
     @Override
     public String getHelp() {
-        return String.format("%s\t\t\t\t%s\t\t\t\t\t%s", this.getName(), this.getIncantation(), this.getDescription());
+        return String.format("%-20s %-20s %s", this.getName(), this.getIncantation(), this.getDescription());
     }
 }
