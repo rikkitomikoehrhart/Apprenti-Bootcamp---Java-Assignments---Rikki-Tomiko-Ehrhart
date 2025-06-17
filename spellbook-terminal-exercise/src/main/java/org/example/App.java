@@ -9,8 +9,7 @@ public class App
 
         while (true) {
             System.out.print("Recite a spell: ");
-            String userSpell = scanner.nextLine();
-            spellBook.tryIncantation(userSpell);
+            spellBook.tryIncantation(scanner.nextLine());
         }
     }
 }
