@@ -30,12 +30,11 @@ public class StringCalculator {
                 for (int i = 0; i < delimiterList.length; i++) {
                     delimiter += returnRegExDelimiter(delimiterList[i]);
                 }
-
             } else {
                 delimiter = returnRegExDelimiter(delimiter.substring(3, delimiter.length()-1));
             }
         } else {
-            delimiter = delimiter.substring(2);
+            delimiter = returnRegExDelimiter(delimiter.substring(2));
         }
         return delimiter;
     }
