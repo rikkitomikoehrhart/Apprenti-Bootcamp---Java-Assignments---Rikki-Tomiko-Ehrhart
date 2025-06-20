@@ -18,7 +18,21 @@ public class MenuOptionsTest {
         assertEquals(expected, actual);
     }
 
-
+    @Test
+    @DisplayName("String Array of Menu is returned")
+    void stringArrayOfMenuItemsIsReturned() {
+        String[] expected = new String[] {
+                "Main Menu",
+                "1. Display Cart",
+                "2. Remove an Item",
+                "3. Add an Item",
+                "4. Checkout",
+                "5. Exit"
+        };
+        String[] actual = MenuOption.getMenuForDisplay();
+        
+        assertArrayEquals(expected, actual);
+    }
 
 
 }
