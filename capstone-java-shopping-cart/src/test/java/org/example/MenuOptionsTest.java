@@ -30,7 +30,7 @@ public class MenuOptionsTest {
                 "5. Exit"
         };
         String[] actual = MenuOption.getMenuForDisplay();
-        
+
         assertArrayEquals(expected, actual);
     }
 
