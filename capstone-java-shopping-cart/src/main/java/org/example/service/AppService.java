@@ -92,7 +92,7 @@ public class AppService {
         return number;
     }
 
-    public void displayCart(String[] stringsForDisplay) {
+    public void displayListOfStrings(String[] stringsForDisplay) {
         for (String string : stringsForDisplay) {
             print(string);
         }

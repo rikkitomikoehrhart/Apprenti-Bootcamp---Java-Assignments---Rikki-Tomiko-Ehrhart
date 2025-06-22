@@ -40,6 +40,10 @@ public class CartService {
             itemsList.add(lineItem);
         }
 
+        if (shoppingCart.cart.size() == 0) {
+            itemsList.add("Please add to your cart!");
+        }
+
         itemsList.add(String.format("%40s %s", "TOTAL:", shoppingCart.getTotalForDisplay()));
 
         return itemsList;
