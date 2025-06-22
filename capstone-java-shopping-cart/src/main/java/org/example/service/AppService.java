@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.exception.EmptyInputException;
 import org.example.exception.NullInputException;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class AppService {
@@ -41,7 +42,7 @@ public class AppService {
     }
 
 
-    public int getIntFromUser(String prompt) throws EmptyInputException, NullInputException {
+    public int getIntFromUser(String prompt) throws EmptyInputException, NullInputException, NumberFormatException {
         while (true) {
             String entry = getStringFromUser(prompt);
 
@@ -53,12 +54,37 @@ public class AppService {
         }
     }
 
-    public int processInt(String string) {
+    public int processInt(String string) throws NumberFormatException {
         int number = -1;
 
 
         try {
             number = Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException();
+        }
+
+        return number;
+    }
+
+
+    public BigDecimal getBigDecimalFromUser(String prompt) throws EmptyInputException, NullInputException {
+        while (true) {
+            String string = getStringFromUser(prompt);
+
+            BigDecimal number = processBigDecimal(string);
+
+            if (number != BigDecimal.valueOf(-1.00)) {
+                return number;
+            }
+        }
+    }
+
+    public BigDecimal processBigDecimal(String string) {
+        BigDecimal number = BigDecimal.valueOf(-1.00);
+
+        try {
+            number = BigDecimal.valueOf(Long.parseLong(string));
         } catch (NumberFormatException e) {
             throw new NumberFormatException();
         }
