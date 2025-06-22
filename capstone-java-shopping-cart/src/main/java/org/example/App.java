@@ -19,22 +19,22 @@ public class App
         while (true) {
             appService.displayListOfStrings(MenuOption.getMenuForDisplay());
 
-            int choice = appService.getIntFromUser("Please enter the number of your choice: ");
+            MenuOption choice = MenuOption.getMenuOptionFromValue(appService.getIntFromUser("Please enter the number of your choice: "));
 
             switch (choice) {
-                case 1:
+                case DISPLAY_CART:
                     new DisplayCartHandler().execute();
                     continue;
-                case 2:
+                case REMOVE_ITEM:
                     // Remove Item
                     break;
-                case 3:
+                case ADD_ITEM:
                     // Add Item
                     break;
-                case 4:
+                case CHECKOUT:
                     // checkout
                     break;
-                case 5:
+                case EXIT:
                     // exit
                     break;
                 default:
