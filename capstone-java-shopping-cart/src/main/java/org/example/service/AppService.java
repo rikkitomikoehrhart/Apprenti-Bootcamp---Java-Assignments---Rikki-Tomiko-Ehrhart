@@ -12,26 +12,34 @@ public class AppService {
         System.out.println(message);
     }
 
-    public String getStringFromUser(String prompt) throws NullInputException, EmptyInputException {
-        print(prompt);
-        String entry = "";
+    public String getStringFromUser(String prompt) throws EmptyInputException, NullInputException {
         while (true) {
-            try {
-                entry = scanner.nextLine();
-                if (entry == null) {
-                    throw new NullInputException("You cannot enter nothing.");
-                } else if (entry == "" || entry == " ") {
-                    throw new EmptyInputException("You must enter something.");
-                }
-            } catch (NullInputException e) {
-                print(e.getMessage());
-                continue;
-            } catch (EmptyInputException e) {
-                print(e.getMessage());
+            print(prompt);
+            String entry = scanner.nextLine();
+
+            if (entry == processString(entry)) {
+                return entry;
+            } else {
                 continue;
             }
-
-            return entry;
         }
     }
+
+    public String processString(String string) throws NullInputException, EmptyInputException {
+        try {
+            if (string == null) {
+                throw new NullInputException("You cannot enter nothing");
+            } else if (string == "" || string == " ") {
+                throw new EmptyInputException("You must enter something.");
+            }
+        } catch (NullInputException | EmptyInputException e) {
+            print(e.getMessage());
+            return null;
+        }
+
+        return string;
+    }
+
+
+    
 }
