@@ -41,5 +41,32 @@ public class AppService {
     }
 
 
+    public int getIntFromUser(String prompt) throws EmptyInputException, NullInputException {
+        while (true) {
+            String entry = getStringFromUser(prompt);
+
+            int number = processInt(entry);
+
+            if (number != -1) {
+                return number;
+            }
+        }
+    }
+
+    public int processInt(String string) {
+        int number = -1;
+
+
+        try {
+            number = Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException();
+        }
+
+        return number;
+    }
+
+
     
+
 }
