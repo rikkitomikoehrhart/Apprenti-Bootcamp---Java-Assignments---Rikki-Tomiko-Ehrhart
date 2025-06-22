@@ -58,4 +58,14 @@ public class CartService {
 
         return receipt;
     }
+
+    public Item getItemFromCart(String name) {
+        for (Item item : shoppingCart.cart.keySet()) {
+            if (item.getName().toLowerCase() == name.toLowerCase()) {
+                return item;
+            }
+        }
+
+        return null;
+    }
 }

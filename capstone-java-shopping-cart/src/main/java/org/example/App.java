@@ -3,8 +3,8 @@ package org.example;
 import org.example.exception.EmptyInputException;
 import org.example.exception.NullInputException;
 import org.example.handler.DisplayCartHandler;
+import org.example.handler.RemoveItemHandler;
 import org.example.model.MenuOption;
-import org.example.model.ShoppingCart;
 import org.example.service.AppService;
 import org.example.service.CartService;
 
@@ -23,10 +23,10 @@ public class App
 
             switch (choice) {
                 case DISPLAY_CART:
-                    new DisplayCartHandler().execute();
+                    new DisplayCartHandler().execute(appService, cartService);
                     continue;
                 case REMOVE_ITEM:
-                    // Remove Item
+                    new RemoveItemHandler().execute(appService, cartService);
                     break;
                 case ADD_ITEM:
                     // Add Item
