@@ -80,7 +80,7 @@ public class AppService {
         }
     }
 
-    public BigDecimal processBigDecimal(String string) {
+    public BigDecimal processBigDecimal(String string) throws NumberFormatException {
         BigDecimal number = BigDecimal.valueOf(-1.00);
 
         try {
@@ -90,6 +90,12 @@ public class AppService {
         }
 
         return number;
+    }
+
+    public void displayCart(String[] stringsForDisplay) {
+        for (String string : stringsForDisplay) {
+            print(string);
+        }
     }
 
 
