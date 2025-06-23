@@ -11,27 +11,16 @@ public class Item {
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public BigDecimal getPrice() {
         return price.setScale(2, RoundingMode.HALF_EVEN);
     }
-    public void setPrice(BigDecimal price) {
-        this.price = price.setScale(2, RoundingMode.HALF_EVEN);
-    }
-
     public String getSKU() {
         return sku;
-    }
-    public void setSKU(String sku) {
-        this.sku = sku;
     }
 
     public void setAll(String name, BigDecimal price, String sku) {
         this.name = name;
-        this.price = price;
+        this.price = price.setScale(2, RoundingMode.HALF_EVEN);
         this.sku = sku;
     }
 }

@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class AppService {
     Scanner scanner = new Scanner(System.in);
 
+
     public void println(String message) {
         System.out.println(message);
     }
@@ -14,6 +15,7 @@ public class AppService {
     public void print(String message) {
         System.out.print(message);
     }
+
 
     public String getStringFromUser(String prompt)  {
         while (true) {
@@ -24,21 +26,6 @@ public class AppService {
                 return entry;
             }
         }
-    }
-
-    public String processString(String string) {
-        try {
-            if (string == null) {
-                throw new NullInputException("You cannot enter nothing");
-            } else if (string.isEmpty() || string.equals(" ")) {
-                throw new EmptyInputException("You must enter something.");
-            }
-        } catch (NullInputException | EmptyInputException e) {
-            println(e.getMessage());
-            return null;
-        }
-
-        return string;
     }
 
 
@@ -54,22 +41,7 @@ public class AppService {
         }
     }
 
-    public int processInt(String string) throws NumberFormatException {
-        int number = -1;
-
-
-        try {
-            number = Integer.parseInt(string);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException();
-        }
-
-        return number;
-
-    }
-
-
-    public BigDecimal getBigDecimalFromUser(String prompt) {
+    private BigDecimal getBigDecimalFromUser(String prompt) {
         while (true) {
             String string = getStringFromUser(prompt);
 
@@ -81,13 +53,44 @@ public class AppService {
         }
     }
 
-    public BigDecimal processBigDecimal(String string) throws NumberFormatException {
+
+    private String processString(String string) {
+        try {
+            if (string == null) {
+                throw new NullInputException("You cannot enter nothing");
+            } else if (string.isEmpty() || string.equals(" ")) {
+                throw new EmptyInputException("You must enter something.");
+            }
+        } catch (NullInputException | EmptyInputException e) {
+            println(e.getMessage());
+            return null;
+        }
+
+        return string;
+    }
+
+    private int processInt(String string) throws NumberFormatException {
+        int number = -1;
+
+
+        try {
+            number = Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            print("That is not a number. ");
+        }
+
+        return number;
+
+    }
+
+
+    private BigDecimal processBigDecimal(String string) throws NumberFormatException {
         BigDecimal number = BigDecimal.valueOf(-1.00);
 
         try {
-            number = BigDecimal.valueOf(Long.parseLong(string));
+            number = BigDecimal.valueOf(Double.parseDouble(string));
         } catch (NumberFormatException e) {
-            throw new NumberFormatException();
+            print("That is not a number. ");
         }
 
         return number;

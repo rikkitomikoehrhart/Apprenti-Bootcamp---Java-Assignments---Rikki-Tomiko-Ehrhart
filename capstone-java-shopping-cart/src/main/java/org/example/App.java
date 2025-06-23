@@ -23,13 +23,13 @@ public class App {
                     continue;
                 case REMOVE_ITEM:
                     new RemoveItemHandler().execute(appService, cartService);
-                    break;
+                    continue;
                 case ADD_ITEM:
                     new AddItemHandler().execute(appService, cartService);
-                    break;
+                    continue;
                 case CHECKOUT:
                     new CheckoutHandler().execute(appService, cartService);
-                    break;
+                    continue;
                 case EXIT:
                     new ExitHandler().execute(appService, cartService);
                     break;

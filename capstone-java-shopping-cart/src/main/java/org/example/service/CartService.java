@@ -25,11 +25,12 @@ public class CartService {
         shoppingCart.cart.clear();
     }
 
+
     public ArrayList<String> getCartForDisplay() {
         ArrayList<String> itemsList = new ArrayList<>();
 
-        itemsList.add("--------------- Shopping Cart ----------------");
-        itemsList.add(String.format("%-10s - %-15s | %-10s %s", "ITEM", "SKU", "QUANTITY", "PRICE"));
+        itemsList.add("\n------------------- Shopping Cart --------------------");
+        itemsList.add(String.format("%-10s   %-15s | %-10s %s", "ITEM", "SKU", "QUANTITY", "PRICE"));
 
 
         for (Item item : shoppingCart.cart.keySet()) {
@@ -42,7 +43,7 @@ public class CartService {
             itemsList.add("Please add to your cart!");
         }
 
-        itemsList.add(String.format("%40s %s", "TOTAL:", shoppingCart.getTotalForDisplay()));
+        itemsList.add(String.format("%41s %s", "TOTAL:", shoppingCart.getTotalForDisplay()));
 
         return itemsList;
     }
@@ -51,7 +52,7 @@ public class CartService {
         ArrayList<String> receipt;
         receipt = getCartForDisplay();
 
-        receipt.set(0, "------------------ Receipt -------------------");
+        receipt.set(0, "\n---------------------- Receipt -----------------------");
         receipt.add("\nTHANK YOU HAVE A NICE DAY!");
 
         return receipt;

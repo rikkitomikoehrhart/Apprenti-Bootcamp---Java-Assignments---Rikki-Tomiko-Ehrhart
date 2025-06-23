@@ -11,12 +11,12 @@ public class ShoppingCart {
 
     public ShoppingCart() {
         this.cart = new HashMap<>();
-        this.total = BigDecimal.valueOf(0.00);
+        this.total = BigDecimal.ZERO;
     }
 
 
 
-    public BigDecimal getTotal() {
+    private BigDecimal getTotal() {
         return total.setScale(2, RoundingMode.HALF_UP);
     }
 

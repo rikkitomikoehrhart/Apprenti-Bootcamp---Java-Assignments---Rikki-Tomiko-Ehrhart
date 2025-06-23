@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,36 +21,57 @@ public class ShoppingCartServiceTest {
         cartService = new CartService();
 
         testItem1 = new Item();
-        testItem1.setName("Computer");
-        testItem1.setPrice(BigDecimal.valueOf(1000.00));
-        testItem1.setSKU("MACBOOK");
+        testItem1.setAll("Computer", BigDecimal.valueOf(1000.00), "MACBOOK");
 
         testItem2 = new Item();
-        testItem2.setName("Tablet");
-        testItem2.setPrice(BigDecimal.valueOf(600.00));
-        testItem2.setSKU("IPAD");
+        testItem2.setAll("Tablet", BigDecimal.valueOf(600.00), "IPAD");
 
         cartService.addOrUpdateItem(testItem1, 1);
         cartService.shoppingCart.processTotal();
     }
 
-
-
+    // Item.java Tests
     @Test
-    @DisplayName("Displays BigDecimal as Currency")
-    public void displaysBigDecimalAsCurrency() {
-        String expected = "$1000.00";
-        String actual = cartService.shoppingCart.getTotalForDisplay();
-
-        assertEquals(expected, actual);
+    @DisplayName("Item Gets all return the correct information")
+    void itemGetsReturnsCorrectInfo() {
+        assertEquals("Computer", testItem1.getName());
+        assertEquals(BigDecimal.valueOf(1000.00).setScale(2, RoundingMode.HALF_EVEN), testItem1.getPrice());
+        assertEquals("MACBOOK", testItem1.getSKU());
     }
 
 
     @Test
+    @DisplayName("Item Sets All correctly sets")
+    void itemSetsAllCorrectlySetsAllInfo() {
+        testItem1.setAll("Desktop", BigDecimal.valueOf(999.99), "DELL");
+        assertEquals("Desktop", testItem1.getName());
+        assertEquals(BigDecimal.valueOf(999.99).setScale(2, RoundingMode.HALF_EVEN), testItem1.getPrice());
+        assertEquals("DELL", testItem1.getSKU());
+    }
+
+
+    // ShoppingCart.java Tests
+    @Test
+    @DisplayName("Displays BigDecimal as Currency")
+    public void displaysBigDecimalAsCurrency() {
+        String actual = cartService.shoppingCart.getTotalForDisplay();
+
+        assertEquals("$1000.00", actual);
+    }
+
+    @Test
+    @DisplayName("Processing Total updates the total variable and display total displays it as a dollar string")
+    void processingTotalCorrectlyUpdatesTheTotalCostAndDisplayTotalDisplaysAsADollarString() {
+        cartService.shoppingCart.processTotal();
+        assertEquals("$1000.00", cartService.shoppingCart.getTotalForDisplay());
+
+    }
+
+
+    // CartService.java Tests
+    @Test
     @DisplayName("Add Item to Cart")
-    public void addingItemsToCart() {
-
-
+    public void addingItemsToCartWithAddOrUpdateItem() {
         cartService.addOrUpdateItem(testItem2, 1);
 
         int expected = 2;
@@ -60,7 +82,7 @@ public class ShoppingCartServiceTest {
 
     @Test
     @DisplayName("Update item quantity")
-    public void updateItemQuantity() {
+    public void updateItemQuantityWithAddOrUpdateItem() {
         int expected = 10;
         cartService.addOrUpdateItem(testItem1, expected);
 
