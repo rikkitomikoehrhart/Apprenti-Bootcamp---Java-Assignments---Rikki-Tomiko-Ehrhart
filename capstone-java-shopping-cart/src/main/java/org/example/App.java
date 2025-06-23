@@ -32,7 +32,7 @@ public class App {
                     new CheckoutHandler().execute(appService, cartService);
                     break;
                 case EXIT:
-                    // exit
+                    new ExitHandler().execute(appService);
                     break;
                 default:
                     // Sorry
