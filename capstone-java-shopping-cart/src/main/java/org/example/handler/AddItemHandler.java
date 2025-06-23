@@ -24,7 +24,14 @@ public class AddItemHandler {
         item = cartService.getItemFromCart(itemName);
 
         if (item != null) {
-            appService.print("That item was already in your cart. It is now updated with your new entries.");
+            if (itemQuantity != 0) {
+                appService.print("That item was already in your cart. It is now updated with your new entries.");
+            } else {
+                appService.print("That item was already in your cart. Since you updated the quantity to 0, that product has been removed.");
+                cartService.removeItem(item);
+                return;
+            }
+
         }
 
         item.setName(itemName);
