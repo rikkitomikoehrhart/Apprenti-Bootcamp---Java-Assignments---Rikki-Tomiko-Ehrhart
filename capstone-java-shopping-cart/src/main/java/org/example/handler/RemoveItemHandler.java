@@ -20,7 +20,21 @@ public class RemoveItemHandler {
             return;
         }
 
-        cartService.removeItem(item);
-        appService.print(String.format("%s has been successfully removed", item.getName()));
+        int quantityToRemove = appService.getIntFromUser("Please enter the amount you would like to remove: ");
+
+        if (quantityToRemove == 0) {
+            appService.print("Since you entered 0, the quantity will stay the same");
+            return;
+        } else {
+            if (quantityToRemove >= cartService.shoppingCart.cart.get(item)) {
+                cartService.removeItem(item);
+                appService.print(String.format("%s has been successfully removed", item.getName()));
+            } else {
+                int newQuantity = cartService.shoppingCart.cart.get(item) - quantityToRemove;
+                cartService.addOrUpdateItem(item, newQuantity);
+            }
+        }
+
+
     }
 }
