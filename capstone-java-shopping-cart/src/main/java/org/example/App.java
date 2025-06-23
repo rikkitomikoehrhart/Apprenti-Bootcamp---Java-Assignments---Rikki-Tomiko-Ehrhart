@@ -1,12 +1,9 @@
 package org.example;
 
-import org.example.exception.EmptyInputException;
-import org.example.exception.NullInputException;
-import org.example.handler.DisplayCartHandler;
-import org.example.handler.RemoveItemHandler;
+import org.example.exception.*;
+import org.example.handler.*;
 import org.example.model.MenuOption;
-import org.example.service.AppService;
-import org.example.service.CartService;
+import org.example.service.*;
 
 public class App
 {
@@ -29,7 +26,7 @@ public class App
                     new RemoveItemHandler().execute(appService, cartService);
                     break;
                 case ADD_ITEM:
-                    // Add Item
+                    new AddItemHandler().execute(appService, cartService);
                     break;
                 case CHECKOUT:
                     // checkout
