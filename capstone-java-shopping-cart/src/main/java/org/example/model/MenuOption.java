@@ -25,7 +25,7 @@ public enum MenuOption {
         return EXIT;
     }
 
-    public final static String[] getMenuForDisplay() {
+    public static String[] getMenuForDisplay() {
         String[] menu = new String[6];
 
         menu[0] = "Main Menu";

@@ -1,6 +1,5 @@
 package org.example.handler;
 
-import org.example.exception.*;
 import org.example.model.Item;
 import org.example.service.*;
 import java.math.BigDecimal;
@@ -8,36 +7,35 @@ import java.math.BigDecimal;
 public class AddItemHandler implements HandlerInterface {
 
     @Override
-    public void execute(AppService appService, CartService cartService) throws EmptyInputException, NullInputException {
+    public void execute(AppService appService, CartService cartService) {
         new DisplayCartHandler().execute(appService, cartService);
         Item item;
 
 
-        String itemName = appService.getStringFromUser("Enter the name of the product you wish to add: ");
-        BigDecimal itemPrice = appService.getBigDecimalFromUser("Enter the price for 1 " + itemName + ": $");
-        String itemSKU = appService.getStringFromUser("Enter the item's SKU: ");
-        int itemQuantity = appService.getIntFromUser("Enter the quantity for the item: ");
+        String itemName = appService.getItemNameFromUser();
+        BigDecimal itemPrice = appService.getItemPriceFromUser(itemName);
+        String itemSKU = appService.getItemSKUFromUser();
+        int itemQuantity = appService.getItemQuantityFromUser();
 
 
         item = cartService.getItemFromCart(itemName);
 
         if (item != null) {
+            appService.print("That item was already in your cart. ");
             if (itemQuantity != 0) {
-                appService.print("That item was already in your cart. It is now updated with your new entries.");
+                appService.println("It is now updated with your new entries.");
+                itemPrice = item.getPrice();
+                itemSKU = item.getSKU();
             } else {
-                appService.print("That item was already in your cart. Since you updated the quantity to 0, that product has been removed.");
+                appService.println("Since you updated the quantity to 0, that product has been removed.");
                 cartService.removeItem(item);
                 return;
             }
-
+        } else {
+            item = new Item();
         }
 
-        item.setName(itemName);
-        item.setPrice(itemPrice);
-        item.setSKU(itemSKU);
-
+        item.setAll(itemName, itemPrice, itemSKU);
         cartService.addOrUpdateItem(item, itemQuantity);
-        cartService.shoppingCart.processTotal();
-
     }
 }

@@ -1,17 +1,16 @@
 package org.example;
 
-import org.example.exception.*;
 import org.example.handler.*;
 import org.example.model.MenuOption;
 import org.example.service.*;
 
 public class App {
 
-    public static void main( String[] args ) throws EmptyInputException, NullInputException {
+    public static void main( String[] args ) {
         AppService appService = new AppService();
         CartService cartService = new CartService();
 
-        appService.print("Welcome to the Shopping Cart App\n");
+        appService.println("Welcome to the Shopping Cart App\n");
 
         while (true) {
             appService.displayListOfStrings(MenuOption.getMenuForDisplay());
@@ -35,8 +34,10 @@ public class App {
                     new ExitHandler().execute(appService, cartService);
                     break;
                 default:
-                    appService.print("Sorry, there was an error processing. Please try again.");
+                    appService.println("Sorry, there was an error processing. Please try again.");
             }
+
+            break;
         }
     }
 }

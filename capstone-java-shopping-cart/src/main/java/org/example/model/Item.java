@@ -28,4 +28,10 @@ public class Item {
     public void setSKU(String sku) {
         this.sku = sku;
     }
+
+    public void setAll(String name, BigDecimal price, String sku) {
+        this.name = name;
+        this.price = price;
+        this.sku = sku;
+    }
 }

@@ -7,7 +7,7 @@ public class ExitHandler implements HandlerInterface {
 
     @Override
     public void execute(AppService appService, CartService cartService) {
-        appService.print("Thank you! Have a great day!");
+        appService.println("Thank you! Have a great day!");
         System.exit(0);
     }
 }

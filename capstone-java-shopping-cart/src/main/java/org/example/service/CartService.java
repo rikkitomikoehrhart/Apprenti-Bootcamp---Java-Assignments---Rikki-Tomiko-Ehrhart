@@ -14,6 +14,7 @@ public class CartService {
 
     public void addOrUpdateItem(Item item, int quantity) {
         shoppingCart.cart.put(item, quantity);
+        shoppingCart.processTotal();
     }
 
     public void removeItem(Item item) {
@@ -25,7 +26,7 @@ public class CartService {
     }
 
     public ArrayList<String> getCartForDisplay() {
-        ArrayList<String> itemsList = new ArrayList<String>();
+        ArrayList<String> itemsList = new ArrayList<>();
 
         itemsList.add("--------------- Shopping Cart ----------------");
         itemsList.add(String.format("%-10s - %-15s | %-10s %s", "ITEM", "SKU", "QUANTITY", "PRICE"));
@@ -37,7 +38,7 @@ public class CartService {
             itemsList.add(lineItem);
         }
 
-        if (shoppingCart.cart.size() == 0) {
+        if (shoppingCart.cart.isEmpty()) {
             itemsList.add("Please add to your cart!");
         }
 
@@ -47,7 +48,7 @@ public class CartService {
     }
 
     public ArrayList<String> getReceiptForDisplay() {
-        ArrayList<String> receipt = new ArrayList<String>();
+        ArrayList<String> receipt;
         receipt = getCartForDisplay();
 
         receipt.set(0, "------------------ Receipt -------------------");
@@ -58,7 +59,7 @@ public class CartService {
 
     public Item getItemFromCart(String name) {
         for (Item item : shoppingCart.cart.keySet()) {
-            if (item.getName().toLowerCase() == name.toLowerCase()) {
+            if (item.getName().equalsIgnoreCase(name)) {
                 return item;
             }
         }

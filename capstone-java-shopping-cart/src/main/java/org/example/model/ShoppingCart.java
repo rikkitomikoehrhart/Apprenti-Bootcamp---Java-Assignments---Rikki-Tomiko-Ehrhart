@@ -10,25 +10,18 @@ public class ShoppingCart {
     private BigDecimal total;
 
     public ShoppingCart() {
-        this.cart = new HashMap<Item, Integer>();
+        this.cart = new HashMap<>();
         this.total = BigDecimal.valueOf(0.00);
     }
 
 
-
-    public HashMap<Item, Integer> getCart() {
-        return cart;
-    }
-    public void setCart(HashMap<Item, Integer> cart) {
-        this.cart = cart;
-    }
 
     public BigDecimal getTotal() {
         return total.setScale(2, RoundingMode.HALF_UP);
     }
 
     public void processTotal() {
-        BigDecimal count = BigDecimal.ZERO;
+        total = BigDecimal.ZERO;
 
         for (Item item : cart.keySet()) {
             BigDecimal price = item.getPrice();

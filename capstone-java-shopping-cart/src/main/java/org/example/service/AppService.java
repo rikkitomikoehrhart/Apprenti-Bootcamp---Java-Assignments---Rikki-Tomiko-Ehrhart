@@ -7,32 +7,34 @@ import java.util.Scanner;
 public class AppService {
     Scanner scanner = new Scanner(System.in);
 
-    public void print(String message) {
+    public void println(String message) {
         System.out.println(message);
     }
 
-    public String getStringFromUser(String prompt) throws EmptyInputException, NullInputException {
+    public void print(String message) {
+        System.out.print(message);
+    }
+
+    public String getStringFromUser(String prompt)  {
         while (true) {
             print(prompt);
             String entry = scanner.nextLine();
 
-            if (entry == processString(entry)) {
+            if (entry.equals(processString(entry))) {
                 return entry;
-            } else {
-                continue;
             }
         }
     }
 
-    public String processString(String string) throws NullInputException, EmptyInputException {
+    public String processString(String string) {
         try {
             if (string == null) {
                 throw new NullInputException("You cannot enter nothing");
-            } else if (string == "" || string == " ") {
+            } else if (string.isEmpty() || string.equals(" ")) {
                 throw new EmptyInputException("You must enter something.");
             }
         } catch (NullInputException | EmptyInputException e) {
-            print(e.getMessage());
+            println(e.getMessage());
             return null;
         }
 
@@ -40,7 +42,7 @@ public class AppService {
     }
 
 
-    public int getIntFromUser(String prompt) throws EmptyInputException, NullInputException, NumberFormatException {
+    public int getIntFromUser(String prompt) throws NumberFormatException {
         while (true) {
             String entry = getStringFromUser(prompt);
 
@@ -63,16 +65,17 @@ public class AppService {
         }
 
         return number;
+
     }
 
 
-    public BigDecimal getBigDecimalFromUser(String prompt) throws EmptyInputException, NullInputException {
+    public BigDecimal getBigDecimalFromUser(String prompt) {
         while (true) {
             String string = getStringFromUser(prompt);
 
             BigDecimal number = processBigDecimal(string);
 
-            if (number != BigDecimal.valueOf(-1.00)) {
+            if (!number.equals(BigDecimal.valueOf(-1.00))) {
                 return number;
             }
         }
@@ -92,11 +95,24 @@ public class AppService {
 
     public void displayListOfStrings(String[] stringsForDisplay) {
         for (String string : stringsForDisplay) {
-            print(string);
+            println(string);
         }
     }
 
 
+
+    public String getItemNameFromUser() {
+        return getStringFromUser("Enter the name of the product: ");
+    }
+    public BigDecimal getItemPriceFromUser(String itemName) {
+        return getBigDecimalFromUser("Enter the price for 1 " + itemName + ": $");
+    }
+    public String getItemSKUFromUser() {
+        return getStringFromUser("Enter the item's SKU: ");
+    }
+    public int getItemQuantityFromUser() {
+        return getIntFromUser("Enter the quantity: ");
+    }
 
 
 }
