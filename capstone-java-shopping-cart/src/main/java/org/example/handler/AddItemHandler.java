@@ -8,8 +8,9 @@ import org.example.service.CartService;
 
 import java.math.BigDecimal;
 
-public class AddItemHandler {
+public class AddItemHandler implements HandlerInterface {
 
+    @Override
     public void execute(AppService appService, CartService cartService) throws EmptyInputException, NullInputException {
         new DisplayCartHandler().execute(appService, cartService);
         Item item;
@@ -36,7 +37,7 @@ public class AddItemHandler {
 
         item.setName(itemName);
         item.setPrice(itemPrice);
-        item.setSku(itemSKU);
+        item.setSKU(itemSKU);
 
         cartService.addOrUpdateItem(item, itemQuantity);
         cartService.shoppingCart.processTotal();

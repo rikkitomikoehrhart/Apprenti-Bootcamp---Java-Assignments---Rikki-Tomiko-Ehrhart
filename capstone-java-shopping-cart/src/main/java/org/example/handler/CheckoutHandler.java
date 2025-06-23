@@ -5,8 +5,9 @@ import org.example.exception.NullInputException;
 import org.example.service.AppService;
 import org.example.service.CartService;
 
-public class CheckoutHandler {
+public class CheckoutHandler implements HandlerInterface{
 
+    @Override
     public void execute(AppService appService, CartService cartService) throws EmptyInputException, NullInputException {
         appService.displayListOfStrings(cartService.getReceiptForDisplay().toArray(new String[0]));
         String choice = appService.getStringFromUser("\nReady to checkout? (y/anything else for no): ");

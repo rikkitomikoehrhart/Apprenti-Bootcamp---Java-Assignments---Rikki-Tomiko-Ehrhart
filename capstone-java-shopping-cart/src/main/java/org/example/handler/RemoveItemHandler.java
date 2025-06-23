@@ -6,8 +6,9 @@ import org.example.model.Item;
 import org.example.service.AppService;
 import org.example.service.CartService;
 
-public class RemoveItemHandler {
+public class RemoveItemHandler implements HandlerInterface {
 
+    @Override
     public void execute(AppService appService, CartService cartService) throws EmptyInputException, NullInputException {
         new DisplayCartHandler().execute(appService, cartService);
 

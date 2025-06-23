@@ -6,9 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,12 +22,12 @@ public class ShoppingCartServiceTest {
         testItem1 = new Item();
         testItem1.setName("Computer");
         testItem1.setPrice(BigDecimal.valueOf(1000.00));
-        testItem1.setSku("MACBOOK");
+        testItem1.setSKU("MACBOOK");
 
         testItem2 = new Item();
         testItem2.setName("Tablet");
         testItem2.setPrice(BigDecimal.valueOf(600.00));
-        testItem2.setSku("IPAD");
+        testItem2.setSKU("IPAD");
 
         cartService.addOrUpdateItem(testItem1, 1);
         cartService.shoppingCart.processTotal();

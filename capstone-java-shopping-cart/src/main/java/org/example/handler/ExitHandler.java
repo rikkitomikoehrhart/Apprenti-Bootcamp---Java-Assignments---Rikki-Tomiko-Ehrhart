@@ -1,10 +1,12 @@
 package org.example.handler;
 
 import org.example.service.AppService;
+import org.example.service.CartService;
 
-public class ExitHandler {
+public class ExitHandler implements HandlerInterface {
 
-    public void execute(AppService appService) {
+    @Override
+    public void execute(AppService appService, CartService cartService) {
         appService.print("Thank you! Have a great day!");
         System.exit(0);
     }
