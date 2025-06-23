@@ -1,8 +1,6 @@
 package org.example.service;
 
-import org.example.model.Item;
-import org.example.model.ShoppingCart;
-
+import org.example.model.*;
 import java.util.ArrayList;
 
 public class CartService {

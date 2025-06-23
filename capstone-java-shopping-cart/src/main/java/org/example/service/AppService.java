@@ -1,8 +1,6 @@
 package org.example.service;
 
-import org.example.exception.EmptyInputException;
-import org.example.exception.NullInputException;
-
+import org.example.exception.*;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
