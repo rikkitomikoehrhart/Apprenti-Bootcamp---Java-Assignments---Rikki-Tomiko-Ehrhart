@@ -5,8 +5,8 @@ import org.example.handler.*;
 import org.example.model.MenuOption;
 import org.example.service.*;
 
-public class App
-{
+public class App {
+
     public static void main( String[] args ) throws EmptyInputException, NullInputException {
         AppService appService = new AppService();
         CartService cartService = new CartService();
@@ -29,7 +29,7 @@ public class App
                     new AddItemHandler().execute(appService, cartService);
                     break;
                 case CHECKOUT:
-                    // checkout
+                    new CheckoutHandler().execute(appService, cartService);
                     break;
                 case EXIT:
                     // exit

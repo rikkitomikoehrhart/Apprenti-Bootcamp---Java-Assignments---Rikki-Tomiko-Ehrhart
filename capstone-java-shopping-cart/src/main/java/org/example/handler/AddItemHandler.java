@@ -39,6 +39,7 @@ public class AddItemHandler {
         item.setSku(itemSKU);
 
         cartService.addOrUpdateItem(item, itemQuantity);
+        cartService.shoppingCart.processTotal();
 
     }
 }

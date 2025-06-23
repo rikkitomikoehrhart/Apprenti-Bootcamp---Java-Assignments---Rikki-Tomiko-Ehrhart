@@ -3,7 +3,6 @@ package org.example.service;
 import org.example.model.Item;
 import org.example.model.ShoppingCart;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class CartService {
@@ -35,7 +34,7 @@ public class CartService {
 
 
         for (Item item : shoppingCart.cart.keySet()) {
-            String lineItem = String.format("%-10s - %-15s | %-10s $%.2f", item.getName(), item.getSku(), shoppingCart.cart.get(item) ,item.getPrice());
+            String lineItem = String.format("%-10s - %-15s | %-10s $%.2f", item.getName(), item.getSKU(), shoppingCart.cart.get(item) ,item.getPrice());
 
             itemsList.add(lineItem);
         }
