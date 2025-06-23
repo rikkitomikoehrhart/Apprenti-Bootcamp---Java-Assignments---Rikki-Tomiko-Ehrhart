@@ -35,7 +35,7 @@ public class App {
                     new ExitHandler().execute(appService, cartService);
                     break;
                 default:
-                    // Sorry
+                    appService.print("Sorry, there was an error processing. Please try again.");
             }
         }
     }
