@@ -1,16 +1,12 @@
 package org.example.handler;
 
-import org.example.model.Item;
-import org.example.model.ShoppingCart;
 import org.example.service.*;
-
-import java.util.HashMap;
 
 
 public class CheckoutHandler implements WorkFlowHandler {
 
     @Override
-    public void execute(AppService appService, CartService cartService, ShoppingCart shoppingCart, HashMap<Item, Integer> cart) {
+    public void execute(AppService appService, CartService cartService) {
         appService.displayListOfStrings(cartService.getReceiptForDisplay().toArray(new String[0]));
 
         String choice = appService.getStringFromUser("\nReady to checkout? (y/anything else for no): ");
@@ -19,7 +15,6 @@ public class CheckoutHandler implements WorkFlowHandler {
             appService.println("Total: " + cartService.getTotalForDisplay() + ". Thank you! Cart is empty and ready for the next customer.");
 
             cartService.emptyCart();
-            cartService.processTotal();
 
 
 

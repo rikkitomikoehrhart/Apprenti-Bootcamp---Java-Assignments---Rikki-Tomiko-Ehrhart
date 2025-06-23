@@ -1,16 +1,14 @@
 package org.example.handler;
 
 import org.example.model.Item;
-import org.example.model.ShoppingCart;
 import org.example.service.*;
 import java.math.BigDecimal;
-import java.util.HashMap;
 
 public class AddItemHandler implements WorkFlowHandler {
 
     @Override
-    public void execute(AppService appService, CartService cartService, ShoppingCart shoppingCart, HashMap<Item, Integer> cart) {
-        new DisplayCartHandler().execute(appService, cartService, shoppingCart, cart);
+    public void execute(AppService appService, CartService cartService) {
+        new DisplayCartHandler().execute(appService, cartService);
         Item item;
 
 

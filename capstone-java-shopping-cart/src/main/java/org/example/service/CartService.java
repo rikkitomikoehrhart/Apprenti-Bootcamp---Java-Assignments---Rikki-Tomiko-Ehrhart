@@ -7,32 +7,39 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CartService {
-    private ShoppingCart shoppingCart;
-    private HashMap<Item, Integer> cart;
+    private final ShoppingCart shoppingCart;
 
     private static final String CART_ITEM_FORMAT = "%-10s   %-15s | %-10s %s";
 
     public CartService() {
         shoppingCart = new ShoppingCart();
-        cart = shoppingCart.getCart();
+    }
+
+
+    public void addOrUpdateItem(Item item, int quantity) {
+        if (quantity <= 0) {
+            shoppingCart.removeItem(item);
+        } else {
+            shoppingCart.addItem(item, quantity);
+        }
+    }
+
+    public void removeItem(Item item) {
+        shoppingCart.removeItem(item);
+    }
+
+    public void emptyCart() {
+        shoppingCart.empty();
     }
 
     public ShoppingCart getShoppingCart() {
         return shoppingCart;
     }
 
-    public void addOrUpdateItem(Item item, int quantity) {
-        cart.put(item, quantity);
-        processTotal();
+    public int getItemQuantity(Item item) {
+        return shoppingCart.getQuantity(item);
     }
 
-    public void removeItem(Item item) {
-        cart.remove(item);
-    }
-
-    public void emptyCart() {
-        cart.clear();
-    }
 
 
     public ArrayList<String> getCartForDisplay() {
@@ -42,14 +49,14 @@ public class CartService {
         itemsList.add(String.format(CART_ITEM_FORMAT, "ITEM", "SKU", "QUANTITY", "PRICE"));
 
 
-        for (Item item : cart.keySet()) {
-            String lineItem = String.format(CART_ITEM_FORMAT, item.getName(), item.getSKU(), cart.get(item) ,item.getPrice());
-
-            itemsList.add(lineItem);
-        }
-
-        if (cart.isEmpty()) {
+        if (shoppingCart.isEmpty()) {
             itemsList.add("Please add to your cart!");
+        } else {
+            for (Item item : shoppingCart.getItems()) {
+                String lineItem = String.format(CART_ITEM_FORMAT, item.getName(), item.getSKU(), shoppingCart.getQuantity(item) ,item.getPrice());
+
+                itemsList.add(lineItem);
+            }
         }
 
         itemsList.add(String.format("%41s %s", "TOTAL:", getTotalForDisplay()));
@@ -68,26 +75,13 @@ public class CartService {
     }
 
     public Item getItemFromCart(String name) {
-        for (Item item : cart.keySet()) {
+        for (Item item : shoppingCart.getItems()) {
             if (item.getName().equalsIgnoreCase(name)) {
                 return item;
             }
         }
 
         return null;
-    }
-
-    public void processTotal() {
-        BigDecimal calculation = BigDecimal.ZERO;
-
-        for (Item item : cart.keySet()) {
-            BigDecimal price = item.getPrice();
-            BigDecimal quantity = BigDecimal.valueOf(cart.get(item));
-
-            calculation = calculation.add(price.multiply(quantity));
-        }
-
-        shoppingCart.setTotal(calculation);
     }
 
     public String getTotalForDisplay() {

@@ -18,13 +18,11 @@ public class ShoppingCartServiceTest {
     private CartService cartService;
     private Item testItem1, testItem2;
     private ShoppingCart shoppingCart;
-    private HashMap<Item, Integer> cart;
 
     @BeforeEach
     void setUp() {
         cartService = new CartService();
         shoppingCart = cartService.getShoppingCart();
-        cart = shoppingCart.getCart();
 
         testItem1 = new Item();
         testItem1.setAll("Computer", BigDecimal.valueOf(1000.00), "MACBOOK");
@@ -33,7 +31,6 @@ public class ShoppingCartServiceTest {
         testItem2.setAll("Tablet", BigDecimal.valueOf(600.00), "IPAD");
 
         cartService.addOrUpdateItem(testItem1, 1);
-        cartService.processTotal();
     }
 
     // Item.java Tests
@@ -68,7 +65,6 @@ public class ShoppingCartServiceTest {
     @Test
     @DisplayName("Processing Total updates the total variable and display total displays it as a dollar string")
     void processingTotalCorrectlyUpdatesTheTotalCostAndDisplayTotalDisplaysAsADollarString() {
-        cartService.processTotal();
         assertEquals("$1000.00", cartService.getTotalForDisplay());
 
     }
@@ -81,7 +77,7 @@ public class ShoppingCartServiceTest {
         cartService.addOrUpdateItem(testItem2, 1);
 
         int expected = 2;
-        int actual = cart.size();
+        int actual = shoppingCart.getItems().size();
 
         assertEquals(expected, actual);
     }
@@ -92,7 +88,7 @@ public class ShoppingCartServiceTest {
         int expected = 10;
         cartService.addOrUpdateItem(testItem1, expected);
 
-        int actual = cart.get(testItem1);
+        int actual = shoppingCart.getQuantity(testItem1);
 
         assertEquals(expected, actual);
     }
@@ -102,7 +98,7 @@ public class ShoppingCartServiceTest {
     public void removeItems() {
         cartService.removeItem(testItem1);
         int expected = 0;
-        int actual = cart.size();
+        int actual = shoppingCart.getItems().size();
 
         assertEquals(expected, actual);
     }
@@ -115,7 +111,7 @@ public class ShoppingCartServiceTest {
         cartService.emptyCart();
 
         int expected = 0;
-        int actual = cart.size();
+        int actual = shoppingCart.getItems().size();
 
         assertEquals(expected, actual);
     }
