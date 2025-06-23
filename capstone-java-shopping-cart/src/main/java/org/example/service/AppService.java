@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.exception.*;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -29,26 +29,22 @@ public class AppService {
     }
 
 
-    public int getIntFromUser(String prompt) throws NumberFormatException {
+    public int getIntFromUser(String prompt) {
         while (true) {
             String entry = getStringFromUser(prompt);
 
-            int number = processInt(entry);
-
-            if (number != -1) {
-                return number;
+            if (isValidInt(entry)) {
+                return Integer.parseInt(entry);
             }
         }
     }
 
     private BigDecimal getBigDecimalFromUser(String prompt) {
         while (true) {
-            String string = getStringFromUser(prompt);
+            String entry = getStringFromUser(prompt);
 
-            BigDecimal number = processBigDecimal(string);
-
-            if (!number.equals(BigDecimal.valueOf(-1.00))) {
-                return number;
+            if(isValidBigDecimal(entry)) {
+                return new BigDecimal(entry);
             }
         }
     }
@@ -57,31 +53,22 @@ public class AppService {
         return input != null && !input.trim().isEmpty();
     }
 
-    private int processInt(String string) throws NumberFormatException {
-        int number = -1;
-
-
+    private boolean isValidInt(String input) {
         try {
-            number = Integer.parseInt(string);
+            Integer.parseInt(input);
+            return true;
         } catch (NumberFormatException e) {
-            print("That is not a number. ");
+            return false;
         }
-
-        return number;
-
     }
 
-
-    private BigDecimal processBigDecimal(String string) throws NumberFormatException {
-        BigDecimal number = BigDecimal.valueOf(-1.00);
-
+    private boolean isValidBigDecimal(String input) {
         try {
-            number = BigDecimal.valueOf(Double.parseDouble(string));
+            new BigDecimal(input);
+            return true;
         } catch (NumberFormatException e) {
-            print("That is not a number. ");
+            return false;
         }
-
-        return number;
     }
 
     public void displayListOfStrings(String[] stringsForDisplay) {
