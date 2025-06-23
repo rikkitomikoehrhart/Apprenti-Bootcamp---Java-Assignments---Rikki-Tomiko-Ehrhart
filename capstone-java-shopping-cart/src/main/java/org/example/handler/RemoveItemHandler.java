@@ -1,7 +1,6 @@
 package org.example.handler;
 
-import org.example.exception.EmptyInputException;
-import org.example.exception.NullInputException;
+
 import org.example.model.Item;
 import org.example.model.ShoppingCart;
 import org.example.service.*;
@@ -11,7 +10,7 @@ import java.util.HashMap;
 public class RemoveItemHandler implements WorkFlowHandler {
 
     @Override
-    public void execute(AppService appService, CartService cartService, ShoppingCart shoppingCart, HashMap<Item, Integer> cart) throws EmptyInputException, NullInputException {
+    public void execute(AppService appService, CartService cartService, ShoppingCart shoppingCart, HashMap<Item, Integer> cart) {
         new DisplayCartHandler().execute(appService, cartService, shoppingCart, cart);
 
         String itemName = appService.getItemNameFromUser();
