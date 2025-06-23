@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.model.Item;
+import org.example.model.ShoppingCart;
 import org.example.service.CartService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,10 +17,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ShoppingCartServiceTest {
     private CartService cartService;
     private Item testItem1, testItem2;
+    private ShoppingCart shoppingCart;
+    private HashMap<Item, Integer> cart;
 
     @BeforeEach
     void setUp() {
         cartService = new CartService();
+        shoppingCart = cartService.getShoppingCart();
+        cart = shoppingCart.getCart();
 
         testItem1 = new Item();
         testItem1.setAll("Computer", BigDecimal.valueOf(1000.00), "MACBOOK");
@@ -27,7 +33,7 @@ public class ShoppingCartServiceTest {
         testItem2.setAll("Tablet", BigDecimal.valueOf(600.00), "IPAD");
 
         cartService.addOrUpdateItem(testItem1, 1);
-        cartService.shoppingCart.processTotal();
+        cartService.processTotal();
     }
 
     // Item.java Tests
@@ -54,7 +60,7 @@ public class ShoppingCartServiceTest {
     @Test
     @DisplayName("Displays BigDecimal as Currency")
     public void displaysBigDecimalAsCurrency() {
-        String actual = cartService.shoppingCart.getTotalForDisplay();
+        String actual = cartService.getTotalForDisplay();
 
         assertEquals("$1000.00", actual);
     }
@@ -62,8 +68,8 @@ public class ShoppingCartServiceTest {
     @Test
     @DisplayName("Processing Total updates the total variable and display total displays it as a dollar string")
     void processingTotalCorrectlyUpdatesTheTotalCostAndDisplayTotalDisplaysAsADollarString() {
-        cartService.shoppingCart.processTotal();
-        assertEquals("$1000.00", cartService.shoppingCart.getTotalForDisplay());
+        cartService.processTotal();
+        assertEquals("$1000.00", cartService.getTotalForDisplay());
 
     }
 
@@ -75,7 +81,7 @@ public class ShoppingCartServiceTest {
         cartService.addOrUpdateItem(testItem2, 1);
 
         int expected = 2;
-        int actual = cartService.shoppingCart.cart.size();
+        int actual = cart.size();
 
         assertEquals(expected, actual);
     }
@@ -86,7 +92,7 @@ public class ShoppingCartServiceTest {
         int expected = 10;
         cartService.addOrUpdateItem(testItem1, expected);
 
-        int actual = cartService.shoppingCart.cart.get(testItem1);
+        int actual = cart.get(testItem1);
 
         assertEquals(expected, actual);
     }
@@ -96,7 +102,7 @@ public class ShoppingCartServiceTest {
     public void removeItems() {
         cartService.removeItem(testItem1);
         int expected = 0;
-        int actual = cartService.shoppingCart.cart.size();
+        int actual = cart.size();
 
         assertEquals(expected, actual);
     }
@@ -109,7 +115,7 @@ public class ShoppingCartServiceTest {
         cartService.emptyCart();
 
         int expected = 0;
-        int actual = cartService.shoppingCart.cart.size();
+        int actual = cart.size();
 
         assertEquals(expected, actual);
     }

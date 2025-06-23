@@ -17,7 +17,7 @@ public class AppService {
     }
 
 
-    public String getStringFromUser(String prompt)  {
+    public String getStringFromUser(String prompt) throws EmptyInputException, NullInputException {
         while (true) {
             print(prompt);
             String entry = scanner.nextLine();
@@ -29,7 +29,7 @@ public class AppService {
     }
 
 
-    public int getIntFromUser(String prompt) throws NumberFormatException {
+    public int getIntFromUser(String prompt) throws NumberFormatException, EmptyInputException, NullInputException {
         while (true) {
             String entry = getStringFromUser(prompt);
 
@@ -41,7 +41,7 @@ public class AppService {
         }
     }
 
-    private BigDecimal getBigDecimalFromUser(String prompt) {
+    private BigDecimal getBigDecimalFromUser(String prompt) throws EmptyInputException, NullInputException {
         while (true) {
             String string = getStringFromUser(prompt);
 
@@ -54,16 +54,16 @@ public class AppService {
     }
 
 
-    private String processString(String string) {
+    private String processString(String string) throws EmptyInputException, NullInputException {
         try {
             if (string == null) {
                 throw new NullInputException("You cannot enter nothing");
-            } else if (string.isEmpty() || string.equals(" ")) {
+            } else if (string.trim().isEmpty()) {
                 throw new EmptyInputException("You must enter something.");
             }
         } catch (NullInputException | EmptyInputException e) {
             println(e.getMessage());
-            return null;
+            throw e;
         }
 
         return string;
@@ -104,16 +104,16 @@ public class AppService {
 
 
 
-    public String getItemNameFromUser() {
+    public String getItemNameFromUser() throws EmptyInputException, NullInputException {
         return getStringFromUser("Enter the name of the product: ");
     }
-    public BigDecimal getItemPriceFromUser(String itemName) {
+    public BigDecimal getItemPriceFromUser(String itemName) throws EmptyInputException, NullInputException {
         return getBigDecimalFromUser("Enter the price for 1 " + itemName + ": $");
     }
-    public String getItemSKUFromUser() {
+    public String getItemSKUFromUser() throws EmptyInputException, NullInputException {
         return getStringFromUser("Enter the item's SKU: ");
     }
-    public int getItemQuantityFromUser() {
+    public int getItemQuantityFromUser() throws EmptyInputException, NullInputException {
         return getIntFromUser("Enter the quantity: ");
     }
 

@@ -26,7 +26,7 @@ public enum MenuOption {
     }
 
     public static String[] getMenuForDisplay() {
-        String[] menu = new String[6];
+        String[] menu = new String[MenuOption.values().length + 1];
 
         menu[0] = "Main Menu";
 

@@ -1,28 +1,37 @@
 package org.example.service;
 
 import org.example.model.*;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CartService {
-    public ShoppingCart shoppingCart;
+    private ShoppingCart shoppingCart;
+    private HashMap<Item, Integer> cart;
 
+    private static final String CART_ITEM_FORMAT = "%-10s   %-15s | %-10s %s";
 
     public CartService() {
         shoppingCart = new ShoppingCart();
+        cart = shoppingCart.getCart();
     }
 
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
 
     public void addOrUpdateItem(Item item, int quantity) {
-        shoppingCart.cart.put(item, quantity);
-        shoppingCart.processTotal();
+        cart.put(item, quantity);
+        processTotal();
     }
 
     public void removeItem(Item item) {
-        shoppingCart.cart.remove(item);
+        cart.remove(item);
     }
 
     public void emptyCart() {
-        shoppingCart.cart.clear();
+        cart.clear();
     }
 
 
@@ -30,20 +39,20 @@ public class CartService {
         ArrayList<String> itemsList = new ArrayList<>();
 
         itemsList.add("\n------------------- Shopping Cart --------------------");
-        itemsList.add(String.format("%-10s   %-15s | %-10s %s", "ITEM", "SKU", "QUANTITY", "PRICE"));
+        itemsList.add(String.format(CART_ITEM_FORMAT, "ITEM", "SKU", "QUANTITY", "PRICE"));
 
 
-        for (Item item : shoppingCart.cart.keySet()) {
-            String lineItem = String.format("%-10s - %-15s | %-10s $%.2f", item.getName(), item.getSKU(), shoppingCart.cart.get(item) ,item.getPrice());
+        for (Item item : cart.keySet()) {
+            String lineItem = String.format(CART_ITEM_FORMAT, item.getName(), item.getSKU(), cart.get(item) ,item.getPrice());
 
             itemsList.add(lineItem);
         }
 
-        if (shoppingCart.cart.isEmpty()) {
+        if (cart.isEmpty()) {
             itemsList.add("Please add to your cart!");
         }
 
-        itemsList.add(String.format("%41s %s", "TOTAL:", shoppingCart.getTotalForDisplay()));
+        itemsList.add(String.format("%41s %s", "TOTAL:", getTotalForDisplay()));
 
         return itemsList;
     }
@@ -59,12 +68,29 @@ public class CartService {
     }
 
     public Item getItemFromCart(String name) {
-        for (Item item : shoppingCart.cart.keySet()) {
+        for (Item item : cart.keySet()) {
             if (item.getName().equalsIgnoreCase(name)) {
                 return item;
             }
         }
 
         return null;
+    }
+
+    public void processTotal() {
+        BigDecimal calculation = BigDecimal.ZERO;
+
+        for (Item item : cart.keySet()) {
+            BigDecimal price = item.getPrice();
+            BigDecimal quantity = BigDecimal.valueOf(cart.get(item));
+
+            calculation = calculation.add(price.multiply(quantity));
+        }
+
+        shoppingCart.setTotal(calculation);
+    }
+
+    public String getTotalForDisplay() {
+        return String.format("$%.2f", shoppingCart.getTotal());
     }
 }

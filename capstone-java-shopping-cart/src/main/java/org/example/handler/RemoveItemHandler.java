@@ -1,13 +1,18 @@
 package org.example.handler;
 
+import org.example.exception.EmptyInputException;
+import org.example.exception.NullInputException;
 import org.example.model.Item;
+import org.example.model.ShoppingCart;
 import org.example.service.*;
 
-public class RemoveItemHandler implements HandlerInterface {
+import java.util.HashMap;
+
+public class RemoveItemHandler implements WorkFlowHandler {
 
     @Override
-    public void execute(AppService appService, CartService cartService) {
-        new DisplayCartHandler().execute(appService, cartService);
+    public void execute(AppService appService, CartService cartService, ShoppingCart shoppingCart, HashMap<Item, Integer> cart) throws EmptyInputException, NullInputException {
+        new DisplayCartHandler().execute(appService, cartService, shoppingCart, cart);
 
         String itemName = appService.getItemNameFromUser();
         Item item = cartService.getItemFromCart(itemName);
@@ -22,11 +27,11 @@ public class RemoveItemHandler implements HandlerInterface {
 
         if (quantityToRemove == 0) {
             appService.println("Since you entered 0, the quantity will stay the same");
-        } else if (quantityToRemove >= cartService.shoppingCart.cart.get(item)) {
+        } else if (quantityToRemove >= cart.get(item)) {
             cartService.removeItem(item);
             appService.println(String.format("%s has been successfully removed", item.getName()));
         } else {
-            int newQuantity = cartService.shoppingCart.cart.get(item) - quantityToRemove;
+            int newQuantity = cart.get(item) - quantityToRemove;
             cartService.addOrUpdateItem(item, newQuantity);
         }
 
