@@ -52,15 +52,7 @@ public class ShoppingCart {
             total = total.add(price.multiply(quantity));
         }
     }
-
-    public HashMap<Item, Integer> getCart() {
-        return cart;
-    }
-
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
+    
 
     public Set<Item> getItems() {
         return cart.keySet();
