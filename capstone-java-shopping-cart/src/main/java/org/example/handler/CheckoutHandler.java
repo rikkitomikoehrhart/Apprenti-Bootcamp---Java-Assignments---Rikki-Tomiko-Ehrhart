@@ -4,10 +4,17 @@ import org.example.service.*;
 
 
 public class CheckoutHandler implements WorkFlowHandler {
+    private AppService appService;
+    private CartService cartService;
+
+    public CheckoutHandler(AppService appService, CartService cartService) {
+        this.appService = appService;
+        this.cartService = cartService;
+    }
 
     @Override
-    public void execute(AppService appService, CartService cartService) {
-        appService.displayListOfStrings(cartService.getReceiptForDisplay().toArray(new String[0]));
+    public void execute() {
+        appService.displayArrayListOfStrings(cartService.getReceiptForDisplay());
 
         String choice = appService.getStringFromUser("\nReady to checkout? (y/anything else for no): ");
 
@@ -15,7 +22,6 @@ public class CheckoutHandler implements WorkFlowHandler {
             appService.println("Total: " + cartService.getTotalForDisplay() + ". Thank you! Cart is empty and ready for the next customer.");
 
             cartService.emptyCart();
-
 
 
         } else {

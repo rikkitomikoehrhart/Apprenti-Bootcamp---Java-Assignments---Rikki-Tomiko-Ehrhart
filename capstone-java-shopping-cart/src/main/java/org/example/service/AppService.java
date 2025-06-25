@@ -2,6 +2,7 @@ package org.example.service;
 
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AppService {
@@ -72,6 +73,12 @@ public class AppService {
     }
 
     public void displayListOfStrings(String[] stringsForDisplay) {
+        for (String string : stringsForDisplay) {
+            println(string);
+        }
+    }
+
+    public void displayArrayListOfStrings(ArrayList<String> stringsForDisplay) {
         for (String string : stringsForDisplay) {
             println(string);
         }

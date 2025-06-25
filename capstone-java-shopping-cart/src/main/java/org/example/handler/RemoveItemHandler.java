@@ -1,18 +1,25 @@
 package org.example.handler;
 
 
-import org.example.model.Item;
+import org.example.model.Product;
 import org.example.service.*;
 
 
 public class RemoveItemHandler implements WorkFlowHandler {
+    AppService appService;
+    CartService cartService;
+
+    public RemoveItemHandler(AppService appService, CartService cartService) {
+        this.appService = appService;
+        this.cartService = cartService;
+    }
 
     @Override
-    public void execute(AppService appService, CartService cartService) {
-        new DisplayCartHandler().execute(appService, cartService);
+    public void execute() {
+        new DisplayCartHandler(appService, cartService).execute();
 
         String itemName = appService.getItemNameFromUser();
-        Item item = cartService.getItemFromCart(itemName);
+        Product item = cartService.getItemFromCart(itemName);
 
 
         if (item == null) {

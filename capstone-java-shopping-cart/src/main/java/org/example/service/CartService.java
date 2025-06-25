@@ -1,10 +1,8 @@
 package org.example.service;
 
 import org.example.model.*;
-
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class CartService {
     private final ShoppingCart shoppingCart;
@@ -16,7 +14,7 @@ public class CartService {
     }
 
 
-    public void addOrUpdateItem(Item item, int quantity) {
+    public void addOrUpdateItem(Product item, int quantity) {
         if (quantity <= 0) {
             shoppingCart.removeItem(item);
         } else {
@@ -24,7 +22,7 @@ public class CartService {
         }
     }
 
-    public void removeItem(Item item) {
+    public void removeItem(Product item) {
         shoppingCart.removeItem(item);
     }
 
@@ -36,7 +34,7 @@ public class CartService {
         return shoppingCart;
     }
 
-    public int getItemQuantity(Item item) {
+    public int getItemQuantity(Product item) {
         return shoppingCart.getQuantity(item);
     }
 
@@ -52,7 +50,7 @@ public class CartService {
         if (shoppingCart.isEmpty()) {
             itemsList.add("Please add to your cart!");
         } else {
-            for (Item item : shoppingCart.getItems()) {
+            for (Product item : shoppingCart.getItems()) {
                 String lineItem = String.format(CART_ITEM_FORMAT, item.getName(), item.getSKU(), shoppingCart.getQuantity(item) ,item.getPrice());
 
                 itemsList.add(lineItem);
@@ -74,8 +72,8 @@ public class CartService {
         return receipt;
     }
 
-    public Item getItemFromCart(String name) {
-        for (Item item : shoppingCart.getItems()) {
+    public Product getItemFromCart(String name) {
+        for (Product item : shoppingCart.getItems()) {
             if (item.getName().equalsIgnoreCase(name)) {
                 return item;
             }

@@ -7,7 +7,7 @@ import java.util.Set;
 
 
 public class ShoppingCart {
-    private final HashMap<Item, Integer> cart;
+    private final HashMap<Product, Integer> cart;
     private BigDecimal total;
 
     public ShoppingCart() {
@@ -15,12 +15,12 @@ public class ShoppingCart {
         this.total = BigDecimal.ZERO;
     }
 
-    public void addItem(Item item, int quantity) {
+    public void addItem(Product item, int quantity) {
         cart.put(item, quantity);
         calculateTotal();
     }
 
-    public void removeItem(Item item) {
+    public void removeItem(Product item) {
         cart.remove(item);
         calculateTotal();
     }
@@ -30,8 +30,8 @@ public class ShoppingCart {
         total = BigDecimal.ZERO;
     }
 
-    public int getQuantity(Item item) {
-        return cart.getOrDefault(item, 0);
+    public int getQuantity(Product item) {
+        return cart.get(item);
     }
 
     public boolean isEmpty() {
@@ -45,16 +45,16 @@ public class ShoppingCart {
     public void calculateTotal() {
         total = BigDecimal.ZERO;
 
-        for (Item item : cart.keySet()) {
+        for (Product item : cart.keySet()) {
             BigDecimal price = item.getPrice();
             BigDecimal quantity = BigDecimal.valueOf(cart.get(item));
 
             total = total.add(price.multiply(quantity));
         }
     }
-    
 
-    public Set<Item> getItems() {
+
+    public Set<Product> getItems() {
         return cart.keySet();
     }
 

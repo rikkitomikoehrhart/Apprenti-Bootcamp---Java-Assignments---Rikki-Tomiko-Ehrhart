@@ -1,15 +1,23 @@
 package org.example.handler;
 
-import org.example.model.Item;
+import org.example.model.Product;
 import org.example.service.*;
 import java.math.BigDecimal;
 
 public class AddItemHandler implements WorkFlowHandler {
+    private AppService appService;
+    private CartService cartService;
+
+    public AddItemHandler(AppService appService, CartService cartService) {
+        this.appService = appService;
+        this.cartService = cartService;
+    }
+
 
     @Override
-    public void execute(AppService appService, CartService cartService) {
-        new DisplayCartHandler().execute(appService, cartService);
-        Item item;
+    public void execute() {
+        new DisplayCartHandler(appService, cartService).execute();
+        Product item;
 
 
         String itemName = appService.getItemNameFromUser();
@@ -32,7 +40,7 @@ public class AddItemHandler implements WorkFlowHandler {
                 return;
             }
         } else {
-            item = new Item();
+            item = new Product();
         }
 
         item.setAll(itemName, itemPrice, itemSKU);

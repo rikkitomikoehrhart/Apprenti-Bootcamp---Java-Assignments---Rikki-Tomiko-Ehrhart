@@ -20,19 +20,19 @@ public class App {
 
             switch (choice) {
                 case DISPLAY_CART:
-                    new DisplayCartHandler().execute(appService, cartService);
+                    new DisplayCartHandler(appService, cartService).execute();
                     continue;
                 case REMOVE_ITEM:
-                    new RemoveItemHandler().execute(appService, cartService);
+                    new RemoveItemHandler(appService, cartService).execute();
                     continue;
                 case ADD_ITEM:
-                    new AddItemHandler().execute(appService, cartService);
+                    new AddItemHandler(appService, cartService).execute();
                     continue;
                 case CHECKOUT:
-                    new CheckoutHandler().execute(appService, cartService);
+                    new CheckoutHandler(appService, cartService).execute();
                     continue;
                 case EXIT:
-                    new ExitHandler().execute(appService, cartService);
+                    new ExitHandler(appService).execute();
                     break;
                 default:
                     appService.println("Sorry, there was an error processing. Please try again.");

@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.model.Item;
+import org.example.model.Product;
 import org.example.model.ShoppingCart;
 import org.example.service.CartService;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ShoppingCartServiceTest {
     private CartService cartService;
-    private Item testItem1, testItem2;
+    private Product testItem1, testItem2;
     private ShoppingCart shoppingCart;
 
     @BeforeEach
@@ -23,10 +23,10 @@ public class ShoppingCartServiceTest {
         cartService = new CartService();
         shoppingCart = cartService.getShoppingCart();
 
-        testItem1 = new Item();
+        testItem1 = new Product();
         testItem1.setAll("Computer", BigDecimal.valueOf(1000.00), "MACBOOK");
 
-        testItem2 = new Item();
+        testItem2 = new Product();
         testItem2.setAll("Tablet", BigDecimal.valueOf(600.00), "IPAD");
 
         cartService.addOrUpdateItem(testItem1, 1);

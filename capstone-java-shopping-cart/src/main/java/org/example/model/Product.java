@@ -3,7 +3,7 @@ package org.example.model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Item {
+public class Product {
     private String name;
     private BigDecimal price;
     private String sku;
