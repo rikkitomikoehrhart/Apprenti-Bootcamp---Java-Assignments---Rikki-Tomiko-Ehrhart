@@ -168,6 +168,9 @@ public class ShoppingCartServiceTest {
     }
 
 
+    // test if item is not in cart
+
+
     @Test
     @DisplayName("getTotalForDisplay() displays the total in a string with a dollar sign and as money")
     void getTotalForDisplayDisplaysTheTotalAsAMoneyString() {
