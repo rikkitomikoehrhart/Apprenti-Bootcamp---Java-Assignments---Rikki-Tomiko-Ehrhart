@@ -80,4 +80,20 @@ public class EncounterService {
         return byType;
     }
 
+    public Encounter findById(int id) throws DataAccessException {
+        List<Encounter> encounters = findAll();
+
+        for (Encounter e : encounters) {
+            if (e.getEncounterId() == id) {
+                return e;
+            }
+        }
+
+        return null;
+    }
+
+    public EncounterResult update(Encounter encounter) {
+        return validate(encounter);
+    }
+
 }

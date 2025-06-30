@@ -70,6 +70,24 @@ public class View {
         return encounter;
     }
 
+    public Encounter updateEncounter(Encounter encounter) {
+        EncounterType type = readString("Update Encounter Type? [y]: ").trim().equalsIgnoreCase("y") ? readType() : encounter.getType();
+        int occurrences = readString("Update Encounter Occurrences? [y]: ").trim().equalsIgnoreCase("y") ? readInt("Enter Updated Occurrences: ") : encounter.getOccurrences();
+        String when = readString("Update Encounter Date? [y]: ").trim().equalsIgnoreCase("y") ? readString("Enter Updated Date: ") : encounter.getWhen();
+        String description = readString("Update Description? [y]: ").trim().equalsIgnoreCase("y") ? readString("Enter Updated Description: ") : encounter.getDescription();
+
+        encounter.setType(type);
+        encounter.setOccurrences(occurrences);
+        encounter.setWhen(when);
+        encounter.setDescription(description);
+
+        return encounter;
+    }
+
+    public int getEncounterId() {
+            return readInt("Enter ID: ");
+    }
+
     private String readString(String message) {
         System.out.print(message);
         return console.nextLine();
