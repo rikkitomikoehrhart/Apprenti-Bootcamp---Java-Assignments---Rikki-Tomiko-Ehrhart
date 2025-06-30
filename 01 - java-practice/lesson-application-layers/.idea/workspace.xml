@@ -5,45 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="140ae9d6-58ad-491c-8b80-8b16a42a3834" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../LabRefactorForScalabilityStarter/src/main/java/org/example/controller/MenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../big-decimal-demo/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../big-decimal-demo/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../big-decimal-demo/.mvn/jvm.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../big-decimal-demo/.mvn/maven.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../big-decimal-demo/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../big-decimal-demo/src/main/java/org/example/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../big-decimal-demo/src/test/java/org/example/AppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise-file-io/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise-file-io/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise-file-io/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise-file-io/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise-file-io/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise-file-io/.mvn/jvm.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise-file-io/.mvn/maven.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise-file-io/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise-file-io/src/main/java/org/example/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise-file-io/src/test/java/org/example/AppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../file-io-demo/src/Example.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/jvm.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/maven.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/memories-seed.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/memories-test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/learn/memories/data/DataAccessException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/learn/memories/data/MemoryFileRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/learn/memories/data/MemoryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/learn/memories/domain/MemoryResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/learn/memories/domain/MemoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/learn/memories/models/Memory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/MemoryFileRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LabRefactorForScalabilityStarter/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LabRefactorForScalabilityStarter/src/main/java/org/example/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LabRefactorForScalabilityStarter/src/main/java/org/example/service/PrinterManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LabRefactorForScalabilityStarter/src/main/java/org/example/service/PrinterManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LabRefactorForScalabilityStarter/src/test/java/org/example/model/PrinterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LabRefactorForScalabilityStarter/src/test/java/org/example/model/PrinterTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../capstone-java-shopping-cart/src/test/java/org/example/ShoppingCartServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../capstone-java-shopping-cart/src/test/java/org/example/ShoppingCartServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/learn/memories/ui/ConsoleIO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/learn/memories/ui/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/learn/memories/ui/TextIO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/learn/memories/ui/View.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/memories/data/MemoryRepositoryDouble.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/memories/domain/MemoryServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/MemoryFileRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/memories/data/MemoryFileRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,27 +42,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.MemoryFileRepositoryTest.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.MemoryFileRepositoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemoryServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="JUnit.MemoryServiceTest">
     <configuration name="MemoryFileRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="lesson-application-layers" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.*" />
+          <option name="PATTERN" value="org.example.memories.data.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.example" />
-      <option name="MAIN_CLASS_NAME" value="org.example.MemoryFileRepositoryTest" />
+      <option name="PACKAGE_NAME" value="org.example.memories.data" />
+      <option name="MAIN_CLASS_NAME" value="org.example.memories.data.MemoryFileRepositoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemoryServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="lesson-application-layers" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.memories.domain.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.memories.domain" />
+      <option name="MAIN_CLASS_NAME" value="org.example.memories.domain.MemoryServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -101,6 +86,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MemoryServiceTest" />
         <item itemvalue="JUnit.MemoryFileRepositoryTest" />
       </list>
     </recent_temporary>

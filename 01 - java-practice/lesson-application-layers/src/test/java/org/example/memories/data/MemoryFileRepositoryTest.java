@@ -1,9 +1,7 @@
-package org.example;
+package org.example.memories.data;
 
 import org.example.learn.memories.data.DataAccessException;
 import org.example.learn.memories.data.MemoryFileRepository;
-import org.example.learn.memories.domain.MemoryResult;
-import org.example.learn.memories.domain.MemoryService;
 import org.example.learn.memories.models.Memory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -102,7 +100,7 @@ public class MemoryFileRepositoryTest {
         assertFalse(repository.deleteById(1024));
         assertEquals(count - 1, repository.findAll().size());
     }
-    
+
 
 
 }
