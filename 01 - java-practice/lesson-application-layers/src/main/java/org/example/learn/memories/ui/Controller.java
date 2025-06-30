@@ -1,60 +1,102 @@
 package org.example.learn.memories.ui;
 
-import java.util.Scanner;
+import org.example.learn.memories.data.DataAccessException;
+import org.example.learn.memories.domain.MemoryResult;
+import org.example.learn.memories.domain.MemoryService;
+import org.example.learn.memories.models.Memory;
 
-public class Controller implements TextIO {
-    private final Scanner console = new Scanner(System.in);
+import java.util.List;
 
-    @Override
-    public void println(Object value) {
-        System.out.println(value);
+public class Controller {
+    private final View view;
+    private final MemoryService service;
+
+    public Controller(View view, MemoryService service) {
+        this.view = view;
+        this.service = service;
     }
 
-    @Override
-    public void print(Object value) {
-        System.out.print(value);
+    public void run() {
+        view.displayHeader("Welcome to Memories");
+
+        try {
+            runApp();
+        } catch (DataAccessException ex) {
+            view.displayErrors(List.of(ex.getMessage()));
+        }
+
+        view.displayMessage("GoodBye.");
     }
 
-    @Override
-    public void printf(String format, Object... values) {
-        System.out.printf(format, values);
-    }
-
-    @Override
-    public String readString(String prompt) {
-        print(prompt);
-        return console.nextLine();
-    }
-
-    @Override
-    public boolean readBoolean(String prompt) {
-        String result = readString(prompt);
-        return result.equalsIgnoreCase("y");
-    }
-
-    @Override
-    public int readInt(String prompt) {
-        while (true) {
-            String value = readString(prompt);
-            try {
-                int result = Integer.parseInt(value);
-                return result;
-            } catch (NumberFormatException e) {
-                printf("`%s` is not a valid number.%n", value);
+    private void runApp() throws DataAccessException {
+        for (int option = view.chooseMenuOption();
+             option > 0;
+             option = view.chooseMenuOption()) {
+            switch (option) {
+                case 1:
+                    viewMemories();
+                    break;
+                case 2:
+                    addMemory();
+                    break;
+                case 3:
+                    updateMemory();
+                    break;
+                case 4:
+                    deleteMemory();
+                    break;
             }
         }
     }
 
-    @Override
-    public int readInt(String prompt, int min, int max) {
-        while (true) {
-            int value = readInt(prompt);
-            if (value >= min && value <= max) {
-                return value;
-            }
-            printf("Value must be between %s and %s. %n", min, max);
+    private void viewMemories() throws DataAccessException {
+        List<Memory> memories = getMemories("View Memories");
+        view.displayMemories(memories);
+    }
+
+    private void addMemory() throws DataAccessException {
+        Memory m = view.createMemory();
+        MemoryResult result = service.add(m);
+        if (result.isSuccess()) {
+            view.displayMessage("Memory " + result.getMemory().getId() + " created.");
+        } else {
+            view.displayErrors(result.getErrorMessages());
         }
     }
 
+    private void updateMemory() throws DataAccessException {
+        List<Memory> memories = getMemories("Update a Memory");
+        Memory m = view.chooseMemory(memories);
+        if (m == null) {
+            view.displayMessage("Memory not found.");
+            return;
+        }
+        m = view.editMemory(m);
+        MemoryResult result = service.update(m);
+        if (result.isSuccess()) {
+            view.displayMessage("Memory " + result.getMemory().getId() + " updated.");
+        } else {
+            view.displayErrors(result.getErrorMessages());
+        }
+    }
+
+    private void deleteMemory() throws DataAccessException {
+        List<Memory> memories = getMemories("Delete a Memory");
+        Memory m = view.chooseMemory(memories);
+        if (m != null && service.deleteById(m.getId()).isSuccess()) {
+            view.displayMessage("Memory " + m.getId() + " deleted.");
+        } else {
+            view.displayMessage("Memory not found.");
+        }
+    }
+
+    private List<Memory> getMemories(String title) throws DataAccessException {
+        view.displayMessage(title);
+
+        if (view.isPublic()) {
+            return service.findPublicMemories();
+        }
+        return service.findPrivateMemories();
+    }
 
 }

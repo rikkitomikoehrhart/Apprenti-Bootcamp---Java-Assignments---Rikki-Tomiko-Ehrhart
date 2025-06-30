@@ -48,6 +48,66 @@ public class View {
         io.println("=".repeat(length));
     }
 
+    public void displayErrors(List<String> errors) {
+        displayHeader("Errors:");
+        for (String error : errors) {
+            io.println(error);
+        }
+    }
+
+    public void displayMemories(List<Memory> memories) {
+        if (memories.size() == 0) {
+            displayHeader("No Memories Found.");
+        } else {
+            displayHeader("Memories:");
+            for (Memory m : memories) {
+                io.printf("ID: %s, From: %s%n%s%n", m.getId(), m.getFrom(), m.getContent());
+            }
+        }
+    }
+
+    public void displayMessage(String message) {
+        io.println("");
+        io.println(message);
+    }
+
+    public Memory createMemory() {
+        displayHeader("Add a Memory");
+        Memory result = new Memory();
+
+        result.setFrom(io.readString("From: "));
+        result.setContent(io.readString("Content: "));
+        result.setShareable(io.readBoolean("Shareable [y/n]: "));
+        return result;
+    }
+
+    public Memory editMemory(Memory m) {
+        displayHeader("Update");
+
+        String from = io.readString("From (" + m.getFrom() + "): ");
+        // only update if it changed
+        if (from.trim().length() > 0) {
+            m.setFrom(from);
+        }
+
+        String content = io.readString("Content (" + m.getContent() + "): ");
+        if (content.trim().length() > 0) {
+            m.setContent(content);
+        }
+
+        String shareable = io.readString("Shareable (" + (m.isShareable() ? "y" : "n") + ") [y/n]: ");
+        if (shareable.trim().length() > 0) {
+            m.setShareable(shareable.equalsIgnoreCase("y"));
+        }
+
+        return m;
+    }
+
+
+
+
+
+
 
 
 
