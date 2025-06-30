@@ -37,6 +37,9 @@ public class Controller {
                 case DISPLAY_ALL:
                     displayAllEncounters();
                     break;
+                case DISPLAY_ENCOUNTERS_BY_TYPE:
+                    displayEncountersByType();
+                    break;
                 case ADD:
                     addEncounter();
                     break;
@@ -46,6 +49,11 @@ public class Controller {
 
     private void displayAllEncounters() throws DataAccessException {
         List<Encounter> encounters = service.findAll();
+        view.printAllEncounters(encounters);
+    }
+
+    private void displayEncountersByType() throws DataAccessException {
+        List<Encounter> encounters = service.findByType(view.readType());
         view.printAllEncounters(encounters);
     }
 

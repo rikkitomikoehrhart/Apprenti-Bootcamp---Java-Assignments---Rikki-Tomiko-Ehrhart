@@ -3,7 +3,9 @@ package learn.unexplained.domain;
 import learn.unexplained.data.DataAccessException;
 import learn.unexplained.data.EncounterRepository;
 import learn.unexplained.models.Encounter;
+import learn.unexplained.models.EncounterType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -63,4 +65,19 @@ public class EncounterService {
 
         return result;
     }
+
+    public List<Encounter> findByType(EncounterType type) throws DataAccessException {
+        List<Encounter> encounters = findAll();
+
+        List<Encounter> byType = new ArrayList<Encounter>();
+
+        for (Encounter e : encounters) {
+            if (e.getType() == type) {
+                byType.add(e);
+            }
+        }
+
+        return byType;
+    }
+
 }

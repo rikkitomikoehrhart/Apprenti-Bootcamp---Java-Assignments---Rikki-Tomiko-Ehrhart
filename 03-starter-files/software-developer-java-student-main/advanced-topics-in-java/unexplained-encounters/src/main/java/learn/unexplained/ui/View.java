@@ -114,7 +114,7 @@ public class View {
         return result;
     }
 
-    private EncounterType readType() {
+    public EncounterType readType() {
         int index = 1;
         for (EncounterType type : EncounterType.values()) {
             System.out.printf("%s. %s%n", index++, type);
