@@ -96,4 +96,20 @@ public class EncounterService {
         return validate(encounter);
     }
 
+    public EncounterResult deleteById(int id) throws DataAccessException {
+        EncounterResult result = new EncounterResult();
+
+        result.setPayload(findById(id));
+
+        if (result.getPayload() == null) {
+            result.addErrorMessage("Sorry, that ID doesn't exist.");
+        }
+
+        if (!repository.deleteById(id)) {
+            result.addErrorMessage("Sorry, couldn't delete the Encounter with that ID.");
+        }
+
+
+        return result;
+    }
 }

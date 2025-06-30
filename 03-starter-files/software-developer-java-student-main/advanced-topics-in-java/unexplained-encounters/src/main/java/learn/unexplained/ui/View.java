@@ -60,6 +60,19 @@ public class View {
         }
     }
 
+    public void printDeleteResult(EncounterResult result) {
+        if (result.isSuccess()) {
+            if (result.getPayload() != null) {
+                System.out.printf("Encounter Id %s deleted.%n", result.getPayload().getEncounterId());
+            }
+        } else {
+            printHeader("Errors");
+            for (String msg : result.getMessages()) {
+                System.out.printf("- %s%n", msg);
+            }
+        }
+    }
+
     public Encounter makeEncounter() {
         printHeader(MenuOption.ADD.getMessage());
         Encounter encounter = new Encounter();

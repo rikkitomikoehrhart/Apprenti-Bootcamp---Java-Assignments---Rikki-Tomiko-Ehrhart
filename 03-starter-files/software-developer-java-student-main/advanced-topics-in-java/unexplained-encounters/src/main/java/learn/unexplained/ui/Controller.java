@@ -43,6 +43,9 @@ public class Controller {
                 case UPDATE_ENCOUNTER:
                     updateEncounter();
                     break;
+                case DELETE_ENCOUNTER:
+                    deleteEncounter();
+                    break;
                 case ADD:
                     addEncounter();
                     break;
@@ -69,6 +72,12 @@ public class Controller {
         EncounterResult result = service.update(encounter);
 
         view.printResult(result);
+    }
+
+    private void deleteEncounter() throws DataAccessException {
+        EncounterResult result = service.deleteById(view.getEncounterId());
+
+        view.printDeleteResult(result);
     }
 
     private void addEncounter() throws DataAccessException {

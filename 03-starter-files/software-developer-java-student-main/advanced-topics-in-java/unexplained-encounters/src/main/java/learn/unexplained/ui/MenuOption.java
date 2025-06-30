@@ -5,6 +5,7 @@ public enum MenuOption {
     DISPLAY_ALL("Display All Encounters"),
     DISPLAY_ENCOUNTERS_BY_TYPE("Display Encounters By Type"),
     UPDATE_ENCOUNTER("Update an Encounter"),
+    DELETE_ENCOUNTER("Delete an Encounter"),
     ADD("Add An Encounter");
 
     private String message;
