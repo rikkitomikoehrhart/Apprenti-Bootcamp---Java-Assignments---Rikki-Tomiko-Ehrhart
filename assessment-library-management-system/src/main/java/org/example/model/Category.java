@@ -43,6 +43,9 @@ public enum Category {
         return MISC;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
     public static String[] getCategoryListForDisplay() {
         String[] categoryList = new String[Category.values().length];
