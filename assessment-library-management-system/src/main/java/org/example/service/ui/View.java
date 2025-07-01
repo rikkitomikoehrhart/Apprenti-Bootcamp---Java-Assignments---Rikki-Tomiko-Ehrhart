@@ -8,6 +8,7 @@ import java.util.List;
 
 public class View {
     private final TextIO io;
+    private final String ITEM_STRING_FORMAT = "%-10s | %-15s | %-25s by %-25s (%d) | %s";
 
     public View(TextIO io) {
         this.io = io;
@@ -41,11 +42,37 @@ public class View {
     }
 
 
-
     public void displayHeader(String header) {
         int length = header.length();
         io.print("");
         io.println(header);
         io.println("=".repeat(length));
+    }
+
+    public void displayErrors(List<String> errors) {
+        displayHeader("Errors:");
+        for (String error : errors) {
+            io.println(error);
+        }
+    }
+
+    public void displayInventory(List<InventoryItem> items) {
+        if (items.size() == 0) {
+            displayHeader("No Items Found.");
+        } else {
+            displayHeader("Items:");
+            io.printf(ITEM_STRING_FORMAT, "Shelf", "Position", "Title", "Author", "Year", "Category");
+            for (InventoryItem item : items) {
+                io.printf(
+                        ITEM_STRING_FORMAT,
+                        item.getLocation().getShelf(),
+                        item.getLocation().getPosition(),
+                        item.getTitle(),
+                        item.getAuthor(),
+                        item.getYear(),
+                        item.getCategory().getDescription()
+                );
+            }
+        }
     }
 }
