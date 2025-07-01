@@ -1,6 +1,7 @@
 package org.example.service.ui;
 
 import org.example.model.Location;
+import org.example.model.inventory.Category;
 import org.example.model.inventory.InventoryItem;
 import org.example.service.MenuOption;
 
@@ -75,4 +76,19 @@ public class View {
             }
         }
     }
+
+    public void displayCategories() {
+        String[] list = Category.getCategoryListForDisplay();
+
+        displayHeader("Categories:");
+        for (String display : list) {
+            io.println(display);
+        }
+    }
+
+
+    public Category getCategoryFromUser() {
+        return Category.getCategoryFromValue(io.readInt("Choose [1-23]: ", 1, 23));
+    }
+
 }

@@ -2,6 +2,7 @@ package org.example.controller;
 
 
 import org.example.controller.handlers.DisplayAllBookHandler;
+import org.example.controller.handlers.FindBooksByCategory;
 import org.example.model.data.DataAccessException;
 import org.example.service.MenuOption;
 import org.example.service.domain.ItemService;
@@ -13,12 +14,14 @@ public class Controller {
     private final View view;
     private final ItemService service;
     private final DisplayAllBookHandler displayAllBookHandler;
+    private final FindBooksByCategory findBooksByCategory;
 
     public Controller(View view, ItemService service) {
         this.view = view;
         this.service = service;
 
         this.displayAllBookHandler = new DisplayAllBookHandler(view, service);
+        this.findBooksByCategory = new FindBooksByCategory(view, service);
     }
 
     public void run() {
@@ -40,6 +43,7 @@ public class Controller {
                     displayAllBookHandler.execute();
                     break;
                 case FIND_BOOKS_BY_CATEGORY:
+                    findBooksByCategory.execute();
                     break;
                 case ADD_A_BOOK:
                     break;

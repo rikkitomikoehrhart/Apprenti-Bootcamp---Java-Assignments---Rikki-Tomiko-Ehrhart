@@ -2,8 +2,10 @@ package org.example.service.domain;
 
 import org.example.model.data.DataAccessException;
 import org.example.model.data.LibraryDataRepository;
+import org.example.model.inventory.Category;
 import org.example.model.inventory.InventoryItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemService {
@@ -74,6 +76,19 @@ public class ItemService {
     }
 
 
+    public List<InventoryItem> findAllByCategory(Category category) {
+        List<InventoryItem> all = findAll();
+        List<InventoryItem> items = new ArrayList<>();
+
+        for (InventoryItem item : all) {
+            if (item.getCategory() == category) {
+                items.add(item);
+            }
+        }
+
+        return items;
+
+    }
 
 
 }
