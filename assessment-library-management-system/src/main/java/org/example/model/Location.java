@@ -20,14 +20,14 @@ public class Location {
         this.position = position;
     }
 
-    private boolean isSpotAvailable(Location[] locations) {
-        for (Location location : locations) {
-            if (location.getShelf() == this.shelf) {
-                if (location.getPosition() == this.position) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+//    private boolean isSpotAvailable(Location[] locations) {
+//        for (Location location : locations) {
+//            if (location.getShelf() == this.shelf) {
+//                if (location.getPosition() == this.position) {
+//                    return false;
+//                }
+//            }
+//        }
+//        return true;
+//    }
 }

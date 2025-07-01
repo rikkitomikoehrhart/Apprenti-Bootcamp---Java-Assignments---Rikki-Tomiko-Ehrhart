@@ -43,6 +43,25 @@ public enum Category {
         return MISC;
     }
 
+    public static Category getCategoryFromDescription(String description) {
+        for (Category category : values()) {
+            if (category.description == description) {
+                return category;
+            }
+        }
+        return MISC;
+    }
+
+    public static Category getCategoryFromCategory(String category) {
+        for (Category name : values()) {
+            if (category.equals(name.name())) {
+                return name;
+            }
+        }
+
+        return MISC;
+    }
+
     public String getDescription() {
         return description;
     }

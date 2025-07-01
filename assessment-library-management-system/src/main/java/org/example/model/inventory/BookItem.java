@@ -8,9 +8,10 @@ public class BookItem implements InventoryItem {
     private int year;
     private Category category;
     private Location location;
-    private final String isbn;
+    private String isbn;
 
-    public BookItem(String title, String author, int year, Category category, Location location, String isbn) {
+    @Override
+    public void setAll(String title, String author, int year, Category category, Location location, String isbn) {
         this.title = title;
         this.author = author;
         this.year = year;
@@ -19,6 +20,7 @@ public class BookItem implements InventoryItem {
         this.isbn = isbn;
     }
 
+    @Override
     public String getTitle() {
         return title;
     }
@@ -26,6 +28,7 @@ public class BookItem implements InventoryItem {
         this.title = title;
     }
 
+    @Override
     public String getAuthor() {
         return author;
     }
@@ -33,6 +36,7 @@ public class BookItem implements InventoryItem {
         this.author = author;
     }
 
+    @Override
     public int getYear() {
         return year;
     }
@@ -40,6 +44,7 @@ public class BookItem implements InventoryItem {
         this.year = year;
     }
 
+    @Override
     public Category getCategory() {
         return category;
     }
@@ -47,6 +52,7 @@ public class BookItem implements InventoryItem {
         this.category = category;
     }
 
+    @Override
     public Location getLocation() {
         return location;
     }
@@ -54,8 +60,12 @@ public class BookItem implements InventoryItem {
         this.location = location;
     }
 
+    @Override
     public String getIsbn() {
         return isbn;
+    }
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     @Override
