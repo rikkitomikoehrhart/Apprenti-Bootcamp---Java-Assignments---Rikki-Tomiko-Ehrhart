@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.model.inventory;
 
 public interface InventoryItem {
     String toString();

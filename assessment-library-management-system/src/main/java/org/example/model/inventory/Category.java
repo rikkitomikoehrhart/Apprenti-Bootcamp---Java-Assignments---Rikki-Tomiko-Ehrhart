@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.model.inventory;
 
 public enum Category {
     FICTION(1, "Fiction"),

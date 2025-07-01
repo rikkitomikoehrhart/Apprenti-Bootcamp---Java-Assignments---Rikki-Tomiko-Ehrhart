@@ -1,4 +1,6 @@
-package org.example.model;
+package org.example.model.inventory;
+
+import org.example.model.Location;
 
 public class BookItem implements InventoryItem {
     private String title;
