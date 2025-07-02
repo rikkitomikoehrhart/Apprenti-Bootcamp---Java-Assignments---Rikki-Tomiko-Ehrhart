@@ -45,7 +45,7 @@ public enum Category {
 
     public static Category getCategoryFromDescription(String description) {
         for (Category category : values()) {
-            if (category.description == description) {
+            if (category.description.equals(description)) {
                 return category;
             }
         }

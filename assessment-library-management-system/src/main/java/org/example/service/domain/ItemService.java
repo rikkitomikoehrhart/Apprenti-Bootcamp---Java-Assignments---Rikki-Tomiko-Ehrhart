@@ -37,15 +37,15 @@ public class ItemService {
             return result;
         }
 
-        if (item.getIsbn() == null || item.getIsbn() == "") {
+        if (item.getIsbn() == null || item.getIsbn().equals("")) {
             result.addErrorMessage("- ISBN cannot be blank");
         }
 
-        if (item.getTitle() == null || item.getTitle() == "") {
+        if (item.getTitle() == null || item.getTitle().equals("")) {
             result.addErrorMessage("- Title cannot be blank");
         }
 
-        if (item.getAuthor() == null || item.getAuthor() == "") {
+        if (item.getAuthor() == null || item.getAuthor().equals("")) {
             result.addErrorMessage("- Author cannot be blank");
         }
 
@@ -57,7 +57,7 @@ public class ItemService {
         List<InventoryItem> items = findAll();
 
         for (InventoryItem i : items) {
-            if (i.getIsbn() == item.getIsbn()) {
+            if (i.getIsbn().equals(item.getIsbn())) {
                 result.addErrorMessage("- Duplicate ISBN");
             }
 

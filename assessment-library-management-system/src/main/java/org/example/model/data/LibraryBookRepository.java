@@ -34,7 +34,7 @@ public class LibraryBookRepository implements LibraryDataRepository {
                 location.setPosition(Integer.parseInt(elements[6]));
                 String isbn = elements[7];
 
-                if (elements[0] == "BookItem") {
+                if (elements[0].equals("BookItem")) {
                     BookItem book = new BookItem();
                     book.setAll(title, author, year, category, location, isbn);
 
@@ -56,7 +56,7 @@ public class LibraryBookRepository implements LibraryDataRepository {
         List<InventoryItem> all = findAll();
 
         for (InventoryItem item : all) {
-            if (item.getIsbn() == isbn) {
+            if (item.getIsbn().equals(isbn)) {
                 return item;
             }
         }
@@ -69,7 +69,7 @@ public class LibraryBookRepository implements LibraryDataRepository {
         List<InventoryItem> all = findAll();
 
         for (InventoryItem item : all) {
-            if (item.getIsbn() == isbn) {
+            if (item.getIsbn().equals(isbn)) {
                 return true;
             }
         }
@@ -90,7 +90,7 @@ public class LibraryBookRepository implements LibraryDataRepository {
         List<InventoryItem> all = findAll();
 
         for (int i = 0; i < all.size(); i++) {
-            if (all.get(i).getIsbn() == item.getIsbn()) {
+            if (all.get(i).getIsbn().equals(item.getIsbn())) {
                 all.set(i, item);
                 writeToFile(all);
                 return true;
@@ -104,7 +104,7 @@ public class LibraryBookRepository implements LibraryDataRepository {
         List<InventoryItem> all = findAll();
 
         for (int i = 0; i < all.size(); i++) {
-            if (all.get(i).getIsbn() == isbn) {
+            if (all.get(i).getIsbn().equals(isbn)) {
                 all.remove(i);
                 writeToFile(all);
                 return true;
@@ -117,10 +117,11 @@ public class LibraryBookRepository implements LibraryDataRepository {
         try (PrintWriter writer = new PrintWriter(filePath)) {
             for (InventoryItem item : items) {
                 writer.println(String.format(
-                        "%s%s%s%s%s%s%s%s%s%s%s%s%s",
-                        item.getClass(), DELIMITER,
+                        "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+                        item.getClass().getSimpleName(), DELIMITER,
                         item.getTitle(), DELIMITER,
                         item.getAuthor(), DELIMITER,
+                        item.getYear(), DELIMITER
                         item.getCategory(), DELIMITER,
                         item.getLocation().getShelf(), DELIMITER,
                         item.getLocation().getPosition(), DELIMITER,

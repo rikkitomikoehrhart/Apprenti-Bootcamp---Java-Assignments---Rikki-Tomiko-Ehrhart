@@ -23,6 +23,7 @@ public class Location {
     public Location setAll(int shelf, int position) {
         this.shelf = shelf;
         this.position = position;
+        return this;
     }
 
 }
