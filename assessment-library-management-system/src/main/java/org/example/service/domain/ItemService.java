@@ -94,4 +94,8 @@ public class ItemService {
         return repository.add(item);
     }
 
+    public void update(InventoryItem item) {
+        this.repository.update(item);
+    }
+
 }

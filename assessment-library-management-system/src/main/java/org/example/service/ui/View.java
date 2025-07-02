@@ -110,4 +110,74 @@ public class View {
         return book;
     }
 
+    public String getUserChosenISBN() {
+        displayHeader("Update An Item:");
+
+        return io.readString("Enter ISBN: ");
+    }
+
+    public void displayISBNError() {
+        io.println("-- That ISBN doesn't exist in the system. --");
+    }
+
+    public BookItem updateBook(BookItem book) {
+        ItemResult result = new ItemResult();
+
+        io.println("Editing " + book.getCategory().getDescription() + "-" + book.getLocation().getShelf() + "-" + book.getLocation().getPosition());
+        io.println("Press [Enter] to keep original value.\n");
+
+        String stringCategory = io.readString("Category (" + book.getCategory().getDescription() + "): ");
+        if (stringCategory.trim().length() > 0) {
+            book.setCategory(Category.getCategoryFromDescription(stringCategory));
+        }
+
+        String shelfNumber = io.readString("Shelf Number (" + book.getLocation().getShelf() + "): ");
+        if (shelfNumber.trim().length() > 0) {
+            try {
+                book.getLocation().setShelf(Integer.parseInt(shelfNumber));
+            } catch (NumberFormatException e) {
+                result.addErrorMessage("- Shelf not updated, must be a valid number.");
+            }
+        }
+
+        String position = io.readString("Position (" + book.getLocation().getPosition() + "): ");
+        if (position.trim().length() > 0) {
+            try {
+                book.getLocation().setPosition(Integer.parseInt(position));
+            } catch (NumberFormatException e) {
+                result.addErrorMessage("- Position not updated, must be a valid number.");
+            }
+        }
+
+        String title = io.readString("Title (" + book.getTitle() + "): ");
+        if (title.trim().length() > 0) {
+            book.setTitle(title);
+        }
+
+
+        String author = io.readString("Author (" + book.getAuthor() + "): ");
+        if (author.trim().length() > 0) {
+            book.setAuthor(author);
+        }
+
+        String year = io.readString("Year Published (" + book.getYear() + "): ");
+        if (year.trim().length() > 0) {
+            try {
+                book.setYear(Integer.parseInt(year));
+            } catch (NumberFormatException e) {
+                result.addErrorMessage("- Year not updated, must be a valid number.");
+            }
+        }
+
+        String isbn = io.readString("ISBN (" + book.getIsbn() + "): ");
+        if (isbn.trim().length() > 0) {
+            book.setIsbn(isbn);
+        }
+
+        if (!result.isSuccess()) {
+            displayErrors(result.getErrorMessages());
+        }
+
+        return book;
+    }
 }

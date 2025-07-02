@@ -49,7 +49,7 @@ public class Controller {
                     findBooksByCategory.execute();
                     break;
                 case ADD_A_BOOK:
-
+                    addABookHandler.execute();
                     break;
                 case UPDATE_A_BOOK:
                     break;
