@@ -1,6 +1,7 @@
 package org.example.controller;
 
 
+import org.example.controller.handlers.AddABookHandler;
 import org.example.controller.handlers.DisplayAllBookHandler;
 import org.example.controller.handlers.FindBooksByCategory;
 import org.example.model.data.DataAccessException;
@@ -15,6 +16,7 @@ public class Controller {
     private final ItemService service;
     private final DisplayAllBookHandler displayAllBookHandler;
     private final FindBooksByCategory findBooksByCategory;
+    private final AddABookHandler addABookHandler;
 
     public Controller(View view, ItemService service) {
         this.view = view;
@@ -22,6 +24,7 @@ public class Controller {
 
         this.displayAllBookHandler = new DisplayAllBookHandler(view, service);
         this.findBooksByCategory = new FindBooksByCategory(view, service);
+        this.addABookHandler = new AddABookHandler(view, service);
     }
 
     public void run() {
@@ -46,6 +49,7 @@ public class Controller {
                     findBooksByCategory.execute();
                     break;
                 case ADD_A_BOOK:
+
                     break;
                 case UPDATE_A_BOOK:
                     break;

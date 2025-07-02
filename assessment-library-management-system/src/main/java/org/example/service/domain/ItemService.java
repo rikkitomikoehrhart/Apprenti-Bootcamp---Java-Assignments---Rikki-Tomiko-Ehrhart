@@ -52,7 +52,7 @@ public class ItemService {
         return result;
     }
 
-    private ItemResult okToAdd(InventoryItem item) {
+    public ItemResult okToAdd(InventoryItem item) {
         ItemResult result = validate(item);
         List<InventoryItem> items = findAll();
 
@@ -90,5 +90,8 @@ public class ItemService {
 
     }
 
+    public InventoryItem addItemToLibrary(InventoryItem item) {
+        return repository.add(item);
+    }
 
 }

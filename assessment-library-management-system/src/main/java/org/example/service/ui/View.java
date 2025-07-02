@@ -1,9 +1,11 @@
 package org.example.service.ui;
 
 import org.example.model.Location;
+import org.example.model.inventory.BookItem;
 import org.example.model.inventory.Category;
 import org.example.model.inventory.InventoryItem;
 import org.example.service.MenuOption;
+import org.example.service.domain.ItemResult;
 
 import java.util.List;
 
@@ -89,6 +91,23 @@ public class View {
 
     public Category getCategoryFromUser() {
         return Category.getCategoryFromValue(io.readInt("Choose [1-23]: ", 1, 23));
+    }
+
+
+    public InventoryItem createItem() {
+        BookItem book = new BookItem();
+        Location location = new Location();
+
+
+        book.setAll(
+                io.readString("Enter Title: "),
+                io.readString("Enter Author: "),
+                io.readInt("Enter Publish Year: "),
+                Category.getCategoryFromDescription(io.readString("Enter Category: ")),
+                location.setAll((io.readInt("Enter Shelf: ",1, 250)), (io.readInt("Enter Position: ",1,250))),
+                io.readString("Enter ISBN: "));
+
+        return book;
     }
 
 }
