@@ -26,6 +26,28 @@ public class NonOverlappingMicroLeaseSchedule {
      * false if not valid
      */
     public boolean add(MicroLease lease) {
-        return false;
+        if (lease == null) {
+            return false;
+        }
+
+        if (lease.getStart() == null || lease.getEnd() == null) {
+            return false;
+        }
+
+        if (lease.getStart().isAfter(lease.getEnd())) {
+            return false;
+        }
+
+        for (int i = 0; i < leases.size(); i++) {
+            MicroLease microLease = leases.get(i);
+
+            if (lease.getStart().isAfter(microLease.getStart()) && microLease.getEnd().isBefore(lease.getEnd())) {
+                return false;
+            }
+        }
+
+        leases.add(lease);
+
+        return true;
     }
 }
