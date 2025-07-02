@@ -1,9 +1,7 @@
 package org.example.controller;
 
 
-import org.example.controller.handlers.AddABookHandler;
-import org.example.controller.handlers.DisplayAllBookHandler;
-import org.example.controller.handlers.FindBooksByCategory;
+import org.example.controller.handlers.*;
 import org.example.model.data.DataAccessException;
 import org.example.service.MenuOption;
 import org.example.service.domain.ItemService;
@@ -17,6 +15,8 @@ public class Controller {
     private final DisplayAllBookHandler displayAllBookHandler;
     private final FindBooksByCategory findBooksByCategory;
     private final AddABookHandler addABookHandler;
+    private final UpdateABookHandler updateABookHandler;
+    private final RemoveABookHandler removeABookHandler;
 
     public Controller(View view, ItemService service) {
         this.view = view;
@@ -25,6 +25,8 @@ public class Controller {
         this.displayAllBookHandler = new DisplayAllBookHandler(view, service);
         this.findBooksByCategory = new FindBooksByCategory(view, service);
         this.addABookHandler = new AddABookHandler(view, service);
+        this.updateABookHandler = new UpdateABookHandler(view, service);
+        this.removeABookHandler = new RemoveABookHandler(view, service);
     }
 
     public void run() {
@@ -52,10 +54,13 @@ public class Controller {
                     addABookHandler.execute();
                     break;
                 case UPDATE_A_BOOK:
+                    updateABookHandler.execute();
                     break;
                 case REMOVE_A_BOOK:
+                    removeABookHandler.execute();
                     break;
                 case EXIT:
+                    System.exit(0);
                     break;
             }
         }

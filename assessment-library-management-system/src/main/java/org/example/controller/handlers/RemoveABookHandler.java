@@ -1,0 +1,27 @@
+package org.example.controller.handlers;
+
+import org.example.model.inventory.BookItem;
+import org.example.service.domain.ItemService;
+import org.example.service.ui.View;
+
+public class RemoveABookHandler implements HandlerInterface {
+    private final View view;
+    private final ItemService service;
+
+    public RemoveABookHandler(View view, ItemService service) {
+        this.view = view;
+        this.service = service;
+    }
+
+
+    @Override
+    public void execute() {
+        BookItem book = (BookItem) service.findByISBN(view.getUserChosenISBN());
+
+        if (book == null) {
+            view.displayISBNError();
+        } else {
+            service.delete(book);
+        }
+    }
+}

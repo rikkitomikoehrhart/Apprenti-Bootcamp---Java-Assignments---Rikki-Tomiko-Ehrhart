@@ -98,4 +98,8 @@ public class ItemService {
         this.repository.update(item);
     }
 
+    public void delete(InventoryItem item) {
+        this.repository.deleteByIsbn(item.getIsbn());
+    }
+
 }
