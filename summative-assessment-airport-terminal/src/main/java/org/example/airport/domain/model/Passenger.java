@@ -1,4 +1,32 @@
 package org.example.airport.domain.model;
 
 public class Passenger {
+    private String name;
+    private String passportNumber;
+
+    public Passenger(String name, String passportNumber) {
+        this.name = name;
+        this.passportNumber = passportNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %s", this.name, this.passportNumber);
+    }
 }
