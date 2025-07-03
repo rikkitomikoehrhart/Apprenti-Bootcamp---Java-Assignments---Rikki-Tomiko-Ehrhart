@@ -4,11 +4,13 @@ import learn.unexplained.data.DataAccessException;
 import learn.unexplained.data.EncounterRepository;
 import learn.unexplained.models.Encounter;
 import learn.unexplained.models.EncounterType;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Service
 public class EncounterService {
 
     private final EncounterRepository repository;

@@ -4,17 +4,29 @@ import learn.memories.data.DataAccessException;
 import learn.memories.domain.MemoryResult;
 import learn.memories.domain.MemoryService;
 import learn.memories.models.Memory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class Controller {
 
-    private final View view;
+
+    private View view;
+
+    @Autowired      // direct field injection
     private final MemoryService service;
 
+    @Autowired      // indicates both a view and service should be injected
     public Controller(View view, MemoryService service) {
         this.view = view;
         this.service = service;
+    }
+
+    @Autowired      // setter injection
+    public void setView(View view) {
+        this.view = view;
     }
 
     public void run() {
