@@ -1,11 +1,15 @@
 package org.example;
 
+import org.example.airport.domain.model.CommercialAircraft;
+import org.example.airport.domain.model.Flight;
 import org.example.airport.domain.model.Passenger;
 import org.example.airport.domain.reservation.ReservationSystem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +20,7 @@ public class ReservationTest {
     Passenger rikki;
     Passenger kellen;
     Passenger nicole;
-
+    Flight flight;
 
     @BeforeEach
     void setUp() {
@@ -32,6 +36,8 @@ public class ReservationTest {
 
         reservationSystem.addReservation("56789", kellen);
         reservationSystem.addReservation("56789", nicole);
+
+        flight = new Flight("12345", LocalDate.now(), BigDecimal.ONE, new CommercialAircraft("12345", 100, 123.45, "Airplanes Inc."));
     }
 
 
@@ -40,7 +46,12 @@ public class ReservationTest {
     public void createAFlightInTheReservationSystem() {
         assertNotNull(reservationSystem.getPassengersForFlight("12345"));
         assertEquals(2, reservationSystem.getPassengersForFlight("12345").size());
+    }
 
+    @Test
+    @DisplayName("If a Flight Number Doesn't Exist Should Return Null")
+    public void flightNumberDoesntExistReturnNull() {
+        assertNull(reservationSystem.getPassengersForFlight("Should Return Null"));
     }
 
     @Test
@@ -51,5 +62,21 @@ public class ReservationTest {
         assertEquals(2, flightNumbers.size());
     }
 
+    @Test
+    @DisplayName("If Flight Number Isn't In Flights Should Return Null")
+    public void flightNumberNotInFlightsReturnsNull() {
+        ReservationSystem system2 = new ReservationSystem();
+
+        assertNull(system2.getFlight("Should Return Null"));
+    }
+
+
+    @Test
+    @DisplayName("Adding a Flight To The Flights HashMap")
+    public void addFlight() {
+        reservationSystem.addFlight(flight);
+
+        assertNotNull(reservationSystem.getFlight(flight.getFlightNumber()));
+    }
 
 }
