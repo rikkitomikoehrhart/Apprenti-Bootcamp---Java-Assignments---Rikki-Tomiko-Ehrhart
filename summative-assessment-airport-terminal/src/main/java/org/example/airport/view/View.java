@@ -7,8 +7,8 @@ import org.example.airport.domain.model.Passenger;
 
 public class View {
     UIUtils ui = new UIUtils();
-    private final String DISPLAY_FLIGHT_FORMAT = "%-7s | %-15s | $%-10.02f | %s : %s ";
-    private final String DISPLAY_PASSENGER_FORMAT = "%-7s |   %s";
+    private final String DISPLAY_FLIGHT_FORMAT = "%-7s | %-15s | $%-10.02f | %s : %s %n";
+    private final String DISPLAY_PASSENGER_FORMAT = "%-7s |   %s%n";
 
 
 
@@ -48,7 +48,7 @@ public class View {
 
     public void displayHeader(String header) {
         int length = header.length();
-        ui.print("");
+        ui.println("");
         ui.println(header);
         ui.println("=".repeat(length));
     }

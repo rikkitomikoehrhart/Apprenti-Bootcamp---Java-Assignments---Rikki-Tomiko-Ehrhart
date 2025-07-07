@@ -42,34 +42,33 @@ public class FlightSampleDataRepository implements FlightRepository {
     private HashMap<String, ArrayList<Passenger>> createSampleRepo() {
         HashMap<String, ArrayList<Passenger>> repo = new HashMap<>();
 
-        ArrayList<Passenger> passengers = new ArrayList<>();
+        ArrayList<Passenger> passengers1 = new ArrayList<>();
+        passengers1.add(new Passenger("Sam Ehrhart", "123456789"));
+        passengers1.add(new Passenger("Rikki Ehrhart", "213456789"));
+        passengers1.add(new Passenger("Beverley Scott", "231456789"));
+        repo.put("EE123", passengers1);
+        repo.put("MM106", passengers1);
 
-        passengers.add(new Passenger("Sam Ehrhart", "123456789"));
-        passengers.add(new Passenger("Rikki Ehrhart", "213456789"));
-        passengers.add(new Passenger("Beverley Scott", "231456789"));
-        repo.put("EE123", passengers);
-        repo.put("MM106", passengers);
+        ArrayList<Passenger> passengers2 = new ArrayList<>();
+        passengers2.add(new Passenger("Sherri Davis", "234156789"));
+        passengers2.add(new Passenger("Tomiko Kawamura", "234516789"));
+        passengers2.add(new Passenger("William Kennedy", "234561789"));
+        repo.put("EE113", passengers2);
+        repo.put("MM203", passengers2);
 
-        passengers.clear();
-        passengers.add(new Passenger("Sherri Davis", "234156789"));
-        passengers.add(new Passenger("Tomiko Kawamura", "234516789"));
-        passengers.add(new Passenger("William Kennedy", "234561789"));
-        repo.put("EE113", passengers);
-        repo.put("MM203", passengers);
+        ArrayList<Passenger> passengers3 = new ArrayList<>();
+        passengers3.add(new Passenger("Judi Hess", "234567189"));
+        passengers3.add(new Passenger("Merlin Hess", "234567819"));
+        passengers3.add(new Passenger("Pamela Scott", "234567891"));
+        repo.put("EE121", passengers3);
+        repo.put("MM302", passengers3);
 
-        passengers.clear();
-        passengers.add(new Passenger("Judi Hess", "234567189"));
-        passengers.add(new Passenger("Merlin Hess", "234567819"));
-        passengers.add(new Passenger("Pamela Scott", "234567891"));
-        repo.put("EE121", passengers);
-        repo.put("MM302", passengers);
-
-        passengers.clear();
-        passengers.add(new Passenger("Cat Riley", "324567891"));
-        passengers.add(new Passenger("Walter Riley", "342567891"));
-        passengers.add(new Passenger("Laura Fick", "345267891"));
-        repo.put("EE311", passengers);
-        repo.put("MM601", passengers);
+        ArrayList<Passenger> passengers4 = new ArrayList<>();
+        passengers4.add(new Passenger("Cat Riley", "324567891"));
+        passengers4.add(new Passenger("Walter Riley", "342567891"));
+        passengers4.add(new Passenger("Laura Fick", "345267891"));
+        repo.put("EE311", passengers4);
+        repo.put("MM601", passengers4);
 
         return repo;
     }

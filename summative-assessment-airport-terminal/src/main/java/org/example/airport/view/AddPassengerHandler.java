@@ -16,7 +16,7 @@ public class AddPassengerHandler implements MenuHandler {
     @Override
     public void execute() {
         view.displayHeader("Add Passenger");
-        
+
         String flightNumber = view.getFlightNumberFromUser();
         String travelerName = view.getTravelerNameFromUser();
         String travelerPassportNumber = view.getTravelerPassportNumberFromUser();

@@ -4,14 +4,15 @@ import org.example.airport.data.FlightSampleDataRepository;
 import org.example.airport.domain.model.MenuOption;
 
 public class AirportTerminalApp {
-    private View view = new View();
-    private FlightSampleDataRepository repository = new FlightSampleDataRepository();
 
-    private ViewAllFlightsHandler viewAllFlights = new ViewAllFlightsHandler(view, repository);
-    private AddPassengerHandler addPassenger = new AddPassengerHandler(view, repository);
 
-    public void main(String[] args) {
+    public static void main(String[] args) {
+        View view = new View();
+        FlightSampleDataRepository repository = new FlightSampleDataRepository();
 
+        ViewAllFlightsHandler viewAllFlights = new ViewAllFlightsHandler(view, repository);
+        AddPassengerHandler addPassenger = new AddPassengerHandler(view, repository);
+        ViewPassengersHandler viewPassengers = new ViewPassengersHandler(view, repository);
 
         while (true) {
             MenuOption choice = view.chooseMainMenuOption();
@@ -24,7 +25,8 @@ public class AirportTerminalApp {
                     addPassenger.execute();
                     continue;
                 case VIEW_PASSENGERS:
-                    break;
+                    viewPassengers.execute();
+                    continue;
                 case SAVE:
                     break;
                 case EXIT:
