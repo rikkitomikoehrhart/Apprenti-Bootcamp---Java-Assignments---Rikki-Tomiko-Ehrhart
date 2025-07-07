@@ -6,8 +6,8 @@ import org.example.airport.domain.model.Flight;
 import java.util.List;
 
 public class ViewAllFlightsHandler implements MenuHandler {
-    View view;
-    FlightRepository repository;
+    private View view;
+    private FlightRepository repository;
 
 
 

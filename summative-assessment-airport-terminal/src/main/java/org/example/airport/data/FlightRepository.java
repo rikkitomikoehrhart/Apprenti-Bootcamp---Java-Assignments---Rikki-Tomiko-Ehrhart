@@ -12,4 +12,6 @@ public interface FlightRepository {
     List<Flight> getAllFlights();
     Flight getFlightByNumber(String flightNumber);
     List<String> getFlightNumbers();
+    void addReservation(String flightNumber, Passenger passenger);
+    void addToFlights(Flight flight);
 }

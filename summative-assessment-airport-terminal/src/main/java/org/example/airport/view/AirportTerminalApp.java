@@ -7,7 +7,8 @@ public class AirportTerminalApp {
     private View view = new View();
     private FlightSampleDataRepository repository = new FlightSampleDataRepository();
 
-    private ViewAllFlightsHandler viewAllFlightsHandler = new ViewAllFlightsHandler(view, repository);
+    private ViewAllFlightsHandler viewAllFlights = new ViewAllFlightsHandler(view, repository);
+    private AddPassengerHandler addPassenger = new AddPassengerHandler(view, repository);
 
     public void main(String[] args) {
 
@@ -17,10 +18,11 @@ public class AirportTerminalApp {
 
             switch(choice) {
                 case VIEW_ALL_FLIGHTS:
-                    viewAllFlightsHandler.execute();
-                    return;
+                    viewAllFlights.execute();
+                    continue;
                 case ADD_PASSENGER:
-                    break;
+                    addPassenger.execute();
+                    continue;
                 case VIEW_PASSENGERS:
                     break;
                 case SAVE:

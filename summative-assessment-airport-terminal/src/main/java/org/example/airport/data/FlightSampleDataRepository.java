@@ -7,6 +7,7 @@ import org.example.airport.domain.reservation.ReservationSystem;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -93,6 +94,23 @@ public class FlightSampleDataRepository implements FlightRepository {
         return repository.keySet().stream().collect(Collectors.toList());
     }
 
+    @Override
+    public void addReservation(String flightNumber, Passenger passenger) {
+        if (repository.containsKey(flightNumber)) {
+            repository.get(flightNumber).add(passenger);
+        } else {
+            repository.put(flightNumber, new ArrayList<>(Arrays.asList(passenger)));
+        }
+    }
+
+    @Override
+    public void addToFlights(Flight flight) {
+        if (!sampleFlights.contains(flight)) {
+            sampleFlights.add(flight);
+        }
+    }
+
+
     public void populateReservationSystem(ReservationSystem reservationSystem) {
         for (Flight flight : sampleFlights) {
             reservationSystem.addFlight(flight);
@@ -104,4 +122,5 @@ public class FlightSampleDataRepository implements FlightRepository {
             }
         }
     }
+
 }
