@@ -20,7 +20,7 @@ public class AirportTerminalTest {
     public void creatingACommercialFlight() {
         Flight flight = new Flight("TEST123", LocalDate.now(), BigDecimal.valueOf(100.00), new CommercialAircraft("Model", 100, 123.45, "Delta"));
 
-        assertEquals("org.example.airport.domain.model.CommercialAircraft", flight.getAircraft().getClass().getName());
+        assertEquals("CommercialAircraft", flight.getAircraft().getClass().getSimpleName());
     }
 
     @Test
@@ -28,6 +28,6 @@ public class AirportTerminalTest {
     public void creatingAPrivateJetFlight() {
         Flight flight = new Flight("TEST123", LocalDate.now(), BigDecimal.valueOf(100.00), new PrivateJet("Model", 100, 123.45, true, 1000));
 
-        assertEquals("org.example.airport.domain.model.PrivateJet", flight.getAircraft().getClass().getName());
+        assertEquals("PrivateJet", flight.getAircraft().getClass().getSimpleName());
     }
 }
