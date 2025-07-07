@@ -4,8 +4,7 @@ public enum MenuOption {
     VIEW_ALL_FLIGHTS(1, "View All Flights"),
     ADD_PASSENGER(2, "Add a Passenger"),
     VIEW_PASSENGERS(3, "View Passengers On Flight"),
-    SAVE(4, "Save Flight Reservations"),
-    EXIT(5, "Exit");
+    EXIT(4, "Exit");
 
     private int value;
     private String description;

@@ -27,8 +27,6 @@ public class AirportTerminalApp {
                 case VIEW_PASSENGERS:
                     viewPassengers.execute();
                     continue;
-                case SAVE:
-                    break;
                 case EXIT:
                     System.exit(0);
             }

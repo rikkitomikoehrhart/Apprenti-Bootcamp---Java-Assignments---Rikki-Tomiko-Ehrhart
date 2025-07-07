@@ -21,7 +21,7 @@ public class View {
             ui.println(menuItem);
         }
 
-        return MenuOption.getMenuOptionFromValue(ui.readInt("Choose [0-5]: "));
+        return MenuOption.getMenuOptionFromValue(ui.readInt("Choose [0-4]: "));
     }
 
 
