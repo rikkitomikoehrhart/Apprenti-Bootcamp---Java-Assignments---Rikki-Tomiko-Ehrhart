@@ -2,15 +2,16 @@ package org.example.airport.data;
 
 import com.opencsv.CSVWriter;
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 import org.example.airport.domain.model.*;
 import org.example.airport.domain.reservation.ReservationSystem;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CSVUtil {
@@ -24,6 +25,15 @@ public class CSVUtil {
 
     public void saveReservationsToCSV() {
         String[] header = {"flightNumber", "departureDate", "ticketPrice", "passengerName", "passportNumber", "aircraftModel", "aircraftType", "capacity", "fuelCapacity", "airlineName", "hasLuxuryService", "maxSpeed"};
+
+        try {
+            File directory = new File("data");
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+        } catch (NullPointerException e) {
+            System.err.println("Error creating directory: " + e.getMessage());
+        }
 
         try (CSVWriter writer = new CSVWriter(new FileWriter(PATH))) {
             writer.writeNext(header);
@@ -112,37 +122,37 @@ public class CSVUtil {
                 } catch (Exception e) {
                     System.err.println("Error processing record " + i + ": " + e.getMessage());
                 }
-
             }
-        } catch (IOException e) {
+        } catch (IOException | CsvException e) {
             System.err.println("Error Loading Reservations from CSV: " + e.getMessage());
         }
     }
-        private Aircraft createAircraft(String[] record) {
-            String model = record[5];
-            String aircraftType = record[6];
-            int capacity = Integer.parseInt(record[7]);
-            double fuelCapacity = Double.parseDouble(record[8]);
 
-            if ("CommercialAircraft".equals(aircraftType)) {
-                String airlineName = record[9];
+    private Aircraft createAircraft(String[] record) {
+        String model = record[5];
+        String aircraftType = record[6];
+        int capacity = Integer.parseInt(record[7]);
+        double fuelCapacity = Double.parseDouble(record[8]);
 
-                return new CommercialAircraft(model, capacity, fuelCapacity, airlineName);
-            } else if ("PrivateJet".equals(aircraftType)) {
-                boolean hasLuxuryService = record[10].equals("true");
-                int maxSpeed = Integer.parseInt(record[11]);
+        if ("CommercialAircraft".equals(aircraftType)) {
+            String airlineName = record[9];
 
-                return new PrivateJet(model, capacity, fuelCapacity, hasLuxuryService, maxSpeed);
-            }
+            return new CommercialAircraft(model, capacity, fuelCapacity, airlineName);
+        } else if ("PrivateJet".equals(aircraftType)) {
+            boolean hasLuxuryService = record[10].equals("true");
+            int maxSpeed = Integer.parseInt(record[11]);
 
-            return new Aircraft(model, capacity, fuelCapacity);
+            return new PrivateJet(model, capacity, fuelCapacity, hasLuxuryService, maxSpeed);
         }
 
-        private Flight createFlight(String[] record, Aircraft aircraft) {
-            return new Flight(record[0], LocalDate.parse(record[1]), new BigDecimal(record[2]), aircraft);
-        }
+        return new Aircraft(model, capacity, fuelCapacity);
+    }
 
-        private Passenger createPassenger(String[] record) {
-            return new Passenger(record[3], record[4]);
-        }
+    private Flight createFlight(String[] record, Aircraft aircraft) {
+        return new Flight(record[0], LocalDate.parse(record[1]), new BigDecimal(record[2]), aircraft);
+    }
+
+    private Passenger createPassenger(String[] record) {
+        return new Passenger(record[3], record[4]);
+    }
 }
