@@ -11,4 +11,5 @@ public interface InventoryRepository {
     Product findProductByName(String name);
     List<Product> loadProduct(String fileName);
     boolean saveProducts(String fileName);
+    List<Product> getAllInventory();
 }

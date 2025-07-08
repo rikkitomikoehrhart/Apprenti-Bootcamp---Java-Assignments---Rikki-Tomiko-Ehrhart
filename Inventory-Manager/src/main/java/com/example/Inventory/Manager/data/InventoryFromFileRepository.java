@@ -95,6 +95,11 @@ public class InventoryFromFileRepository implements InventoryRepository {
         }
     }
 
+    @Override
+    public List<Product> getAllInventory() {
+        return inventory;
+    }
+
     public PerishableProduct createNewPerishableProduct(String[] parts) {
         String id = parts[0];
         String name = parts[1];

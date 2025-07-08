@@ -62,4 +62,9 @@ public class InventorySampleDataRepository implements InventoryRepository {
     public boolean saveProducts(String fileName) {
         return true;
     }
+
+    @Override
+    public List<Product> getAllInventory() {
+        return inventory;
+    }
 }
