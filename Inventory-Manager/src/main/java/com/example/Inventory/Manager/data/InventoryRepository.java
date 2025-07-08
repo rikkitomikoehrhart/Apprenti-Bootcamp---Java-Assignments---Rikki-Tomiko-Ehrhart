@@ -9,6 +9,6 @@ public interface InventoryRepository {
     void removeProduct(Product product);
     Product findProductById(String id);
     Product findProductByName(String name);
-    List<Product> loadProduct();
-    boolean saveProducts();
+    List<Product> loadProduct(String fileName);
+    boolean saveProducts(String fileName);
 }
