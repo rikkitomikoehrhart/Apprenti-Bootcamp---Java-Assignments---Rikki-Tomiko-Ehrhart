@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>Inteventory-Manager</artifactId>
+	<artifactId>Inventory-Manager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Inteventory-Manager</name>
+	<name>Inventory-Manager</name>
 	<description>Assessment: Java Console App Inventory Manager</description>
 	<url/>
 	<licenses>
@@ -27,7 +27,7 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>24</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
