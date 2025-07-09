@@ -2,9 +2,11 @@ package com.example.Inventory.Manager.service;
 
 import com.example.Inventory.Manager.repository.InventoryRepository;
 import com.example.Inventory.Manager.model.InventoryItem;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class InventoryService {
     private InventoryRepository repository;
 

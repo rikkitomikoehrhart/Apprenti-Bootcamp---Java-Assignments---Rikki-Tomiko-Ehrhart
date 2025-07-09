@@ -3,6 +3,7 @@ package com.example.Inventory.Manager.repository;
 import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.model.PerishableProduct;
 import com.example.Inventory.Manager.model.Product;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Repository
 public class InventorySampleDataRepository implements InventoryRepository {
     private List<InventoryItem> inventory;
     private String fileName;    // The other Repo needs a fileName. This data is hardcoded, so this is a dummy value;
