@@ -3,6 +3,8 @@ package com.example.Inventory.Manager.data;
 import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.model.PerishableProduct;
 import com.example.Inventory.Manager.model.Product;
+import com.example.Inventory.Manager.repository.InventoryFromFileRepository;
+import com.example.Inventory.Manager.repository.InventorySampleDataRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeEach;

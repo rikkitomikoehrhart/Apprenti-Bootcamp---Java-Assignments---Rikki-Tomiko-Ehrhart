@@ -1,8 +1,7 @@
 package com.example.Inventory.Manager.service;
 
-import com.example.Inventory.Manager.data.InventoryRepository;
+import com.example.Inventory.Manager.repository.InventoryRepository;
 import com.example.Inventory.Manager.model.InventoryItem;
-import com.example.Inventory.Manager.model.ProductType;
 
 import java.util.List;
 

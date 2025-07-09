@@ -1,4 +1,4 @@
-package com.example.Inventory.Manager.data;
+package com.example.Inventory.Manager.repository;
 
 import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.model.PerishableProduct;
