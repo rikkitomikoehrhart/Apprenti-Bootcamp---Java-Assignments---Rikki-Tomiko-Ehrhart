@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InventoryFromFileRepository implements InventoryRepository {
     private final List<InventoryItem> inventory;
@@ -123,4 +124,24 @@ public class InventoryFromFileRepository implements InventoryRepository {
 
         return new InventoryItem(new PerishableProduct(new Product(id, name), expirationDate), quantity, price);
     }
+
+
+    @Override
+    public void update(InventoryItem item) {
+        if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null");
+        }
+
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).getProduct().getProductID().equals(item.getProduct().getProductID())) {
+                inventory.set(i, item);
+            }
+        }
+    }
+
+    @Override
+    public List<InventoryItem> getInStock() {
+        return inventory.stream().filter(item -> item.getQuantity() > 0).collect(Collectors.toList());
+    }
+
 }

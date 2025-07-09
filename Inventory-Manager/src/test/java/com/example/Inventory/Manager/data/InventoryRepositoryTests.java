@@ -126,5 +126,52 @@ public class InventoryRepositoryTests {
     }
 
 
+    @Test
+    @DisplayName("Both repos can update items")
+    void updateItemsInBothRepos() {
+        InventoryItem donut = new InventoryItem(new PerishableProduct(new Product("DONUT", "Donut"), LocalDate.of(2025, 7, 8)), 0, BigDecimal.TWO);
+
+        List<InventoryItem> sampleInventory = sampleDataRepository.getAllInventory();
+        List<InventoryItem> fileInventory = fromFileRepository.getAllInventory();
+
+        sampleInventory.add(donut);
+        fileInventory.add(donut);
+
+        assertEquals(4, sampleInventory.size());
+        assertEquals(1, fileInventory.size());
+
+        InventoryItem updatedDonut = new InventoryItem(new PerishableProduct(new Product("DONUT", "Donut"), LocalDate.of(2025, 7, 8)), 10, BigDecimal.TWO);
+
+        sampleDataRepository.update(updatedDonut);
+        fromFileRepository.update(updatedDonut);
+
+        assertEquals(10, sampleInventory.get(3).getQuantity());
+        assertEquals(10, fileInventory.get(0).getQuantity());
+    }
+
+
+    @Test
+    @DisplayName("Both repos can return a list of just the items in stock")
+    void returnItemsInStockInBothRepos() {
+        InventoryItem donut = new InventoryItem(new PerishableProduct(new Product("DONUT", "Donut"), LocalDate.of(2025, 7, 8)), 10, BigDecimal.TWO);
+        InventoryItem eclair = new InventoryItem(new PerishableProduct(new Product("ECLAIR", "Eclair"), LocalDate.of(2025, 12, 1)), 0, BigDecimal.TWO);
+
+        List<InventoryItem> sampleInventory = sampleDataRepository.getAllInventory();
+        List<InventoryItem> fileInventory = fromFileRepository.getAllInventory();
+
+        sampleInventory.add(donut);
+        sampleInventory.add(eclair);
+        fileInventory.add(donut);
+        fileInventory.add(eclair);
+
+        assertEquals(5, sampleInventory.size());
+        assertEquals(2, fileInventory.size());
+
+        List<InventoryItem> sampleInStock = sampleDataRepository.getInStock();
+        List<InventoryItem> fileInStock = fromFileRepository.getInStock();
+
+        assertEquals(3, sampleInStock.size());
+        assertEquals(1, fileInStock.size());
+    }
 
 }

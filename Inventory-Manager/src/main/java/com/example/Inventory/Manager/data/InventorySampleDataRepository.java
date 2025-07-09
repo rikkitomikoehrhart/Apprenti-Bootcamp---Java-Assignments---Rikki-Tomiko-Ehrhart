@@ -3,12 +3,12 @@ package com.example.Inventory.Manager.data;
 import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.model.PerishableProduct;
 import com.example.Inventory.Manager.model.Product;
-import com.example.Inventory.Manager.model.ProductType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InventorySampleDataRepository implements InventoryRepository {
     private List<InventoryItem> inventory;
@@ -54,7 +54,7 @@ public class InventorySampleDataRepository implements InventoryRepository {
         List<InventoryItem> products = new ArrayList<>();
 
         products.add(new InventoryItem(new PerishableProduct(new Product("APPLE", "Apple"), LocalDate.of(2025, 7, 26)), 100, BigDecimal.valueOf(2.99)));
-        products.add(new InventoryItem(new PerishableProduct(new Product("BANANA", "Banana"), LocalDate.of(2025, 7, 13)), 25, BigDecimal.valueOf(1.49)));
+        products.add(new InventoryItem(new PerishableProduct(new Product("BANANA", "Banana"), LocalDate.of(2025, 7, 13)), 0, BigDecimal.valueOf(1.49)));
         products.add(new InventoryItem(new PerishableProduct(new Product("CARROT", "Carrots"), LocalDate.of(2025, 7, 21)), 250, BigDecimal.valueOf(3.56)));
 
         return products;
@@ -68,5 +68,23 @@ public class InventorySampleDataRepository implements InventoryRepository {
     @Override
     public List<InventoryItem> getAllInventory() {
         return inventory;
+    }
+
+    @Override
+    public void update(InventoryItem item) {
+        if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null");
+        }
+
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).getProduct().getProductID().equals(item.getProduct().getProductID())) {
+                inventory.set(i, item);
+            }
+        }
+    }
+
+    @Override
+    public List<InventoryItem> getInStock() {
+        return inventory.stream().filter(item -> item.getQuantity() > 0).collect(Collectors.toList());
     }
 }

@@ -13,4 +13,8 @@ public interface InventoryRepository {
     List<InventoryItem> loadProduct(String fileName);
     boolean saveProducts(String fileName);
     List<InventoryItem> getAllInventory();
+
+    void update(InventoryItem item);
+    List<InventoryItem> getInStock();
+
 }
