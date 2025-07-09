@@ -1,15 +1,16 @@
 package com.example.Inventory.Manager.data;
 
-import com.example.Inventory.Manager.model.Product;
+import com.example.Inventory.Manager.model.InventoryItem;
+import com.example.Inventory.Manager.model.ProductType;
 
 import java.util.List;
 
 public interface InventoryRepository {
-    void addProduct(Product product);
-    void removeProduct(Product product);
-    Product findProductById(String id);
-    Product findProductByName(String name);
-    List<Product> loadProduct(String fileName);
+    void addProduct(InventoryItem product);
+    void removeProduct(InventoryItem product);
+    InventoryItem findProductById(String id);
+    InventoryItem findProductByName(String name);
+    List<InventoryItem> loadProduct(String fileName);
     boolean saveProducts(String fileName);
-    List<Product> getAllInventory();
+    List<InventoryItem> getAllInventory();
 }

@@ -1,6 +1,8 @@
 package com.example.Inventory.Manager.service;
 
+import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.model.PerishableProduct;
+import com.example.Inventory.Manager.model.Product;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,13 +14,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductServiceTests {
     private ProductService productService;
-    private PerishableProduct product;
+    private InventoryItem product;
 
     @BeforeEach
     void setUp() {
         productService = new ProductService();
-
-        product = new PerishableProduct("ID", "Name", 100, BigDecimal.valueOf(100.00), LocalDate.of(2025, 7, 26));
+        product = new InventoryItem(new PerishableProduct(new Product("ID", "Name"), LocalDate.of(2025, 7, 26)), 100, BigDecimal.valueOf(100.00));
     }
 
     @Test
@@ -65,7 +66,8 @@ public class ProductServiceTests {
     @Test
     @DisplayName("Check if Days Until ExpirationDate is returned")
     public void checkDaysUntilExpiration() {
-        assertEquals(18, productService.daysUntilExpirationDate(product));
+        PerishableProduct perishable = (PerishableProduct) product.getProduct();
+        assertEquals(17, productService.daysUntilExpirationDate(perishable));
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.Inventory.Manager.data;
 
+import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.model.PerishableProduct;
 import com.example.Inventory.Manager.model.Product;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ public class InventoryRepositoryTests {
     @Test
     @DisplayName("Sample Data Repo has Sample Data")
     void sampleDataRepoHasSampleData(){
-        List<Product> inventory = sampleDataRepository.getAllInventory();
+        List<InventoryItem> inventory = sampleDataRepository.getAllInventory();
 
         assertFalse(inventory.isEmpty());
     }
@@ -41,13 +42,13 @@ public class InventoryRepositoryTests {
     @Test
     @DisplayName("Both repos can add products")
     void bothReposCanAddProducts() {
-        PerishableProduct donut = new PerishableProduct("DONUT", "Donut", 10, BigDecimal.TWO, LocalDate.of(2025, 7, 8));
+        InventoryItem donut = new InventoryItem(new PerishableProduct(new Product("DONUT", "Donut"), LocalDate.of(2025, 7, 8)), 10, BigDecimal.TWO);
 
         sampleDataRepository.addProduct(donut);
         fromFileRepository.addProduct(donut);
 
-        List<Product> sampleInventory = sampleDataRepository.getAllInventory();
-        List<Product> fileInventory = fromFileRepository.getAllInventory();
+        List<InventoryItem> sampleInventory = sampleDataRepository.getAllInventory();
+        List<InventoryItem> fileInventory = fromFileRepository.getAllInventory();
 
         assertEquals(4, sampleInventory.size());
         assertEquals(1, fileInventory.size());
@@ -56,13 +57,13 @@ public class InventoryRepositoryTests {
     @Test
     @DisplayName("Both repos can remove products")
     void bothReposCanARemoveProducts() {
-        PerishableProduct donut = new PerishableProduct("DONUT", "Donut", 10, BigDecimal.TWO, LocalDate.of(2025, 7, 8));
+        InventoryItem donut = new InventoryItem(new PerishableProduct(new Product("DONUT", "Donut"), LocalDate.of(2025, 7, 8)), 10, BigDecimal.TWO);
 
         sampleDataRepository.addProduct(donut);
         fromFileRepository.addProduct(donut);
 
-        List<Product> sampleInventory = sampleDataRepository.getAllInventory();
-        List<Product> fileInventory = fromFileRepository.getAllInventory();
+        List<InventoryItem> sampleInventory = sampleDataRepository.getAllInventory();
+        List<InventoryItem> fileInventory = fromFileRepository.getAllInventory();
 
         assertEquals(4, sampleInventory.size());
         assertEquals(1, fileInventory.size());
@@ -77,13 +78,13 @@ public class InventoryRepositoryTests {
     @Test
     @DisplayName("Both repos can find product by id")
     void bothReposCanAFindById() {
-        PerishableProduct donut = new PerishableProduct("DONUT", "Donut", 10, BigDecimal.TWO, LocalDate.of(2025, 7, 8));
+        InventoryItem donut = new InventoryItem(new PerishableProduct(new Product("DONUT", "Donut"), LocalDate.of(2025, 7, 8)), 10, BigDecimal.TWO);
 
         sampleDataRepository.addProduct(donut);
         fromFileRepository.addProduct(donut);
 
-        List<Product> sampleInventory = sampleDataRepository.getAllInventory();
-        List<Product> fileInventory = fromFileRepository.getAllInventory();
+        List<InventoryItem> sampleInventory = sampleDataRepository.getAllInventory();
+        List<InventoryItem> fileInventory = fromFileRepository.getAllInventory();
 
         assertEquals(donut, sampleDataRepository.findProductById("DONUT"));
         assertEquals(donut, fromFileRepository.findProductById("DONUT"));
@@ -92,8 +93,8 @@ public class InventoryRepositoryTests {
     @Test
     @DisplayName("Both repos will return null if not found product by id")
     void bothReposWillReturnNullIfNotFoundById() {
-        List<Product> sampleInventory = sampleDataRepository.getAllInventory();
-        List<Product> fileInventory = fromFileRepository.getAllInventory();
+        List<InventoryItem> sampleInventory = sampleDataRepository.getAllInventory();
+        List<InventoryItem> fileInventory = fromFileRepository.getAllInventory();
 
         assertNull(sampleDataRepository.findProductById("Should be null"));
         assertNull(fromFileRepository.findProductById("Should be null"));
@@ -102,13 +103,13 @@ public class InventoryRepositoryTests {
     @Test
     @DisplayName("Both repos can find product by name")
     void bothReposCanAFindByName() {
-        PerishableProduct donut = new PerishableProduct("DONUT", "Donut", 10, BigDecimal.TWO, LocalDate.of(2025, 7, 8));
+        InventoryItem donut = new InventoryItem(new PerishableProduct(new Product("DONUT", "Donut"), LocalDate.of(2025, 7, 8)), 10, BigDecimal.TWO);
 
         sampleDataRepository.addProduct(donut);
         fromFileRepository.addProduct(donut);
 
-        List<Product> sampleInventory = sampleDataRepository.getAllInventory();
-        List<Product> fileInventory = fromFileRepository.getAllInventory();
+        List<InventoryItem> sampleInventory = sampleDataRepository.getAllInventory();
+        List<InventoryItem> fileInventory = fromFileRepository.getAllInventory();
 
         assertEquals(donut, sampleDataRepository.findProductByName("Donut"));
         assertEquals(donut, fromFileRepository.findProductByName("Donut"));
@@ -117,8 +118,8 @@ public class InventoryRepositoryTests {
     @Test
     @DisplayName("Both repos will return null if not found product by name")
     void bothReposWillReturnNullIfNotFoundByName() {
-        List<Product> sampleInventory = sampleDataRepository.getAllInventory();
-        List<Product> fileInventory = fromFileRepository.getAllInventory();
+        List<InventoryItem> sampleInventory = sampleDataRepository.getAllInventory();
+        List<InventoryItem> fileInventory = fromFileRepository.getAllInventory();
 
         assertNull(sampleDataRepository.findProductByName("Should be null"));
         assertNull(fromFileRepository.findProductByName("Should be null"));

@@ -1,7 +1,9 @@
 package com.example.Inventory.Manager.data;
 
+import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.model.PerishableProduct;
 import com.example.Inventory.Manager.model.Product;
+import com.example.Inventory.Manager.model.ProductType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InventorySampleDataRepository implements InventoryRepository {
-    private List<Product> inventory;
+    private List<InventoryItem> inventory;
     private String fileName;    // The other Repo needs a fileName. This data is hardcoded, so this is a dummy value;
 
     public InventorySampleDataRepository(String fileName) {
@@ -18,19 +20,19 @@ public class InventorySampleDataRepository implements InventoryRepository {
     }
 
     @Override
-    public void addProduct(Product product) {
+    public void addProduct(InventoryItem product) {
         inventory.add(product);
     }
 
     @Override
-    public void removeProduct(Product product) {
+    public void removeProduct(InventoryItem product) {
         inventory.remove(product);
     }
 
     @Override
-    public Product findProductById(String id) {
-        for (Product product : inventory) {
-            if (product.getProductID().equals(id)) {
+    public InventoryItem findProductById(String id) {
+        for (InventoryItem product : inventory) {
+            if (product.getProduct().getProductID().equals(id)) {
                 return product;
             }
         }
@@ -38,9 +40,9 @@ public class InventorySampleDataRepository implements InventoryRepository {
     }
 
     @Override
-    public Product findProductByName(String name) {
-        for (Product product : inventory) {
-            if (product.getProductName().equals(name)) {
+    public InventoryItem findProductByName(String name) {
+        for (InventoryItem product : inventory) {
+            if (product.getProduct().getProductName().equals(name)) {
                 return product;
             }
         }
@@ -48,12 +50,12 @@ public class InventorySampleDataRepository implements InventoryRepository {
     }
 
     @Override
-    public List<Product> loadProduct(String fileName) {
-        List<Product> products = new ArrayList<>();
+    public List<InventoryItem> loadProduct(String fileName) {
+        List<InventoryItem> products = new ArrayList<>();
 
-        products.add(new PerishableProduct("APPLE", "Apple", 100, BigDecimal.valueOf(2.99), LocalDate.of(2025, 7, 26)));
-        products.add(new PerishableProduct("BANANA", "Banana", 25, BigDecimal.valueOf(1.49), LocalDate.of(2025, 7, 13)));
-        products.add(new PerishableProduct("CARROT", "Carrots", 250, BigDecimal.valueOf(3.56), LocalDate.of(2025, 7, 21)));
+        products.add(new InventoryItem(new PerishableProduct(new Product("APPLE", "Apple"), LocalDate.of(2025, 7, 26)), 100, BigDecimal.valueOf(2.99)));
+        products.add(new InventoryItem(new PerishableProduct(new Product("BANANA", "Banana"), LocalDate.of(2025, 7, 13)), 25, BigDecimal.valueOf(1.49)));
+        products.add(new InventoryItem(new PerishableProduct(new Product("CARROT", "Carrots"), LocalDate.of(2025, 7, 21)), 250, BigDecimal.valueOf(3.56)));
 
         return products;
     }
@@ -64,7 +66,7 @@ public class InventorySampleDataRepository implements InventoryRepository {
     }
 
     @Override
-    public List<Product> getAllInventory() {
+    public List<InventoryItem> getAllInventory() {
         return inventory;
     }
 }

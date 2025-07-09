@@ -1,5 +1,6 @@
 package com.example.Inventory.Manager.ui;
 
+import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.model.MenuOption;
 import com.example.Inventory.Manager.model.PerishableProduct;
 
@@ -27,7 +28,8 @@ public class View {
         return MenuOption.getMenuOptionFromValue(uiUtils.readInt("Enter your choice [1-7]: "));
     }
 
-    public void displayPerishableProduct(PerishableProduct product) {
-        uiUtils.printf(DISPLAY_PERISHABLE_PRODUCT, product.getProductID(), product.getProductName(), product.getQuantity(), product.getPrice(), product.getExpirationDate());
+    public void displayPerishableProduct(InventoryItem product) {
+        PerishableProduct perishable = (PerishableProduct) product.getProduct();
+        uiUtils.printf(DISPLAY_PERISHABLE_PRODUCT, product.getProduct().getProductID(), product.getProduct().getProductName(), product.getQuantity(), product.getPrice(), perishable.getExpirationDate());
     }
 }

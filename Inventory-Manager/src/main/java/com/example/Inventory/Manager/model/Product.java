@@ -1,14 +1,27 @@
 package com.example.Inventory.Manager.model;
 
-import java.math.BigDecimal;
+public class Product {
+    private String productId;
+    private String productName;
 
-public interface Product {
-    String getProductID();
-    void setProductID(String id);
-    String getProductName();
-    void setProductName(String name);
-    int getQuantity();
-    void setQuantity(int quantity);
-    BigDecimal getPrice();
-    void setPrice(BigDecimal price);
+    public Product(String productId, String productName) {
+        this.productId = productId;
+        this.productName = productName;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 }

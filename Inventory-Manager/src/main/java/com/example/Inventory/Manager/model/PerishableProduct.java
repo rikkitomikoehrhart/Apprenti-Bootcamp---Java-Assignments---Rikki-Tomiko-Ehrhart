@@ -1,61 +1,39 @@
 package com.example.Inventory.Manager.model;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class PerishableProduct implements Product {
-    private String productId;
-    private String productName;
-    private int quantity;
-    private BigDecimal price;
+public class PerishableProduct implements ProductType {
+    private Product product;
     private LocalDate expirationDate;
 
-    public PerishableProduct(String productId, String productName, int quantity, BigDecimal price, LocalDate expirationDate) {
-        this.productId = productId;
-        this.productName = productName;
-        this.quantity = quantity;
-        this.price = price;
+    public PerishableProduct(Product product, LocalDate expirationDate) {
+        this.product = product;
         this.expirationDate = expirationDate;
     }
 
     @Override
+    public Product getProduct() {
+        return product;
+    }
+
+    @Override
     public String getProductID() {
-        return productId;
+        return product.getProductId();
     }
 
     @Override
     public void setProductID(String id) {
-        this.productId = id;
+        this.product.setProductId(id);
     }
 
     @Override
     public String getProductName() {
-        return productName;
+        return product.getProductName();
     }
 
     @Override
     public void setProductName(String name) {
-        this.productName = name;
-    }
-
-    @Override
-    public int getQuantity() {
-        return quantity;
-    }
-
-    @Override
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    @Override
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    @Override
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+        product.setProductName(name);
     }
 
     public LocalDate getExpirationDate() {

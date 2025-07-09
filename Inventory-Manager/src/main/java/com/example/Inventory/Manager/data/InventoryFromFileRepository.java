@@ -1,5 +1,6 @@
 package com.example.Inventory.Manager.data;
 
+import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.model.PerishableProduct;
 import com.example.Inventory.Manager.model.Product;
 
@@ -10,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryFromFileRepository implements InventoryRepository {
-    private List<Product> inventory;
-    private String fileName;
+    private final List<InventoryItem> inventory;
+    private final String fileName;
     private final String HEADER = "productId,productName,quantity,price,productType,expirationDate";
     private final String CSV_LINE_FORMAT = "%s,%s,%d,%.2f,%s,%s%n";
 
@@ -21,21 +22,21 @@ public class InventoryFromFileRepository implements InventoryRepository {
     }
 
     @Override
-    public void addProduct(Product product) {
+    public void addProduct(InventoryItem product) {
         inventory.add(product);
         saveProducts(fileName);
     }
 
     @Override
-    public void removeProduct(Product product) {
+    public void removeProduct(InventoryItem product) {
         inventory.remove(product);
         saveProducts(fileName);
     }
 
     @Override
-    public Product findProductById(String id) {
-        for (Product product : inventory) {
-            if (product.getProductID().equals(id)){
+    public InventoryItem findProductById(String id) {
+        for (InventoryItem product : inventory) {
+            if (product.getProduct().getProductID().equals(id)){
                 return product;
             }
         }
@@ -43,9 +44,9 @@ public class InventoryFromFileRepository implements InventoryRepository {
     }
 
     @Override
-    public Product findProductByName(String name) {
-        for (Product product : inventory) {
-            if (product.getProductName().equals(name)) {
+    public InventoryItem findProductByName(String name) {
+        for (InventoryItem product : inventory) {
+            if (product.getProduct().getProductName().equals(name)) {
                 return product;
             }
         }
@@ -53,8 +54,8 @@ public class InventoryFromFileRepository implements InventoryRepository {
     }
 
     @Override
-    public List<Product> loadProduct(String fileName) {
-        List<Product> fromFile = new ArrayList<>();
+    public List<InventoryItem> loadProduct(String fileName) {
+        List<InventoryItem> fromFile = new ArrayList<>();
         File csvFile = new File(fileName);
 
         if (!csvFile.exists()) {
@@ -73,7 +74,7 @@ public class InventoryFromFileRepository implements InventoryRepository {
                 }
 
                 String[] parts = line.split(",");
-                Product product = null;
+                InventoryItem product = null;
 
                 if (parts[4].equals("PerishableProduct")) {
                     product = createNewPerishableProduct(parts);
@@ -94,12 +95,12 @@ public class InventoryFromFileRepository implements InventoryRepository {
     public boolean saveProducts(String fileName) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
             writer.println(HEADER);
-            for (Product product : inventory) {
-                if (product.getClass().getSimpleName().equals("PerishableProduct")) {
-                    PerishableProduct perishable = (PerishableProduct) product;
-                    writer.printf(CSV_LINE_FORMAT, perishable.getProductID(), perishable.getProductName(), perishable.getQuantity(), perishable.getPrice(), perishable.getClass().getSimpleName(), perishable.getExpirationDate());
+            for (InventoryItem product : inventory) {
+                if (product.getProduct().getClass().getSimpleName().equals("PerishableProduct")) {
+                    PerishableProduct perishable = (PerishableProduct) product.getProduct();
+                    writer.printf(CSV_LINE_FORMAT, product.getProduct().getProductID(), product.getProduct().getProductName(), product.getQuantity(), product.getPrice(), product.getProduct().getClass().getSimpleName(), perishable.getExpirationDate());
                 } else {
-                    writer.printf(CSV_LINE_FORMAT, product.getProductID(), product.getProductName(), product.getQuantity(), product.getPrice(), product.getClass().getSimpleName(), "");
+                    writer.printf(CSV_LINE_FORMAT, product.getProduct().getProductID(), product.getProduct().getProductName(), product.getQuantity(), product.getPrice(), product.getClass().getSimpleName(), "");
                 }
             }
             return true;
@@ -109,17 +110,17 @@ public class InventoryFromFileRepository implements InventoryRepository {
     }
 
     @Override
-    public List<Product> getAllInventory() {
+    public List<InventoryItem> getAllInventory() {
         return inventory;
     }
 
-    public PerishableProduct createNewPerishableProduct(String[] parts) {
+    public InventoryItem createNewPerishableProduct(String[] parts) {
         String id = parts[0];
         String name = parts[1];
         int quantity = Integer.parseInt(parts[2]);
         BigDecimal price = BigDecimal.valueOf(Long.parseLong(parts[3]));
         LocalDate expirationDate = LocalDate.parse(parts[5]);
 
-        return new PerishableProduct(id, name, quantity, price, expirationDate);
+        return new InventoryItem(new PerishableProduct(new Product(id, name), expirationDate), quantity, price);
     }
 }

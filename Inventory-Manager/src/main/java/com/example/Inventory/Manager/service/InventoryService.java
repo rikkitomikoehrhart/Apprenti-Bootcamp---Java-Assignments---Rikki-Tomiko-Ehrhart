@@ -1,7 +1,8 @@
 package com.example.Inventory.Manager.service;
 
 import com.example.Inventory.Manager.data.InventoryRepository;
-import com.example.Inventory.Manager.model.Product;
+import com.example.Inventory.Manager.model.InventoryItem;
+import com.example.Inventory.Manager.model.ProductType;
 
 import java.util.List;
 
@@ -12,23 +13,23 @@ public class InventoryService {
         this.repository = repository;
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(InventoryItem product) {
         repository.addProduct(product);
     }
 
-    public void removeProduct(Product product) {
+    public void removeProduct(InventoryItem product) {
         repository.removeProduct(product);
     }
 
-    public Product findProductById(String id) {
+    public InventoryItem findProductById(String id) {
         return repository.findProductById(id);
     }
 
-    public Product findProductByName(String name) {
+    public InventoryItem findProductByName(String name) {
         return repository.findProductByName(name);
     }
 
-    public List<Product> getAllInventory() {
+    public List<InventoryItem> getAllInventory() {
         return repository.getAllInventory();
     }
 
