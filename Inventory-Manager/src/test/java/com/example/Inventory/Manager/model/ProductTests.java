@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PerishableProductTests {
+public class ProductTests {
     InventoryItem product;
 
     @BeforeEach
