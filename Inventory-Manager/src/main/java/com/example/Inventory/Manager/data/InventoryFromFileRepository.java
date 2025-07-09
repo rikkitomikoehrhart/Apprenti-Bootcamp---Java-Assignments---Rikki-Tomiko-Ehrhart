@@ -55,10 +55,23 @@ public class InventoryFromFileRepository implements InventoryRepository {
     @Override
     public List<Product> loadProduct(String fileName) {
         List<Product> fromFile = new ArrayList<>();
+        File csvFile = new File(fileName);
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        if (!csvFile.exists()) {
+            return fromFile;
+        }
+
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
             String line;
+            boolean isFirstLine = true;
+
             while((line = reader.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
+
                 String[] parts = line.split(",");
                 Product product = null;
 
