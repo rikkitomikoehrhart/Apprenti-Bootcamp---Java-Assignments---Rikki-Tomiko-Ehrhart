@@ -1,5 +1,6 @@
 package com.example.Inventory.Manager.ui;
 
+import com.example.Inventory.Manager.model.CartOption;
 import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.model.MenuOption;
 import com.example.Inventory.Manager.model.PerishableProduct;
@@ -26,6 +27,10 @@ public class View {
 
     public MenuOption getMenuChoiceFromUser() {
         return MenuOption.getMenuOptionFromValue(uiUtils.readInt("Enter your choice [1-7]: "));
+    }
+
+    public CartOption getCartChoiceFromUser() {
+        return CartOption.getCartOptionFromValue(uiUtils.readInt("Enter your choice [1-7]: "));
     }
 
     public void displayPerishableProduct(InventoryItem product) {

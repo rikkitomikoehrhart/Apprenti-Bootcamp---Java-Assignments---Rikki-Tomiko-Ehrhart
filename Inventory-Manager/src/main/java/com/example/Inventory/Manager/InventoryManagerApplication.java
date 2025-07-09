@@ -1,45 +1,36 @@
 package com.example.Inventory.Manager;
 
-import com.example.Inventory.Manager.model.MenuOption;
-import com.example.Inventory.Manager.ui.View;
+import com.example.Inventory.Manager.ui.Cart;
+import com.example.Inventory.Manager.ui.Inventory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class InventoryManagerApplication {
-	public static void main(String[] args) {
-		View view = new View();
+public class InventoryManagerApplication implements CommandLineRunner {
+
+	@Autowired
+	private Cart cart;
+
+	@Autowired
+	private Inventory inventory;
+
+	@Value("${inventory.mode:cart}")
+	private String mode;
 
 
-		SpringApplication.run(InventoryManagerApplication.class, args);
 
 
-		while(true) {
-			view.displayMainMenu();
+	public static void main(String[] args) { SpringApplication.run(InventoryManagerApplication.class, args); }
 
-			MenuOption choice = view.getMenuChoiceFromUser();
-
-			switch (choice) {
-				case ADD_PRODUCT:
-					break;
-				case VIEW_PRODUCTS:
-					break;
-				case SEARCH_PRODUCTS:
-					break;
-				case UPDATE_PRODUCT:
-					break;
-				case DELETE_PRODUCT:
-					break;
-				case LOAD_INVENTORY:
-					break;
-				case EXIT:
-					System.exit(0);
-			}
-
+	@Override
+	public void run(String... args) throws Exception {
+		if (mode.equalsIgnoreCase("admin")) {
+			inventory.run();
+		} else {
+			cart.run();
 		}
-
-
-
 	}
-
 }
