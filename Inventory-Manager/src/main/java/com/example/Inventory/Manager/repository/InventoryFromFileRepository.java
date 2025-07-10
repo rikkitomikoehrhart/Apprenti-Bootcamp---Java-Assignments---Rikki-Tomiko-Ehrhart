@@ -3,7 +3,6 @@ package com.example.Inventory.Manager.repository;
 import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.model.PerishableProduct;
 import com.example.Inventory.Manager.model.Product;
-import org.springframework.stereotype.Repository;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Repository
+
 public class InventoryFromFileRepository implements InventoryRepository {
     private final List<InventoryItem> inventory;
     private final String fileName;
@@ -37,23 +36,27 @@ public class InventoryFromFileRepository implements InventoryRepository {
     }
 
     @Override
-    public InventoryItem findProductById(String id) {
+    public List<InventoryItem> findProductById(String id) {
+        List<InventoryItem> found = new ArrayList<>();
+
         for (InventoryItem product : inventory) {
             if (product.getProduct().getProductID().equals(id)){
-                return product;
+                found.add(product);
             }
         }
-        return null;
+        return found;
     }
 
     @Override
-    public InventoryItem findProductByName(String name) {
+    public List<InventoryItem> findProductByName(String name) {
+        List<InventoryItem> found = new ArrayList<>();
+
         for (InventoryItem product : inventory) {
             if (product.getProduct().getProductName().equals(name)) {
-                return product;
+                found.add(product);
             }
         }
-        return null;
+        return found;
     }
 
     @Override

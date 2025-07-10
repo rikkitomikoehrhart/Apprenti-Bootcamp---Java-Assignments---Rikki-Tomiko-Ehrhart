@@ -8,8 +8,8 @@ import java.util.List;
 public interface InventoryRepository {
     void addProduct(InventoryItem product);
     void removeProduct(InventoryItem product);
-    InventoryItem findProductById(String id);
-    InventoryItem findProductByName(String name);
+    List<InventoryItem> findProductById(String id);
+    List<InventoryItem> findProductByName(String name);
     List<InventoryItem> loadProduct(String fileName);
     boolean saveProducts(String fileName);
     List<InventoryItem> getAllInventory();

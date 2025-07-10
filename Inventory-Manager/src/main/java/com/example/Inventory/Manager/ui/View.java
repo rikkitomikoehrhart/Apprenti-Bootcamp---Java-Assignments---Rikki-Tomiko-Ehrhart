@@ -1,15 +1,17 @@
 package com.example.Inventory.Manager.ui;
 
 import com.example.Inventory.Manager.model.*;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+@Component
 public class View {
     UIUtils uiUtils = new UIUtils();
-    private final String DISPLAY_PERISHABLE_PRODUCT = "%10-s | %-20s | %-10s | $%10.2f | %s";
-    private final String DISPLAY_HEADING = "%10-s | %-20s | %-10s | %-10s | %s";
+    private final String DISPLAY_PERISHABLE_PRODUCT = "%7s | %-20s | %-10s | $%10.2f | %s%n";
+    private final String DISPLAY_HEADING = "%7s | %-20s | %-10s | %-10s  | %s%n";
 
     // UNIVERSAL FUNCTIONS
     public void displayHeader(String header) {
@@ -73,6 +75,10 @@ public class View {
         displayHeader("View Products");
     }
 
+    public void displaySearchProductsTitle() {
+        displayHeader("Search Products");
+    }
+
     public InventoryItem createNewProductFromUser() {
         String id = uiUtils.readString("Enter the Product ID: ");
         String name = uiUtils.readString("Enter the Product Name: ");
@@ -93,8 +99,11 @@ public class View {
     public void viewProductsReport(List<InventoryItem> inventoryItems) {
         reportHeader("INVENTORY");
         uiUtils.printf(DISPLAY_HEADING, "ID", "NAME", "QUANTITY", "PRICE", "EXPIRATION DATE");
-        uiUtils.print("---------------------------------------------------------------------------");
+        uiUtils.println("---------------------------------------------------------------------------");
 
+        if (inventoryItems.isEmpty()) {
+            uiUtils.print("Sorry, there are no products.");
+        }
         for (InventoryItem item : inventoryItems) {
             displayPerishableProduct(item);
         }
@@ -102,6 +111,9 @@ public class View {
         reportFooter();
     }
 
+    public String searchBar() {
+        return uiUtils.readString("Enter a Product ID or Product Name: ");
+    }
 
     // SHOPPING CART FUNCTIONS
     public void displayCartMenu() {

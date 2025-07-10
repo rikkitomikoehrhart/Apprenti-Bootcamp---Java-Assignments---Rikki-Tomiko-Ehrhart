@@ -1,4 +1,34 @@
 package com.example.Inventory.Manager.ui.inventory_handlers;
 
-public class SearchProductsHandler {
+import com.example.Inventory.Manager.model.InventoryItem;
+import com.example.Inventory.Manager.service.InventoryService;
+import com.example.Inventory.Manager.ui.AppHandler;
+import com.example.Inventory.Manager.ui.View;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SearchProductsHandler implements AppHandler {
+    View view;
+    InventoryService service;
+
+    public SearchProductsHandler(View view, InventoryService service) {
+        this.view = view;
+        this.service = service;
+    }
+
+
+    @Override
+    public void execute() {
+        view.displaySearchProductsTitle();
+
+        String searchCriteria = view.searchBar();
+
+        List<InventoryItem> searchResults = new ArrayList<>();
+
+        searchResults.addAll(service.findProductById(searchCriteria));
+        searchResults.addAll(service.findProductByName(searchCriteria));
+
+        view.viewProductsReport(searchResults);
+    }
 }

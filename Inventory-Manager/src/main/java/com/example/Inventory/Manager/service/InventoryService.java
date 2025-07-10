@@ -22,11 +22,11 @@ public class InventoryService {
         repository.removeProduct(product);
     }
 
-    public InventoryItem findProductById(String id) {
+    public List<InventoryItem> findProductById(String id) {
         return repository.findProductById(id);
     }
 
-    public InventoryItem findProductByName(String name) {
+    public List<InventoryItem> findProductByName(String name) {
         return repository.findProductByName(name);
     }
 

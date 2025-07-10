@@ -4,7 +4,6 @@ import com.example.Inventory.Manager.model.MenuOption;
 import com.example.Inventory.Manager.service.InventoryService;
 import com.example.Inventory.Manager.ui.inventory_handlers.AddProductHandler;
 import com.example.Inventory.Manager.ui.inventory_handlers.ViewProductsHandler;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
