@@ -1,5 +1,10 @@
 package com.example.Inventory.Manager.ui;
 
+import org.springframework.cglib.core.Local;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class UIUtils {
@@ -15,6 +20,10 @@ public class UIUtils {
 
     public void printf(String format, Object... values) {
         System.out.printf(format, values);
+    }
+
+    public void printError(String message) {
+        println("  ✗   ERROR: " + message);
     }
 
     public String readString(String prompt) {
@@ -34,4 +43,23 @@ public class UIUtils {
         }
     }
 
+    public BigDecimal readBigDecimal(String prompt) {
+        while (true) {
+            String value = readString(prompt);
+
+            try {
+                return BigDecimal.valueOf(Long.parseLong(value));
+            } catch (NumberFormatException e) {
+                printError("Must be a valid number");
+            }
+        }
+    }
+
+    public boolean readBoolean(String prompt) {
+        return readString(prompt).trim().equalsIgnoreCase("y");
+    }
+
+    public LocalDate readLocalDate(String prompt) {
+        return LocalDate.parse(readString(prompt));
+    }
 }
