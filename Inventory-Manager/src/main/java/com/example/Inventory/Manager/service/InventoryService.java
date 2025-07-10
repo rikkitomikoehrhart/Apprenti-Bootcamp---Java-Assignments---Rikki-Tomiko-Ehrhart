@@ -42,4 +42,7 @@ public class InventoryService {
         repository.saveProducts(fileName);
     }
 
+    public void updateItem(InventoryItem item) {
+        repository.update(item);
+    }
 }

@@ -1,10 +1,11 @@
 package com.example.Inventory.Manager.ui;
 
-import org.springframework.cglib.core.Local;
+
 
 import java.math.BigDecimal;
+import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.Locale;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class UIUtils {
@@ -43,6 +44,14 @@ public class UIUtils {
         }
     }
 
+    public Object convertToInt(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
     public BigDecimal readBigDecimal(String prompt) {
         while (true) {
             String value = readString(prompt);
@@ -55,11 +64,33 @@ public class UIUtils {
         }
     }
 
+    public BigDecimal convertToBigDecimal(String number) {
+        try {
+            return BigDecimal.valueOf(Long.parseLong(number));
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
     public boolean readBoolean(String prompt) {
         return readString(prompt).trim().equalsIgnoreCase("y");
     }
 
     public LocalDate readLocalDate(String prompt) {
-        return LocalDate.parse(readString(prompt));
+        while (true) {
+            try {
+                return LocalDate.parse(readString(prompt));
+            } catch (DateTimeParseException ex) {
+                printError("Invalid Format. Must be formatted [yyyy-mm-dd].");
+            }
+        }
+    }
+
+    public LocalDate convertToLocalDate(String date) {
+        try {
+            return LocalDate.parse(date);
+        } catch (DateTimeParseException ex) {
+            return null;
+        }
     }
 }
