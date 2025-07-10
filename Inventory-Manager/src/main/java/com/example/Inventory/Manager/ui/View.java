@@ -3,11 +3,13 @@ package com.example.Inventory.Manager.ui;
 import com.example.Inventory.Manager.model.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
 
 public class View {
     UIUtils uiUtils = new UIUtils();
     private final String DISPLAY_PERISHABLE_PRODUCT = "%10-s | %-20s | %-10s | $%10.2f | %s";
-
+    private final String DISPLAY_HEADING = "%10-s | %-20s | %-10s | %-10s | %s";
 
     // UNIVERSAL FUNCTIONS
     public void displayHeader(String header) {
@@ -17,7 +19,33 @@ public class View {
 
     public void displayPerishableProduct(InventoryItem product) {
         PerishableProduct perishable = (PerishableProduct) product.getProduct();
-        uiUtils.printf(DISPLAY_PERISHABLE_PRODUCT, product.getProduct().getProductID(), product.getProduct().getProductName(), product.getQuantity(), product.getPrice(), perishable.getExpirationDate());
+
+        String id = product.getProduct().getProductID();
+        String name = product.getProduct().getProductName();
+        int quantity = product.getQuantity();
+        BigDecimal price = product.getPrice();
+        LocalDate expirationDate = perishable.getExpirationDate();
+
+        if (name.length() > 20) {
+            name = name.substring(0, 17) + "...";
+        }
+
+        uiUtils.printf(DISPLAY_PERISHABLE_PRODUCT, id, name, quantity, price, expirationDate);
+    }
+
+    public void reportHeader(String reportTitle) {
+        uiUtils.println("═══════════════════════════════════════════════════════════════════════════");
+
+        int titleLength = reportTitle.length();
+        int spaces = 37 - (titleLength/2);
+        uiUtils.println(" ".repeat(spaces) + reportTitle);
+
+        uiUtils.println("═══════════════════════════════════════════════════════════════════════════");
+
+    }
+
+    public void reportFooter() {
+        uiUtils.println("═══════════════════════════════════════════════════════════════════════════");
     }
 
 
@@ -41,6 +69,10 @@ public class View {
         displayHeader("Add Product");
     }
 
+    public void displayViewProductsTitle() {
+        displayHeader("View Products");
+    }
+
     public InventoryItem createNewProductFromUser() {
         String id = uiUtils.readString("Enter the Product ID: ");
         String name = uiUtils.readString("Enter the Product Name: ");
@@ -56,6 +88,18 @@ public class View {
         }
 
         return null;
+    }
+
+    public void viewProductsReport(List<InventoryItem> inventoryItems) {
+        reportHeader("INVENTORY");
+        uiUtils.printf(DISPLAY_HEADING, "ID", "NAME", "QUANTITY", "PRICE", "EXPIRATION DATE");
+        uiUtils.print("---------------------------------------------------------------------------");
+
+        for (InventoryItem item : inventoryItems) {
+            displayPerishableProduct(item);
+        }
+
+        reportFooter();
     }
 
 
