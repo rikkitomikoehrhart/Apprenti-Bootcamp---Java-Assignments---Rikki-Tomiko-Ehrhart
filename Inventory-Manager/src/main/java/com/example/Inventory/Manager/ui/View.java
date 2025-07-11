@@ -50,6 +50,9 @@ public class View {
         uiUtils.println("═══════════════════════════════════════════════════════════════════════════");
     }
 
+    public String searchBar() {
+        return uiUtils.readString("Enter the Product ID or Product Name: ");
+    }
 
 
     // INVENTORY MANAGER FUNCTIONS
@@ -177,9 +180,7 @@ public class View {
         }
     }
 
-    public String searchBar() {
-        return uiUtils.readString("Enter the Product ID or Product Name: ");
-    }
+
 
     // SHOPPING CART FUNCTIONS
     public void displayCartMenu() {
@@ -194,6 +195,25 @@ public class View {
 
     public CartOption getCartChoiceFromUser() {
         return CartOption.getCartOptionFromValue(uiUtils.readInt("Enter your choice [1-7]: "));
+    }
+
+    public void viewAvailableProducts(List<InventoryItem> inventoryItems) {
+        reportHeader("PRODUCTS");
+        uiUtils.printf(DISPLAY_HEADING, "ID", "NAME", "QUANTITY", "PRICE", "EXPIRATION DATE");
+        uiUtils.println("---------------------------------------------------------------------------");
+
+        if (inventoryItems.isEmpty()) {
+            uiUtils.println("Sorry, there are no products.");
+        }
+        for (InventoryItem item : inventoryItems) {
+            displayPerishableProduct(item);
+        }
+
+        reportFooter();
+    }
+
+    public int getQuantityFromUser() {
+        return uiUtils.readInt("How many to add?: ");
     }
 
 
