@@ -10,8 +10,8 @@ import java.util.List;
 @Component
 public class View {
     UIUtils uiUtils = new UIUtils();
-    private final String DISPLAY_PERISHABLE_PRODUCT = "%7s | %-20s | %-10s | $%10.2f | %s%n";
-    private final String DISPLAY_HEADING = "%7s | %-20s | %-10s | %-10s  | %s%n";
+    private final String DISPLAY_PERISHABLE_PRODUCT = "%10s | %-17s | %-10s | $%10.2f | %s%n";
+    private final String DISPLAY_HEADING = "%10s | %-17s | %-10s | %-10s  | %s%n";
 
     // UNIVERSAL FUNCTIONS
     public void displayHeader(String header) {

@@ -124,7 +124,7 @@ public class InventoryFromFileRepository implements InventoryRepository {
         String id = parts[0];
         String name = parts[1];
         int quantity = Integer.parseInt(parts[2]);
-        BigDecimal price = BigDecimal.valueOf(Long.parseLong(parts[3]));
+        BigDecimal price = BigDecimal.valueOf(Double.parseDouble(parts[3]));
         LocalDate expirationDate = LocalDate.parse(parts[5]);
 
         return new InventoryItem(new PerishableProduct(new Product(id, name), expirationDate), quantity, price);
@@ -142,6 +142,8 @@ public class InventoryFromFileRepository implements InventoryRepository {
                 inventory.set(i, item);
             }
         }
+
+        saveProducts(fileName);
     }
 
     @Override

@@ -7,7 +7,9 @@ import com.example.Inventory.Manager.ui.Inventory;
 import com.example.Inventory.Manager.ui.View;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class UpdateProductsHandler implements AppHandler {
     View view;
@@ -24,12 +26,12 @@ public class UpdateProductsHandler implements AppHandler {
 
         String itemIdOrName = view.searchBar();
 
-        List<InventoryItem> inventoryItems = new ArrayList<>();
+        Set<InventoryItem> inventoryItems = new HashSet<>();
 
         inventoryItems.addAll(service.findProductById(itemIdOrName));
         inventoryItems.addAll(service.findProductByName(itemIdOrName));
 
-        InventoryItem itemToUpdate = view.getItemForUser(inventoryItems);
+        InventoryItem itemToUpdate = view.getItemForUser(new ArrayList<>(inventoryItems));
 
         itemToUpdate = view.updateProductFromUser(itemToUpdate);
 
