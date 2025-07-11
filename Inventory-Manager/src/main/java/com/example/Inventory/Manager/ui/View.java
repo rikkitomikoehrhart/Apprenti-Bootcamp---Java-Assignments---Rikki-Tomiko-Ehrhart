@@ -83,6 +83,10 @@ public class View {
         displayHeader("Update Product");
     }
 
+    public void displayDeleteProductTitle() {
+        displayHeader("Delete Product");
+    }
+
     public InventoryItem createNewProductFromUser() {
         String id = uiUtils.readString("Enter the Product ID: ");
         String name = uiUtils.readString("Enter the Product Name: ");

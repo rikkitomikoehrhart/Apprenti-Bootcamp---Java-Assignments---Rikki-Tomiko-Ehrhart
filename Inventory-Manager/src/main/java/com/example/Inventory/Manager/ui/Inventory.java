@@ -2,10 +2,7 @@ package com.example.Inventory.Manager.ui;
 
 import com.example.Inventory.Manager.model.MenuOption;
 import com.example.Inventory.Manager.service.InventoryService;
-import com.example.Inventory.Manager.ui.inventory_handlers.AddProductHandler;
-import com.example.Inventory.Manager.ui.inventory_handlers.SearchProductsHandler;
-import com.example.Inventory.Manager.ui.inventory_handlers.UpdateProductsHandler;
-import com.example.Inventory.Manager.ui.inventory_handlers.ViewProductsHandler;
+import com.example.Inventory.Manager.ui.inventory_handlers.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,6 +20,7 @@ public class Inventory {
         ViewProductsHandler viewProducts = new ViewProductsHandler(view, service);
         SearchProductsHandler searchProducts = new SearchProductsHandler(view, service);
         UpdateProductsHandler updateProduct = new UpdateProductsHandler(view, service);
+        DeleteProductsHandler deleteProduct = new DeleteProductsHandler(view, service);
 
 
         while (true) {
@@ -44,6 +42,8 @@ public class Inventory {
                     updateProduct.execute();
                     break;
                 case DELETE_PRODUCT:
+                    deleteProduct.execute();
+                    break;
                 case LOAD_INVENTORY:
                 case EXIT:
                     System.exit(0);

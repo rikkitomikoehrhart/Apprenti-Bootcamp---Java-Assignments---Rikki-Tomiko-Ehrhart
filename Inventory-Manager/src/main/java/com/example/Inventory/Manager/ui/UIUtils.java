@@ -39,7 +39,7 @@ public class UIUtils {
                 int result = Integer.parseInt(value);
                 return result;
             } catch (NumberFormatException e) {
-                printf("`%s` is not a valid number", value);
+                printError(value + " is not a valid number");
             }
         }
     }
@@ -57,9 +57,9 @@ public class UIUtils {
             String value = readString(prompt);
 
             try {
-                return BigDecimal.valueOf(Long.parseLong(value));
+                return BigDecimal.valueOf(Double.parseDouble(value));
             } catch (NumberFormatException e) {
-                printError("Must be a valid number");
+                printError(value + " is not a valid number");
             }
         }
     }

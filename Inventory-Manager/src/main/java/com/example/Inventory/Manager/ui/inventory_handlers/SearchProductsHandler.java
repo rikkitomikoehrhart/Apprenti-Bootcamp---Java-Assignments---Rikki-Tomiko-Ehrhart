@@ -6,7 +6,9 @@ import com.example.Inventory.Manager.ui.AppHandler;
 import com.example.Inventory.Manager.ui.View;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SearchProductsHandler implements AppHandler {
     View view;
@@ -24,11 +26,11 @@ public class SearchProductsHandler implements AppHandler {
 
         String searchCriteria = view.searchBar();
 
-        List<InventoryItem> searchResults = new ArrayList<>();
+        Set<InventoryItem> searchResults = new HashSet<>();
 
         searchResults.addAll(service.findProductById(searchCriteria));
         searchResults.addAll(service.findProductByName(searchCriteria));
 
-        view.viewProductsReport(searchResults);
+        view.viewProductsReport(new ArrayList<>(searchResults));
     }
 }
