@@ -1,23 +1,23 @@
 package com.example.Inventory.Manager.ui.inventory_handlers;
 
-import com.example.Inventory.Manager.config.InventoryConfig;
 import com.example.Inventory.Manager.service.InventoryService;
 import com.example.Inventory.Manager.ui.AppHandler;
-import com.example.Inventory.Manager.ui.View;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 
 public class LoadInventoryHandler implements AppHandler {
-    View view;
     InventoryService service;
+    private final String fileName;
 
-    public LoadInventoryHandler(View view, InventoryService service) {
-        this.view = view;
+    @Autowired
+    public LoadInventoryHandler(InventoryService service, String fileName) {
         this.service = service;
+        this.fileName = fileName;
     }
 
     @Override
     public void execute() {
-        service.loadInventory(InventoryConfig.getFileName());
-
-
+        service.loadInventory(fileName);
     }
 }

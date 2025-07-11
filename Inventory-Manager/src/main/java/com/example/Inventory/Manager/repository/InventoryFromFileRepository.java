@@ -90,8 +90,8 @@ public class InventoryFromFileRepository implements InventoryRepository {
 
                 fromFile.add(product);
             }
-        } catch (IOException e) {
-            return null;
+        } catch (IOException | NullPointerException e) {
+            return fromFile;
         }
 
         return fromFile;

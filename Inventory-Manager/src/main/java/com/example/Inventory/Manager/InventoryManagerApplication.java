@@ -21,8 +21,6 @@ public class InventoryManagerApplication implements CommandLineRunner {
 	private String mode;
 
 
-
-
 	public static void main(String[] args) { SpringApplication.run(InventoryManagerApplication.class, args); }
 
 	@Override

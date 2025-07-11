@@ -1,5 +1,6 @@
 package com.example.Inventory.Manager.ui;
 
+import com.example.Inventory.Manager.config.InventoryConfig;
 import com.example.Inventory.Manager.model.MenuOption;
 import com.example.Inventory.Manager.service.InventoryService;
 import com.example.Inventory.Manager.ui.inventory_handlers.*;
@@ -9,10 +10,12 @@ import org.springframework.stereotype.Component;
 public class Inventory {
     private final InventoryService service;
     private final View view;
+    private final String fileName;
 
-    public Inventory(InventoryService service, View view) {
+    public Inventory(InventoryService service, View view, InventoryConfig config) {
         this.service = service;
         this.view = view;
+        this.fileName = config.getFileName();
     }
 
     public void run() {
@@ -21,7 +24,7 @@ public class Inventory {
         SearchProductsHandler searchProducts = new SearchProductsHandler(view, service);
         UpdateProductsHandler updateProduct = new UpdateProductsHandler(view, service);
         DeleteProductsHandler deleteProduct = new DeleteProductsHandler(view, service);
-        LoadInventoryHandler loadInventory = new LoadInventoryHandler(view, service);
+        LoadInventoryHandler loadInventory = new LoadInventoryHandler(service, fileName);
 
 
         while (true) {
@@ -47,6 +50,7 @@ public class Inventory {
                     break;
                 case LOAD_INVENTORY:
                     loadInventory.execute();
+                    break;
                 case EXIT:
                     System.exit(0);
             }
