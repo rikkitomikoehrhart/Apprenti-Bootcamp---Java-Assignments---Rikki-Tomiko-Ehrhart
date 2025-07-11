@@ -21,6 +21,7 @@ public class Inventory {
         SearchProductsHandler searchProducts = new SearchProductsHandler(view, service);
         UpdateProductsHandler updateProduct = new UpdateProductsHandler(view, service);
         DeleteProductsHandler deleteProduct = new DeleteProductsHandler(view, service);
+        LoadInventoryHandler loadInventory = new LoadInventoryHandler(view, service);
 
 
         while (true) {
@@ -45,6 +46,7 @@ public class Inventory {
                     deleteProduct.execute();
                     break;
                 case LOAD_INVENTORY:
+                    loadInventory.execute();
                 case EXIT:
                     System.exit(0);
             }

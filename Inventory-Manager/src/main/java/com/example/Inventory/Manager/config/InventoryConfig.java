@@ -14,7 +14,7 @@ public class InventoryConfig {
     private String repositoryType;
 
     @Value("${inventory.csv.filepath:data/inventory.csv")
-    private String fileName;
+    private static String fileName;
 
     @Bean
     public InventoryRepository inventoryRepository() {
@@ -28,4 +28,7 @@ public class InventoryConfig {
         }
     }
 
+    public static String getFileName() {
+        return fileName;
+    }
 }
