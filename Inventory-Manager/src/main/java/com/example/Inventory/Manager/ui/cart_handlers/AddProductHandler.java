@@ -24,6 +24,9 @@ public class AddProductHandler implements AppHandler {
 
     @Override
     public void execute() {
+        view.displayAddProductsToCartTitle();
+
+
         List<InventoryItem> availableItems = service.getAllAvailableInventory();
 
         view.viewAvailableProducts(availableItems);

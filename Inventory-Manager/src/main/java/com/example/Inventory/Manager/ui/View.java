@@ -1,6 +1,7 @@
 package com.example.Inventory.Manager.ui;
 
 import com.example.Inventory.Manager.model.*;
+import com.example.Inventory.Manager.service.CartService;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ public class View {
     UIUtils uiUtils = new UIUtils();
     private final String DISPLAY_PERISHABLE_PRODUCT = "%10s | %-17s | %-10s | $%10.2f | %s%n";
     private final String DISPLAY_HEADING = "%10s | %-17s | %-10s | %-10s  | %s%n";
+    private final String DISPLAY_CART_HEADING = "%10s | %-17s | %-10s | %-10s%n";
 
     // UNIVERSAL FUNCTIONS
     public void displayHeader(String header) {
@@ -197,6 +199,13 @@ public class View {
         return CartOption.getCartOptionFromValue(uiUtils.readInt("Enter your choice [1-7]: "));
     }
 
+    public void displayAddProductsToCartTitle() {
+        displayHeader("Add Products To Cart");
+    }
+    public void displayViewShoppingCartTitle() {
+        displayHeader("View Shopping Cart");
+    }
+
     public void viewAvailableProducts(List<InventoryItem> inventoryItems) {
         reportHeader("PRODUCTS");
         uiUtils.printf(DISPLAY_HEADING, "ID", "NAME", "QUANTITY", "PRICE", "EXPIRATION DATE");
@@ -215,6 +224,37 @@ public class View {
     public int getQuantityFromUser() {
         return uiUtils.readInt("How many to add?: ");
     }
+
+    public void viewShoppingCart(List<CartItem> cartItems, BigDecimal total) {
+        reportHeader("SHOPPING CART");
+        uiUtils.printf(DISPLAY_CART_HEADING, "ID", "NAME", "QUANTITY", "PRICE");
+        uiUtils.println("---------------------------------------------------------------------------");
+
+        if (cartItems.isEmpty()) {
+            uiUtils.println("Sorry, there are no products.");
+        }
+        for (CartItem item : cartItems) {
+            displayShoppingCartItem(item);
+        }
+
+        reportFooter();
+        uiUtils.println("TOTAL: \t\t$" + total);
+        reportFooter();
+    }
+
+    public void displayShoppingCartItem(CartItem product) {
+        String id = product.getItem().getProduct().getProductID();
+        String name = product.getItem().getProduct().getProductName();
+        int quantity = product.getQuantity();
+        BigDecimal price = product.getSubTotal();
+
+        if (name.length() > 20) {
+            name = name.substring(0, 17) + "...";
+        }
+
+        uiUtils.printf(DISPLAY_CART_HEADING, id, name, quantity, price);
+    }
+
 
 
 }
