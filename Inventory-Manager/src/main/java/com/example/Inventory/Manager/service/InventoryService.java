@@ -37,6 +37,8 @@ public class InventoryService {
     public List<InventoryItem> getAllAvailableInventory() {
         List<InventoryItem> inventory = getAllInventory();
         List<InventoryItem> available = inventory.stream().filter(item -> item.getQuantity() > 0).toList();
+
+        return available;
     }
 
     public void loadInventory(String fileName) {

@@ -46,5 +46,7 @@ public class AddProductHandler implements AppHandler {
         }
 
         shoppingCart.addToCart(itemToAddToCart, quantity);
+
+        itemToAddToCart.setQuantity(itemToAddToCart.getQuantity()-quantity);
     }
 }

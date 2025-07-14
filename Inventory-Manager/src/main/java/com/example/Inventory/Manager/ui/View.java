@@ -206,6 +206,7 @@ public class View {
         displayHeader("View Shopping Cart");
     }
 
+
     public void viewAvailableProducts(List<InventoryItem> inventoryItems) {
         reportHeader("PRODUCTS");
         uiUtils.printf(DISPLAY_HEADING, "ID", "NAME", "QUANTITY", "PRICE", "EXPIRATION DATE");

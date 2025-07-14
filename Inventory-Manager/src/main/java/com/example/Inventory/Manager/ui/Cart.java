@@ -6,6 +6,8 @@ import com.example.Inventory.Manager.service.CartService;
 import com.example.Inventory.Manager.service.InventoryService;
 import com.example.Inventory.Manager.ui.cart_handlers.AddProductHandler;
 import com.example.Inventory.Manager.ui.cart_handlers.ViewCartHandler;
+import com.example.Inventory.Manager.ui.inventory_handlers.SearchProductsHandler;
+import com.example.Inventory.Manager.ui.inventory_handlers.ViewProductsHandler;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,7 +26,10 @@ public class Cart {
 
     public void run() {
         AddProductHandler addProduct = new AddProductHandler(view, service, shoppingCart);
-        ViewCartHandler viewProduct = new ViewCartHandler(view, service, shoppingCart);
+        ViewProductsHandler viewProducts = new ViewProductsHandler(view, service);
+        SearchProductsHandler searchProducts = new SearchProductsHandler(view, service);
+        ViewCartHandler viewCart = new ViewCartHandler(view, service, shoppingCart);
+
 
         while (true) {
             view.displayCartMenu();
@@ -36,10 +41,15 @@ public class Cart {
                     addProduct.execute();
                     break;
                 case VIEW_PRODUCTS:
-                    viewProduct.execute();
+                    viewProducts.execute();
+                    break;
                 case SEARCH_PRODUCTS:
+                    searchProducts.execute();
+                    break;
                 case UPDATE_CART:
                 case VIEW_CART:
+                    viewCart.execute();
+                    break;
                 case CHECKOUT:
                 case EXIT:
                     System.exit(0);
