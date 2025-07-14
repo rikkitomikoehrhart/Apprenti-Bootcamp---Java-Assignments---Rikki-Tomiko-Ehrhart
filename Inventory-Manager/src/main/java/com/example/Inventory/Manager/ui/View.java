@@ -210,6 +210,10 @@ public class View {
         displayHeader("Update Shopping Cart");
     }
 
+    public void displayCheckoutTitle() {
+        displayHeader("CHECKOUT");
+    }
+
 
     public void viewAvailableProducts(List<InventoryItem> inventoryItems) {
         reportHeader("PRODUCTS");
@@ -312,4 +316,12 @@ public class View {
         uiUtils.printf(DISPLAY_CART_HEADING, item.getItem().getProduct().getProductID(), item.getItem().getProduct().getProductName(), item.getQuantity(), item.getSubTotal());
     }
 
+    public boolean readyToCheckOut() {
+        return uiUtils.readBoolean("Are you ready to check out? [y]: ");
+    }
+
+    public void displayThankYouMessage(BigDecimal total) {
+        uiUtils.printf("%nYou're Total is: $%.2f%n", total);
+        uiUtils.println("HAVE A NICE DAY");
+    }
 }

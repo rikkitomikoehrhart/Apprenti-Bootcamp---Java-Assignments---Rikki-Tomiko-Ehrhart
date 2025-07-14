@@ -65,7 +65,7 @@ public class InventorySampleDataRepository implements InventoryRepository {
     }
 
     @Override
-    public boolean saveProducts(String fileName) {
+    public boolean saveProducts() {
         return true;
     }
 

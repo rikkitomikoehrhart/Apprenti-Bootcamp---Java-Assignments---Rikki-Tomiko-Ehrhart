@@ -11,7 +11,7 @@ public interface InventoryRepository {
     List<InventoryItem> findProductById(String id);
     List<InventoryItem> findProductByName(String name);
     List<InventoryItem> loadProduct(String fileName);
-    boolean saveProducts(String fileName);
+    boolean saveProducts();
     List<InventoryItem> getAllInventory();
 
     void update(InventoryItem item);

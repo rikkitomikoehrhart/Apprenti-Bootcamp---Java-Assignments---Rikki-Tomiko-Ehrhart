@@ -46,8 +46,8 @@ public class InventoryService {
         repository.loadProduct(fileName);
     }
 
-    public void saveInventory(String fileName) {
-        repository.saveProducts(fileName);
+    public void saveInventory() {
+        repository.saveProducts();
     }
 
     public void updateItem(InventoryItem item) {

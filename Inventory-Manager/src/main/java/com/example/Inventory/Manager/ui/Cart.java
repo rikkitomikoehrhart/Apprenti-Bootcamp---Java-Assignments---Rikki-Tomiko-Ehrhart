@@ -5,6 +5,7 @@ import com.example.Inventory.Manager.model.CartOption;
 import com.example.Inventory.Manager.service.CartService;
 import com.example.Inventory.Manager.service.InventoryService;
 import com.example.Inventory.Manager.ui.cart_handlers.AddProductHandler;
+import com.example.Inventory.Manager.ui.cart_handlers.CheckoutHandler;
 import com.example.Inventory.Manager.ui.cart_handlers.UpdateCartHandler;
 import com.example.Inventory.Manager.ui.cart_handlers.ViewCartHandler;
 import com.example.Inventory.Manager.ui.inventory_handlers.SearchProductsHandler;
@@ -31,6 +32,7 @@ public class Cart {
         SearchProductsHandler searchProducts = new SearchProductsHandler(view, service);
         UpdateCartHandler updateCart = new UpdateCartHandler(view, service, shoppingCart);
         ViewCartHandler viewCart = new ViewCartHandler(view, service, shoppingCart);
+        CheckoutHandler checkout = new CheckoutHandler(view, service, shoppingCart);
 
 
         while (true) {
@@ -55,6 +57,8 @@ public class Cart {
                     viewCart.execute();
                     break;
                 case CHECKOUT:
+                    checkout.execute();
+                    break;
                 case EXIT:
                     System.exit(0);
             }

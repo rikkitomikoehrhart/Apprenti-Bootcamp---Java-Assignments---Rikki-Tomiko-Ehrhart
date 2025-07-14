@@ -26,13 +26,13 @@ public class InventoryFromFileRepository implements InventoryRepository {
     @Override
     public void addProduct(InventoryItem product) {
         inventory.add(product);
-        saveProducts(fileName);
+        saveProducts();
     }
 
     @Override
     public void removeProduct(InventoryItem product) {
         inventory.remove(product);
-        saveProducts(fileName);
+        saveProducts();
     }
 
     @Override
@@ -98,7 +98,7 @@ public class InventoryFromFileRepository implements InventoryRepository {
     }
 
     @Override
-    public boolean saveProducts(String fileName) {
+    public boolean saveProducts() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
             writer.println(HEADER);
             for (InventoryItem product : inventory) {
@@ -143,7 +143,7 @@ public class InventoryFromFileRepository implements InventoryRepository {
             }
         }
 
-        saveProducts(fileName);
+        saveProducts();
     }
 
     @Override
