@@ -3,12 +3,10 @@ package com.example.Inventory.Manager.ui.inventory_handlers;
 import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.service.InventoryService;
 import com.example.Inventory.Manager.ui.AppHandler;
-import com.example.Inventory.Manager.ui.Inventory;
 import com.example.Inventory.Manager.ui.View;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class UpdateProductsHandler implements AppHandler {

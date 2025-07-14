@@ -1,7 +1,6 @@
 package com.example.Inventory.Manager.repository;
 
 import com.example.Inventory.Manager.model.InventoryItem;
-import com.example.Inventory.Manager.model.ProductType;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.example.Inventory.Manager.ui;
 
 import com.example.Inventory.Manager.model.*;
-import com.example.Inventory.Manager.service.CartService;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

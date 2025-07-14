@@ -3,7 +3,6 @@ package com.example.Inventory.Manager.ui.inventory_handlers;
 import com.example.Inventory.Manager.service.InventoryService;
 import com.example.Inventory.Manager.ui.AppHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 
 public class LoadInventoryHandler implements AppHandler {

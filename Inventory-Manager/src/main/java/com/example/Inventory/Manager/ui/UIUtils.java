@@ -1,9 +1,6 @@
 package com.example.Inventory.Manager.ui;
 
-
-
 import java.math.BigDecimal;
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
