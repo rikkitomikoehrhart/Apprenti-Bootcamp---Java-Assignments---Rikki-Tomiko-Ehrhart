@@ -23,8 +23,8 @@ public class ViewCartHandler implements AppHandler {
     public void execute() {
         view.displayViewShoppingCartTitle();
 
-        List<CartItem> cartItem = shoppingCart.getCart();
+        List<CartItem> cartItems = shoppingCart.getCart();
 
-        view.viewShoppingCart(cartItem, shoppingCart.getTotal());
+        view.viewShoppingCart(cartItems, shoppingCart.getTotal());
     }
 }

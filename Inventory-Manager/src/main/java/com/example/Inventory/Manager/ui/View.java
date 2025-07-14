@@ -206,6 +206,10 @@ public class View {
         displayHeader("View Shopping Cart");
     }
 
+    public void displayUpdateCartTitle() {
+        displayHeader("Update Shopping Cart");
+    }
+
 
     public void viewAvailableProducts(List<InventoryItem> inventoryItems) {
         reportHeader("PRODUCTS");
@@ -256,6 +260,56 @@ public class View {
         uiUtils.printf(DISPLAY_CART_HEADING, id, name, quantity, price);
     }
 
+    public int getQuantityUpdateFromUser(CartItem item) {
+        uiUtils.println("Enter new value, press enter to keep old value, or enter 0 to remove time.");
+        String quantity = uiUtils.readString("Quantity (" + item.getQuantity() + "): ");
 
+        if (!quantity.isBlank()) {
+            if (uiUtils.convertToInt(quantity) != null) {
+                return (Integer) uiUtils.convertToInt(quantity);
+            }
+        } else if (quantity.isBlank()) {
+            return item.getQuantity();
+        } else {
+            return 0;
+        }
+
+        return 0;
+    }
+
+    public CartItem getItemForUser(String criteria, List<CartItem> shoppingCart) {
+        for (CartItem item : shoppingCart) {
+            if (item.getItem().getProduct().getProductID() == criteria || item.getItem().getProduct().getProductName() == criteria) {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    public CartItem getItemToUpdateFromUser(List<CartItem> cartItems) {
+        if (cartItems.isEmpty()) {
+            return null;
+        } else if (cartItems.size() == 1) {
+            return cartItems.get(0);
+        } else {
+            for (int i = 0; i < cartItems.size(); i++) {
+                uiUtils.print((i + 1) + ". ");
+                displayCartItem(cartItems.get(i));
+            }
+
+            int choice = uiUtils.readInt("Enter the number of the item you wish to update: ");
+
+            if (choice < 0 || choice > cartItems.size()) {
+                return null;
+            } else {
+                return cartItems.get(choice - 1);
+            }
+        }
+    }
+
+    public void displayCartItem(CartItem item) {
+        uiUtils.printf(DISPLAY_CART_HEADING, item.getItem().getProduct().getProductID(), item.getItem().getProduct().getProductName(), item.getQuantity(), item.getSubTotal());
+    }
 
 }

@@ -21,6 +21,10 @@ public class CartService {
         cart.add(new CartItem(item, quantity));
     }
 
+    public void removeFromCart(CartItem item) {
+        cart.remove(item);
+    }
+
     public List<CartItem> getCart() {
         return cart;
     }

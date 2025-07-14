@@ -1,5 +1,6 @@
 package com.example.Inventory.Manager.service;
 
+import com.example.Inventory.Manager.model.CartItem;
 import com.example.Inventory.Manager.repository.InventoryRepository;
 import com.example.Inventory.Manager.model.InventoryItem;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,15 @@ public class InventoryService {
 
     public void updateItem(InventoryItem item) {
         repository.update(item);
+    }
+
+    public InventoryItem getItemFromInventory(CartItem item) {
+        List<InventoryItem> inventory = getAllInventory();
+        for (InventoryItem inventoryItem : inventory) {
+            if (inventoryItem.getProduct().getProductID() == item.getItem().getProduct().getProductID() && inventoryItem.getProduct().getProductName() == item.getItem().getProduct().getProductName()) {
+                return inventoryItem;
+            }
+        }
+        return null;
     }
 }
