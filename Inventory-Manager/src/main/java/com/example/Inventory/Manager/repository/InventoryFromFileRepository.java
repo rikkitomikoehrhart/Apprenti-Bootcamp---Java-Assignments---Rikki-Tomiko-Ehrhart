@@ -91,7 +91,7 @@ public class InventoryFromFileRepository implements InventoryRepository {
                 fromFile.add(product);
             }
         } catch (IOException | NullPointerException e) {
-            return fromFile;
+            System.err.println("Error reading CSV file: " + e.getMessage());
         }
 
         return fromFile;
@@ -111,6 +111,7 @@ public class InventoryFromFileRepository implements InventoryRepository {
             }
             return true;
         } catch (IOException e) {
+            System.err.println("Error saving to file: " + e.getMessage());
             return false;
         }
     }
