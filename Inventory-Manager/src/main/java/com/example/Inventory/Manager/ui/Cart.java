@@ -4,12 +4,8 @@ import com.example.Inventory.Manager.config.InventoryConfig;
 import com.example.Inventory.Manager.model.CartOption;
 import com.example.Inventory.Manager.service.CartService;
 import com.example.Inventory.Manager.service.InventoryService;
-import com.example.Inventory.Manager.ui.cart_handlers.AddProductHandler;
-import com.example.Inventory.Manager.ui.cart_handlers.CheckoutHandler;
-import com.example.Inventory.Manager.ui.cart_handlers.UpdateCartHandler;
-import com.example.Inventory.Manager.ui.cart_handlers.ViewCartHandler;
+import com.example.Inventory.Manager.ui.cart_handlers.*;
 import com.example.Inventory.Manager.ui.inventory_handlers.SearchProductsHandler;
-import com.example.Inventory.Manager.ui.inventory_handlers.ViewProductsHandler;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,7 +24,7 @@ public class Cart {
 
     public void run() {
         AddProductHandler addProduct = new AddProductHandler(view, service, shoppingCart);
-        ViewProductsHandler viewProducts = new ViewProductsHandler(view, service);
+        ViewAvailableProductsHandler viewProducts = new ViewAvailableProductsHandler(view, service);
         SearchProductsHandler searchProducts = new SearchProductsHandler(view, service);
         UpdateCartHandler updateCart = new UpdateCartHandler(view, service, shoppingCart);
         ViewCartHandler viewCart = new ViewCartHandler(view, service, shoppingCart);

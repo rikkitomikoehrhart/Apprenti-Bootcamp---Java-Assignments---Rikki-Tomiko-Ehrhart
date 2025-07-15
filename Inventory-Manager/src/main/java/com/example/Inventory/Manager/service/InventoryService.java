@@ -1,6 +1,7 @@
 package com.example.Inventory.Manager.service;
 
 import com.example.Inventory.Manager.model.CartItem;
+import com.example.Inventory.Manager.model.PerishableProduct;
 import com.example.Inventory.Manager.repository.InventoryRepository;
 import com.example.Inventory.Manager.model.InventoryItem;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,11 @@ import java.util.List;
 @Service
 public class InventoryService {
     private InventoryRepository repository;
+    private ProductService productService;
 
     public InventoryService(InventoryRepository repository) {
         this.repository = repository;
+        this.productService = new ProductService();
     }
 
     public void addProduct(InventoryItem product) {
@@ -37,7 +40,16 @@ public class InventoryService {
 
     public List<InventoryItem> getAllAvailableInventory() {
         List<InventoryItem> inventory = getAllInventory();
-        List<InventoryItem> available = inventory.stream().filter(item -> item.getQuantity() > 0).toList();
+        List<InventoryItem> available = inventory.stream()
+                .filter(item -> item.getQuantity() > 0)
+                .filter(item -> {
+                    if (item.getProduct() instanceof PerishableProduct) {
+                        PerishableProduct perishable = (PerishableProduct) item.getProduct();
+                        return !productService.isExpired(perishable.getExpirationDate());
+                    }
+                    return true;
+                })
+                .toList();
 
         return available;
     }
@@ -63,4 +75,5 @@ public class InventoryService {
         }
         return null;
     }
+
 }

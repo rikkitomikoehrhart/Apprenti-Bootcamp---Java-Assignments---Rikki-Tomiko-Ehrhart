@@ -12,9 +12,11 @@ import java.util.List;
 @Service
 public class CartService {
     List<CartItem> cart;
+    private ProductService productService;
 
     public CartService() {
         cart = new ArrayList<>();
+        this.productService = new ProductService();
     }
 
     public void addToCart(InventoryItem item, int quantity) {
@@ -40,6 +42,10 @@ public class CartService {
         }
 
         return total;
+    }
+
+    public void updateSubTotal(CartItem item) {
+        productService.updateSubtotal(item);
     }
 
 }

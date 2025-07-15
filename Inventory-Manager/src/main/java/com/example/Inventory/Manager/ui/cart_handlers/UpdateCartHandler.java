@@ -50,6 +50,7 @@ public class UpdateCartHandler implements AppHandler {
 
                     itemFromInventory.setQuantity(itemFromInventory.getQuantity() + difference);
                     itemToUpdate.setQuantity(newQuantity);
+                    shoppingCart.updateSubTotal(itemToUpdate);
                 }
 
             }
