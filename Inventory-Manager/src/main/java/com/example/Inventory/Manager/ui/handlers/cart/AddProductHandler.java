@@ -1,9 +1,9 @@
-package com.example.Inventory.Manager.ui.cart_handlers;
+package com.example.Inventory.Manager.ui.handlers.cart;
 
 import com.example.Inventory.Manager.model.InventoryItem;
 import com.example.Inventory.Manager.service.CartService;
 import com.example.Inventory.Manager.service.InventoryService;
-import com.example.Inventory.Manager.ui.AppHandler;
+import com.example.Inventory.Manager.ui.handlers.AppHandler;
 import com.example.Inventory.Manager.ui.View;
 
 import java.util.ArrayList;
@@ -40,10 +40,7 @@ public class AddProductHandler implements AppHandler {
 
         InventoryItem itemToAddToCart = view.getItemForUser(new ArrayList<>(selection));
 
-        int quantity = view.getQuantityFromUser();
-        if (quantity > itemToAddToCart.getQuantity()) {
-            quantity = itemToAddToCart.getQuantity();
-        }
+        int quantity = service.adjustQuantity(itemToAddToCart, view.getQuantityFromUser());
 
         shoppingCart.addToCart(itemToAddToCart, quantity);
 

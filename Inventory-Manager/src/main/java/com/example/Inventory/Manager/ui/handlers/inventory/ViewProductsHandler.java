@@ -1,7 +1,7 @@
-package com.example.Inventory.Manager.ui.inventory_handlers;
+package com.example.Inventory.Manager.ui.handlers.inventory;
 
 import com.example.Inventory.Manager.service.InventoryService;
-import com.example.Inventory.Manager.ui.AppHandler;
+import com.example.Inventory.Manager.ui.handlers.AppHandler;
 import com.example.Inventory.Manager.ui.View;
 
 public class ViewProductsHandler implements AppHandler {

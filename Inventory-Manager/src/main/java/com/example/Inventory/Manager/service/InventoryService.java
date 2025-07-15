@@ -69,11 +69,14 @@ public class InventoryService {
     public InventoryItem getItemFromInventory(CartItem item) {
         List<InventoryItem> inventory = getAllInventory();
         for (InventoryItem inventoryItem : inventory) {
-            if (inventoryItem.getProduct().getProductID() == item.getItem().getProduct().getProductID() && inventoryItem.getProduct().getProductName() == item.getItem().getProduct().getProductName()) {
+            if (inventoryItem.getProduct().getProductID().equals(item.getItem().getProduct().getProductID()) && inventoryItem.getProduct().getProductName().equals(item.getItem().getProduct().getProductName())) {
                 return inventoryItem;
             }
         }
         return null;
     }
 
+    public int adjustQuantity(InventoryItem item, int quantity) {
+        return quantity > item.getQuantity() ? item.getQuantity() : quantity;
+    }
 }

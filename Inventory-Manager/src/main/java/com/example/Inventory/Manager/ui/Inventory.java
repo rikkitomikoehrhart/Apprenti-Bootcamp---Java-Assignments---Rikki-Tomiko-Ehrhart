@@ -3,7 +3,7 @@ package com.example.Inventory.Manager.ui;
 import com.example.Inventory.Manager.config.InventoryConfig;
 import com.example.Inventory.Manager.model.MenuOption;
 import com.example.Inventory.Manager.service.InventoryService;
-import com.example.Inventory.Manager.ui.inventory_handlers.*;
+import com.example.Inventory.Manager.ui.handlers.inventory.*;
 import org.springframework.stereotype.Component;
 
 @Component

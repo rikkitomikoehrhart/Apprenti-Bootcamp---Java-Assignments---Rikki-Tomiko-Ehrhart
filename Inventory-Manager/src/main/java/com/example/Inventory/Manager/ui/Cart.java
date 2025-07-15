@@ -4,8 +4,8 @@ import com.example.Inventory.Manager.config.InventoryConfig;
 import com.example.Inventory.Manager.model.CartOption;
 import com.example.Inventory.Manager.service.CartService;
 import com.example.Inventory.Manager.service.InventoryService;
-import com.example.Inventory.Manager.ui.cart_handlers.*;
-import com.example.Inventory.Manager.ui.inventory_handlers.SearchProductsHandler;
+import com.example.Inventory.Manager.ui.handlers.cart.*;
+import com.example.Inventory.Manager.ui.handlers.inventory.SearchProductsHandler;
 import org.springframework.stereotype.Component;
 
 @Component
