@@ -37,7 +37,4 @@ public class CartItem {
         this.subTotal = subTotal;
     }
 
-    public void updateSubTotal() {
-        this.subTotal = item.getPrice().multiply(BigDecimal.valueOf(quantity));
-    }
 }

@@ -44,7 +44,4 @@ public class PerishableProduct implements ProductType {
         this.expirationDate = expirationDate;
     }
 
-    public boolean isExpired() {
-        return LocalDate.now().isAfter(expirationDate);
-    }
 }
