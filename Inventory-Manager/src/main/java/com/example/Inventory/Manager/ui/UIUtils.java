@@ -20,7 +20,7 @@ public class UIUtils {
         System.out.printf(format, values);
     }
 
-    public void printError(String message) {
+    private void printError(String message) {
         println("  ✗   ERROR: " + message);
     }
 

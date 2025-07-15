@@ -15,12 +15,12 @@ public class View {
     private final String DISPLAY_CART_HEADING = "%10s | %-17s | %-10s | %-10s%n";
 
     // UNIVERSAL FUNCTIONS
-    public void displayHeader(String header) {
+    private void displayHeader(String header) {
         uiUtils.println("");
         uiUtils.println("===== " + header + " =====");
     }
 
-    public void displayPerishableProduct(InventoryItem product) {
+    private void displayPerishableProduct(InventoryItem product) {
         PerishableProduct perishable = (PerishableProduct) product.getProduct();
 
         String id = product.getProduct().getProductID();
@@ -36,7 +36,7 @@ public class View {
         uiUtils.printf(DISPLAY_PERISHABLE_PRODUCT, id, name, quantity, price, expirationDate);
     }
 
-    public void reportHeader(String reportTitle) {
+    private void reportHeader(String reportTitle) {
         uiUtils.println("═══════════════════════════════════════════════════════════════════════════");
 
         int titleLength = reportTitle.length();
@@ -47,7 +47,7 @@ public class View {
 
     }
 
-    public void reportFooter() {
+    private void reportFooter() {
         uiUtils.println("═══════════════════════════════════════════════════════════════════════════");
     }
 
@@ -55,6 +55,9 @@ public class View {
         return uiUtils.readString("Enter the Product ID or Product Name: ");
     }
 
+    public void displayViewProductsTitle() {
+        displayHeader("View Products");
+    }
 
     // INVENTORY MANAGER FUNCTIONS
     public void displayMainMenu() {
@@ -73,10 +76,6 @@ public class View {
 
     public void displayAddProductTitle() {
         displayHeader("Add Product");
-    }
-
-    public void displayViewProductsTitle() {
-        displayHeader("View Products");
     }
 
     public void displaySearchProductsTitle() {
@@ -182,7 +181,6 @@ public class View {
     }
 
 
-
     // SHOPPING CART FUNCTIONS
     public void displayCartMenu() {
         displayHeader("Shopping Cart");
@@ -201,6 +199,7 @@ public class View {
     public void displayAddProductsToCartTitle() {
         displayHeader("Add Products To Cart");
     }
+
     public void displayViewShoppingCartTitle() {
         displayHeader("View Shopping Cart");
     }
@@ -212,7 +211,6 @@ public class View {
     public void displayCheckoutTitle() {
         displayHeader("CHECKOUT");
     }
-
 
     public void viewAvailableProducts(List<InventoryItem> inventoryItems) {
         reportHeader("PRODUCTS");
@@ -278,16 +276,6 @@ public class View {
         }
 
         return 0;
-    }
-
-    public CartItem getItemForUser(String criteria, List<CartItem> shoppingCart) {
-        for (CartItem item : shoppingCart) {
-            if (item.getItem().getProduct().getProductID() == criteria || item.getItem().getProduct().getProductName() == criteria) {
-                return item;
-            }
-        }
-
-        return null;
     }
 
     public CartItem getItemToUpdateFromUser(List<CartItem> cartItems) {
