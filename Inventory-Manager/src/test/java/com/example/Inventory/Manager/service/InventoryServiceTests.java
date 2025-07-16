@@ -60,13 +60,13 @@ public class InventoryServiceTests {
 
         inventoryService.addProduct(donut);
 
-        assertEquals(donut, inventoryService.findProductById("DONUT"));
+        assertEquals(donut, inventoryService.findProductById("DONUT").get(0));
     }
 
     @Test
-    @DisplayName("Find Product By ID returns null")
-    public void findByIdReturnsNull() {
-        assertNull(inventoryService.findProductById("This should be null"));
+    @DisplayName("Find Product By ID returns empty list")
+    public void findByIdReturnsEmptyList() {
+        assertTrue(inventoryService.findProductById("This should be empty").isEmpty());
     }
 
     @Test
@@ -76,13 +76,13 @@ public class InventoryServiceTests {
 
         inventoryService.addProduct(donut);
 
-        assertEquals(donut, inventoryService.findProductByName("Donut"));
+        assertEquals(donut, inventoryService.findProductByName("Donut").get(0));
     }
 
     @Test
-    @DisplayName("Find Product By Name returns null")
-    public void findByNameReturnsNull() {
-        assertNull(inventoryService.findProductById("This should be null"));
+    @DisplayName("Find Product By Name returns empty list")
+    public void findByNameReturnsEmptyList() {
+        assertTrue(inventoryService.findProductById("This should be an empty list").isEmpty());
     }
 
     @Test

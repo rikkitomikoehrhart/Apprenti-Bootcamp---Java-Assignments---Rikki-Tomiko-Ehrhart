@@ -6,9 +6,9 @@ DONUT,Donut,500,4.56,PerishableProduct,2025-07-12
 EGGS,Eggs,600,7.99,PerishableProduct,2025-08-26
 FUDGE,Fudge,1,5.55,PerishableProduct,2026-01-01
 GRAPES,Grapes,645,2.46,PerishableProduct,2025-09-29
-HAM,Ham,62,8.99,PerishableProduct,2025-12-31
-ICE,Ice,10000,0.25,PerishableProduct,2100-01-01
-JAM,Jam,25,4.50,PerishableProduct,2027-01-13
+HAM,Ham,61,8.99,PerishableProduct,2025-12-31
+ICE,Ice,9989,0.25,PerishableProduct,2100-01-01
+JAM,Jam,0,4.50,PerishableProduct,2027-01-13
 KIWI,Kiwi,45,1.25,PerishableProduct,2025-07-30
 LIME,Lime,2,0.42,PerishableProduct,2025-08-13
 MELON,Melon,38,1.30,PerishableProduct,2025-08-02
@@ -16,7 +16,7 @@ NOODLE,Noodle,5000,1.25,PerishableProduct,2030-12-25
 ORANGE,Orange,50,0.99,PerishableProduct,2025-11-02
 PIZZA,Pizza,75,12.99,PerishableProduct,2025-12-01
 QUINOA,Quinoa,256,5.95,PerishableProduct,2030-12-13
-RICE,Rice,1000000,1.89,PerishableProduct,2040-01-13
+RICE,Rice,1000001,1.89,PerishableProduct,2040-01-13
 SALAMI,Salami,70,5.99,PerishableProduct,2026-12-15
 TEA,Tea,44,4.24,PerishableProduct,2025-04-24
 UDON,Udon,12,12.12,PerishableProduct,2025-12-12
