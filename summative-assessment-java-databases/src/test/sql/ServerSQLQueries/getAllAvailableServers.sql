@@ -1,0 +1,1 @@
+SELECT * FROM `Server` WHERE HireDate >= '2020-01-01' AND TermDate IS NULL

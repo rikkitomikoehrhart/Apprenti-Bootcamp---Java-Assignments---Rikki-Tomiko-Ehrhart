@@ -21,12 +21,14 @@ public class ServerFromDatabase implements ServerRepo {
 
     @Override
     public Server getServerById(int id) throws InternalErrorException, RecordNotFoundException {
-        return null;
+        String sql = "SELECT * FROM Server WHERE ServerID = ?;";
+        return jdbcTemplate.queryForObject(sql, serverRowMapper(), id);
     }
 
     @Override
     public List<Server> getAllAvailableServers(LocalDate date) throws InternalErrorException {
-        return List.of();
+        String sql = "SELECT * FROM Server WHERE HireDate >= ? AND (TermDate <= ? OR TermDate IS NULL);";
+        return jdbcTemplate.query(sql, serverRowMapper(), date, date);
     }
 
 
