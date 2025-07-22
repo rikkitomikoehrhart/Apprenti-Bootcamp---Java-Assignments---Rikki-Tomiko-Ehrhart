@@ -2,12 +2,19 @@ package org.example.service.data;
 
 import org.example.data.ItemFromDatabase;
 import org.example.data.OrderFromDatabase;
+import org.example.data.exceptions.InternalErrorException;
+import org.example.data.exceptions.RecordNotFoundException;
+import org.example.model.OrderItem;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import javax.xml.crypto.Data;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,6 +42,12 @@ public class OrderFromDatabaseTest {
         orderRepo = new OrderFromDatabase(jdbcTemplate);
     }
 
+    @Test
+    @DisplayName("Get List of All order Items by OrderID")
+    public void getAllOrderItemsByOrderId() throws InternalErrorException, RecordNotFoundException {
+        List<OrderItem> orderItemList = orderRepo.getAllOrderItemsByOrderID(1);
 
+        assertTrue(orderItemList.size() > 0);
+    }
 
 }

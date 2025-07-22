@@ -1,0 +1,1 @@
+SELECT * FROM OrderItem INNER JOIN Item ON OrderItem.ItemID = Item.ItemID WHERE OrderID = 1
