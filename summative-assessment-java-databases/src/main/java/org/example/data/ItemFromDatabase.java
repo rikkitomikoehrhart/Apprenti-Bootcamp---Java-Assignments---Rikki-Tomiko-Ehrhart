@@ -6,7 +6,6 @@ import org.example.data.exceptions.RecordNotFoundException;
 import org.example.model.Item;
 import org.example.model.ItemCategory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -17,38 +16,35 @@ import java.util.List;
 
 @Repository
 public class ItemFromDatabase implements ItemRepo {
+    private final JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
+    public ItemFromDatabase(@Autowired JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
 
     @Override
     public Item getItemById(int id) throws RecordNotFoundException, InternalErrorException {
         String sql = "SELECT * FROM Item WHERE ItemID = ?;";
-        Item item;
-
-        try {
-            item = jdbcTemplate.queryForObject(sql, itemRowMapper(), id);
-            return item;
-        } catch (DataAccessException e) {
-            return null;
-        }
+        return jdbcTemplate.queryForObject(sql, itemRowMapper(), id);
     }
 
     @Override
     public List<Item> getAllAvailableItems(LocalDate today) throws InternalErrorException {
-        return List.of();
+        String sql = "SELECT * FROM Item WHERE StartDate >= ? AND (EndDate <= ? OR EndDate IS NULL)";
+        return jdbcTemplate.query(sql, itemRowMapper(), today, today);
     }
 
     @Override
     public List<Item> getItemsByCategory(LocalDate today, int itemCategoryID) throws InternalErrorException {
-        return List.of();
+        String sql = "SELECT * FROM Item WHERE StartDate >= ? AND ItemCategoryID = ?;";
+        return jdbcTemplate.query(sql, itemRowMapper(), today, itemCategoryID);
     }
 
     @Override
     public List<ItemCategory> getAllItemCategories() throws InternalErrorException {
-        return List.of();
+        String sql = "SELECT * FROM ItemCategory";
+        return jdbcTemplate.query(sql, itemCategoryRowMapper());
     }
 
 
@@ -67,6 +63,17 @@ public class ItemFromDatabase implements ItemRepo {
 
 
             return item;
+        };
+    }
+
+    private RowMapper<ItemCategory> itemCategoryRowMapper() {
+        return (rs, rowNum) -> {
+            ItemCategory itemCategory = new ItemCategory();
+
+            itemCategory.setItemCategoryID(rs.getInt("ItemCategoryID"));
+            itemCategory.setItemCategoryName(rs.getString("ItemCategoryName"));
+
+            return itemCategory;
         };
     }
 }

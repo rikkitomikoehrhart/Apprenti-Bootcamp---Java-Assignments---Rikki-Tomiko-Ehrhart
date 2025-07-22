@@ -3,6 +3,7 @@ package org.example.data;
 import org.example.data.exceptions.InternalErrorException;
 import org.example.data.exceptions.RecordNotFoundException;
 import org.example.model.Order;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
