@@ -6,10 +6,12 @@ import org.example.model.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Repository
 public class ServerFromDatabase implements ServerRepo {
     private final JdbcTemplate jdbcTemplate;
 
