@@ -1,1 +1,0 @@
-SELECT * FROM Server WHERE ServerID = 1;

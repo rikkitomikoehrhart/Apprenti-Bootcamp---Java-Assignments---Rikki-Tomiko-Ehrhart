@@ -1,1 +1,0 @@
-SELECT * FROM Item WHERE ItemID = 1;
