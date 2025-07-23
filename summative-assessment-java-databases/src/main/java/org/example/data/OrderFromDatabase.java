@@ -140,7 +140,13 @@ public class OrderFromDatabase implements OrderRepo {
 
     @Override
     public Order deleteOrder(int id) throws InternalErrorException {
-        String sql = "DELETE FROM `Order` WHERE OrderID = ?;";
+        String sql1 = "DELETE FROM OrderItem WHERE OrderID = ?";
+        jdbcTemplate.update(sql1, id);
+
+        String sql2 = "DELETE FROM Payment WHERE OrderID = ?";
+        jdbcTemplate.update(sql2, id);
+
+        String sql3 = "DELETE FROM `Order` WHERE OrderID = ?;";
         Order order;
 
         try {
@@ -150,7 +156,7 @@ public class OrderFromDatabase implements OrderRepo {
         }
 
         try {
-            int rowsAffected = jdbcTemplate.update(sql, id);
+            int rowsAffected = jdbcTemplate.update(sql3, id);
         } catch (Exception e) {
             e.printStackTrace();
         }

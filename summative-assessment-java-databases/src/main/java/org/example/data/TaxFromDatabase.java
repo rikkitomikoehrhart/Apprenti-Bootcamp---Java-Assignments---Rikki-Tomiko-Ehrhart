@@ -6,9 +6,11 @@ import org.example.model.Tax;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 
+@Repository
 public class TaxFromDatabase implements TaxRepo {
     private final JdbcTemplate jdbcTemplate;
 
