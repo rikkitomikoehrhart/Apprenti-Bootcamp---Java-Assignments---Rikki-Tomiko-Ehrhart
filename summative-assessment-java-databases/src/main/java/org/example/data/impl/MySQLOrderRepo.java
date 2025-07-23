@@ -1,6 +1,6 @@
-package org.example.data;
+package org.example.data.impl;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
+import org.example.data.OrderRepo;
 import org.example.data.exceptions.InternalErrorException;
 import org.example.data.exceptions.RecordNotFoundException;
 import org.example.model.*;
@@ -12,7 +12,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.security.Key;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
@@ -20,10 +19,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public class OrderFromDatabase implements OrderRepo {
+public class MySQLOrderRepo implements OrderRepo {
     private final JdbcTemplate jdbcTemplate;
 
-    public OrderFromDatabase(@Autowired JdbcTemplate jdbcTemplate) {
+    public MySQLOrderRepo(@Autowired JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

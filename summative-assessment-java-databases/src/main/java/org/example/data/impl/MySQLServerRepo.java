@@ -1,5 +1,6 @@
-package org.example.data;
+package org.example.data.impl;
 
+import org.example.data.ServerRepo;
 import org.example.data.exceptions.InternalErrorException;
 import org.example.data.exceptions.RecordNotFoundException;
 import org.example.model.Server;
@@ -13,10 +14,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public class ServerFromDatabase implements ServerRepo {
+public class MySQLServerRepo implements ServerRepo {
     private final JdbcTemplate jdbcTemplate;
 
-    public ServerFromDatabase(@Autowired JdbcTemplate jdbcTemplate) {
+    public MySQLServerRepo(@Autowired JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

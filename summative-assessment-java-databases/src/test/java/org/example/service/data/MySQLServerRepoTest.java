@@ -1,10 +1,9 @@
 package org.example.service.data;
 
-import org.example.data.ItemFromDatabase;
-import org.example.data.TaxFromDatabase;
+import org.example.data.impl.MySQLServerRepo;
 import org.example.data.exceptions.InternalErrorException;
 import org.example.data.exceptions.RecordNotFoundException;
-import org.example.model.Tax;
+import org.example.model.Server;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,16 +12,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TaxFromDatabaseTest {
+public class MySQLServerRepoTest {
     private DriverManagerDataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
-
     @Autowired
-    private TaxFromDatabase taxRepo;
+    private MySQLServerRepo serverRepo;
 
     @BeforeEach
     public void setup() {
@@ -38,14 +37,23 @@ public class TaxFromDatabaseTest {
 
         jdbcTemplate.update(sql);
 
-        taxRepo = new TaxFromDatabase(jdbcTemplate);
+        serverRepo = new MySQLServerRepo(jdbcTemplate);
     }
 
     @Test
-    @DisplayName("Get current tax")
-    public void getCurrentTax() throws RecordNotFoundException, InternalErrorException {
-        Tax tax = taxRepo.getCurrentTax(LocalDate.now());
+    @DisplayName("Get Server By Id")
+    public void getServerById() throws InternalErrorException, RecordNotFoundException {
+        Server server = serverRepo.getServerById(1);
 
-        assertEquals(2, tax.getTaxID());
+        assertEquals(1, server.getServerID());
     }
+
+    @Test
+    @DisplayName("Get all Available Servers")
+    public void getAllAvailableServers() throws InternalErrorException {
+        List<Server> servers = serverRepo.getAllAvailableServers(LocalDate.of(2020, 01, 01));
+
+        assertTrue(servers.size() > 0);
+    }
+
 }

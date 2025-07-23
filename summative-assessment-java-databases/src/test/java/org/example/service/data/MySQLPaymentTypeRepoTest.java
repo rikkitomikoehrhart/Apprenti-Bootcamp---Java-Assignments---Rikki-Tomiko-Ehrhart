@@ -1,6 +1,6 @@
 package org.example.service.data;
 
-import org.example.data.PaymentTypeFromDatabase;
+import org.example.data.impl.MySQLPaymentTypeRepo;
 import org.example.data.exceptions.InternalErrorException;
 import org.example.model.PaymentType;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,12 +14,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PaymentTypeFromDatabaseTest {
+public class MySQLPaymentTypeRepoTest {
     private DriverManagerDataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private PaymentTypeFromDatabase paymentTypeRepo;
+    private MySQLPaymentTypeRepo paymentTypeRepo;
 
     @BeforeEach
     public void setup() {
@@ -35,7 +35,7 @@ public class PaymentTypeFromDatabaseTest {
 
         jdbcTemplate.update(sql);
 
-        paymentTypeRepo = new PaymentTypeFromDatabase(jdbcTemplate);
+        paymentTypeRepo = new MySQLPaymentTypeRepo(jdbcTemplate);
     }
 
 

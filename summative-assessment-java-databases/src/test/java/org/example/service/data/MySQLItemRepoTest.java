@@ -1,8 +1,8 @@
 package org.example.service.data;
 
-import org.example.data.*;
 import org.example.data.exceptions.InternalErrorException;
 import org.example.data.exceptions.RecordNotFoundException;
+import org.example.data.impl.MySQLItemRepo;
 import org.example.model.Item;
 import org.example.model.ItemCategory;
 import org.junit.jupiter.api.Test;
@@ -18,13 +18,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class ItemFromDatabaseTest {
+public class MySQLItemRepoTest {
     private DriverManagerDataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
 
     @Autowired
-    private ItemFromDatabase itemRepo;
+    private MySQLItemRepo itemRepo;
 
 
 
@@ -42,7 +42,7 @@ public class ItemFromDatabaseTest {
 
         jdbcTemplate.update(sql);
 
-        itemRepo = new ItemFromDatabase(jdbcTemplate);
+        itemRepo = new MySQLItemRepo(jdbcTemplate);
     }
 
     @Test

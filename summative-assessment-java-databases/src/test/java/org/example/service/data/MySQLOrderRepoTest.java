@@ -1,6 +1,6 @@
 package org.example.service.data;
 
-import org.example.data.OrderFromDatabase;
+import org.example.data.impl.MySQLOrderRepo;
 import org.example.data.exceptions.InternalErrorException;
 import org.example.data.exceptions.RecordNotFoundException;
 import org.example.model.*;
@@ -19,12 +19,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class OrderFromDatabaseTest {
+public class MySQLOrderRepoTest {
     private DriverManagerDataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private OrderFromDatabase orderRepo;
+    private MySQLOrderRepo orderRepo;
 
     @BeforeEach
     public void setup() {
@@ -40,7 +40,7 @@ public class OrderFromDatabaseTest {
 
         jdbcTemplate.update(sql);
 
-        orderRepo = new OrderFromDatabase(jdbcTemplate);
+        orderRepo = new MySQLOrderRepo(jdbcTemplate);
     }
 
     @Test

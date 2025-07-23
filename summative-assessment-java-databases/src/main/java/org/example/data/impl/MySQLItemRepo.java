@@ -1,6 +1,7 @@
-package org.example.data;
+package org.example.data.impl;
 
 
+import org.example.data.ItemRepo;
 import org.example.data.exceptions.InternalErrorException;
 import org.example.data.exceptions.RecordNotFoundException;
 import org.example.model.Item;
@@ -16,10 +17,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public class ItemFromDatabase implements ItemRepo {
+public class MySQLItemRepo implements ItemRepo {
     private final JdbcTemplate jdbcTemplate;
 
-    public ItemFromDatabase(@Autowired JdbcTemplate jdbcTemplate) {
+    public MySQLItemRepo(@Autowired JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

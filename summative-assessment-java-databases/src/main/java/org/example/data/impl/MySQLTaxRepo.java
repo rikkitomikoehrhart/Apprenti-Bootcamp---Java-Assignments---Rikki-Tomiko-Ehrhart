@@ -1,5 +1,6 @@
-package org.example.data;
+package org.example.data.impl;
 
+import org.example.data.TaxRepo;
 import org.example.data.exceptions.InternalErrorException;
 import org.example.data.exceptions.RecordNotFoundException;
 import org.example.model.Tax;
@@ -12,10 +13,10 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 
 @Repository
-public class TaxFromDatabase implements TaxRepo {
+public class MySQLTaxRepo implements TaxRepo {
     private final JdbcTemplate jdbcTemplate;
 
-    public TaxFromDatabase(@Autowired JdbcTemplate jdbcTemplate) {
+    public MySQLTaxRepo(@Autowired JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

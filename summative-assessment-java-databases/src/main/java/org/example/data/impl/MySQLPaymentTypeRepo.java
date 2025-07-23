@@ -1,5 +1,6 @@
-package org.example.data;
+package org.example.data.impl;
 
+import org.example.data.PaymentTypeRepo;
 import org.example.data.exceptions.InternalErrorException;
 import org.example.model.PaymentType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PaymentTypeFromDatabase implements PaymentTypeRepo {
+public class MySQLPaymentTypeRepo implements PaymentTypeRepo {
     private final JdbcTemplate jdbcTemplate;
 
-    public PaymentTypeFromDatabase(@Autowired JdbcTemplate jdbcTemplate) {
+    public MySQLPaymentTypeRepo(@Autowired JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
