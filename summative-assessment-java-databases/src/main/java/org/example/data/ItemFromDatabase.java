@@ -6,6 +6,7 @@ import org.example.data.exceptions.RecordNotFoundException;
 import org.example.model.Item;
 import org.example.model.ItemCategory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -26,7 +27,12 @@ public class ItemFromDatabase implements ItemRepo {
     @Override
     public Item getItemById(int id) throws RecordNotFoundException, InternalErrorException {
         String sql = "SELECT * FROM Item WHERE ItemID = ?;";
-        return jdbcTemplate.queryForObject(sql, itemRowMapper(), id);
+
+        try {
+            return jdbcTemplate.queryForObject(sql, itemRowMapper(), id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new RecordNotFoundException("Item not found with ID: " + id);
+        }
     }
 
     @Override

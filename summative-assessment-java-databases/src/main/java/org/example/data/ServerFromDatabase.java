@@ -4,6 +4,7 @@ import org.example.data.exceptions.InternalErrorException;
 import org.example.data.exceptions.RecordNotFoundException;
 import org.example.model.Server;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,12 @@ public class ServerFromDatabase implements ServerRepo {
     @Override
     public Server getServerById(int id) throws InternalErrorException, RecordNotFoundException {
         String sql = "SELECT * FROM Server WHERE ServerID = ?;";
-        return jdbcTemplate.queryForObject(sql, serverRowMapper(), id);
+
+        try {
+            return jdbcTemplate.queryForObject(sql, serverRowMapper(), id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new RecordNotFoundException("Server not found with ID: " + id);
+        }
     }
 
     @Override

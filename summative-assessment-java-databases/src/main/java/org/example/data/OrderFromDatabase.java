@@ -5,6 +5,7 @@ import org.example.data.exceptions.InternalErrorException;
 import org.example.data.exceptions.RecordNotFoundException;
 import org.example.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -30,7 +31,11 @@ public class OrderFromDatabase implements OrderRepo {
     public Order getOrderById(int id) throws RecordNotFoundException, InternalErrorException {
         String sql = "SELECT o.OrderID, o.ServerID, o.OrderDate, o.SubTotal, o.Tax, o.Tip, o.Total, s.FirstName, s.LastName, s.HireDate, s.TermDate FROM `Order` o INNER JOIN `Server` s ON o.ServerID = s.ServerID WHERE o.OrderID = ?;";
 
-        return jdbcTemplate.queryForObject(sql, orderRowMapper(), id);
+        try {
+            return jdbcTemplate.queryForObject(sql, orderRowMapper(), id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new RecordNotFoundException("Order not found with ID: " + id);
+        }
     }
 
     @Override

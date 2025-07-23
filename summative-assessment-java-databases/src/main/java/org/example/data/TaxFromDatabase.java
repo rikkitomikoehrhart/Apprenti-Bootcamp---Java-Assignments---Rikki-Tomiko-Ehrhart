@@ -4,6 +4,7 @@ import org.example.data.exceptions.InternalErrorException;
 import org.example.data.exceptions.RecordNotFoundException;
 import org.example.model.Tax;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,12 @@ public class TaxFromDatabase implements TaxRepo {
     @Override
     public Tax getCurrentTax(LocalDate dateOf) throws InternalErrorException, RecordNotFoundException {
         String sql = "SELECT * FROM Tax WHERE StartDate <= ? AND (EndDate >= ? OR EndDate IS NULL);";
-        return jdbcTemplate.queryForObject(sql, taxRowMapper(), dateOf, dateOf);
+
+        try {
+            return jdbcTemplate.queryForObject(sql, taxRowMapper(), dateOf, dateOf);
+        } catch (EmptyResultDataAccessException e) {
+            throw new RecordNotFoundException("No ta record found for date: " + dateOf);
+        }
     }
 
 
