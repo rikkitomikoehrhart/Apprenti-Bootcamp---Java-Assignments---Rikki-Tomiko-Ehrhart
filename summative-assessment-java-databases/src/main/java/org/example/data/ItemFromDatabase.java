@@ -31,13 +31,13 @@ public class ItemFromDatabase implements ItemRepo {
 
     @Override
     public List<Item> getAllAvailableItems(LocalDate today) throws InternalErrorException {
-        String sql = "SELECT * FROM Item WHERE StartDate >= ? AND (EndDate <= ? OR EndDate IS NULL)";
+        String sql = "SELECT * FROM Item WHERE StartDate <= ? AND (EndDate >= ? OR EndDate IS NULL)";
         return jdbcTemplate.query(sql, itemRowMapper(), today, today);
     }
 
     @Override
     public List<Item> getItemsByCategory(LocalDate today, int itemCategoryID) throws InternalErrorException {
-        String sql = "SELECT * FROM Item WHERE StartDate >= ? AND ItemCategoryID = ?;";
+        String sql = "SELECT * FROM Item WHERE StartDate <= ? AND ItemCategoryID = ?;";
         return jdbcTemplate.query(sql, itemRowMapper(), today, itemCategoryID);
     }
 

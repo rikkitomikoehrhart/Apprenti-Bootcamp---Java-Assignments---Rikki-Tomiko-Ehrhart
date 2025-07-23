@@ -29,7 +29,7 @@ public class ServerFromDatabase implements ServerRepo {
 
     @Override
     public List<Server> getAllAvailableServers(LocalDate date) throws InternalErrorException {
-        String sql = "SELECT * FROM Server WHERE HireDate >= ? AND (TermDate <= ? OR TermDate IS NULL);";
+        String sql = "SELECT * FROM Server WHERE HireDate <= ? AND (TermDate >= ? OR TermDate IS NULL);";
         return jdbcTemplate.query(sql, serverRowMapper(), date, date);
     }
 
