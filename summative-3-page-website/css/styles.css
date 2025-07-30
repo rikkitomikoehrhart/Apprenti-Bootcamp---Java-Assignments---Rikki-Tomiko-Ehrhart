@@ -1,0 +1,10 @@
+/* 
+- Must be responsive
+- Use media queries to ensure the website adapts
+- Appropriate and consistent color scheme and fonts 
+- Ensure proper spacing between elements
+- At least one image on each page that relates to the site's content
+- Media breakpoints: 768px for tablets and 480px for mobile
+*/
+
+@import "tailwindcss";
