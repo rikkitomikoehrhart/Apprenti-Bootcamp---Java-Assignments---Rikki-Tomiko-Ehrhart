@@ -6,3 +6,39 @@
 - At least one image on each page that relates to the site's content
 - Media breakpoints: 768px for tablets and 480px for mobile
 */
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
+.banner {
+    width: 100vw;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+footer p {
+    text-align: center;
+    margin: 5%;
+    font-size: .75rem;
+    color: rgb(59, 76, 96);
+}
+
+@media (min-width: 768px) {
+    footer p {
+        font-size: 1rem;
+        opacity: .8;
+    }
+}
