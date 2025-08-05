@@ -1,7 +1,9 @@
-import apiService from "@/api.Service";
+import apiService from "@/api.service";
+import Button from "@components/Button";
 import React from "react";
 import Form from "./Form/Form";
-import List from "./List/List";
+import Input from "./Form/Input";
+import Item from "./Item";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -39,6 +41,7 @@ function reducer(state, action) {
 }
 
 function Main() {
+  const [isDisabled, setIsDisabled] = React.useState(true);
   const [state, dispatch] = React.useReducer(reducer, []);
 
   React.useEffect(() => {
@@ -46,6 +49,14 @@ function Main() {
       dispatch({ type: "INIT", payload: todos });
     });
   }, []);
+
+  function handleChange(event) {
+    if (event.target.value.length > 0) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }
 
   return (
     <>
@@ -61,8 +72,15 @@ function Main() {
             });
           form.reset();
         }}
-      />
-      <List todos={state} />
+      >
+        <Input changeHandler={handleChange} />{" "}
+        <Button text="Add" className="button-add" isDisabled={isDisabled} />
+      </Form>
+      <ol>
+        {state.map((todo) => (
+          <Item key={todo.id} todo={todo} />
+        ))}
+      </ol>
     </>
   );
 }

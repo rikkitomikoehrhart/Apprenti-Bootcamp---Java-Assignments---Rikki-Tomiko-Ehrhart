@@ -11,6 +11,7 @@ button {
   color: white;
   font-size: 1em;
   font-weight: bold;
+  margin: 0 0.25em;
   padding: 0.5em;
 }
 
@@ -62,29 +63,25 @@ main {
 }
 
 .button-add::after {
-  content: "\00a0➕"
+  content: "\00a0➕";
 }
 
 .button-del {
   background-color: #f44336;
-  color: white;
   padding: 0.25em;
 }
 
 .button-del::after {
-  content: "\00a0✖"
+  content: "\00a0✖";
 }
 
 .button-edit {
   background-color: #2196f3;
-  border-radius: 50%;
-  color: white;
-  content
-  padding: 0.5em;
+  padding: 0.25em;
 }
 
 .button-edit::after {
-  content: "\00a0✎"
+  content: "\00a0✎";
 }
 
 .completed {
