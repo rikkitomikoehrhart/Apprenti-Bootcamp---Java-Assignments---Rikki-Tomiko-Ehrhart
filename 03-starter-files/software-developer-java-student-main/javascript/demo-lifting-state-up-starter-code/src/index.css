@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  form {
+    @apply flex flex-row justify-center gap-4;
+  }
+
+  label {
+    @apply sr-only;
+  }
+}

@@ -1,0 +1,11 @@
+org/example/view/UI.class
+org/example/model/MenuChoice.class
+org/example/view/ConsoleUI.class
+org/example/service/VendingMachine.class
+org/example/controller/Controller$1.class
+org/example/App.class
+org/example/service/VendingMachineImpl.class
+org/example/model/Payload.class
+org/example/controller/Controller.class
+org/example/model/MenuChoice$MENU_CHOICE.class
+org/example/model/Product.class

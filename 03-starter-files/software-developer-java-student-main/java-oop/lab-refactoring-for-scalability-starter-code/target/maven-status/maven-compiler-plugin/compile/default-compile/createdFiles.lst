@@ -1,0 +1,6 @@
+org/example/service/PrinterMonitor$1.class
+org/example/service/PrinterMonitor.class
+org/example/model/Printer$PrinterStatus.class
+org/example/view/ConsoleIO.class
+org/example/App.class
+org/example/model/Printer.class

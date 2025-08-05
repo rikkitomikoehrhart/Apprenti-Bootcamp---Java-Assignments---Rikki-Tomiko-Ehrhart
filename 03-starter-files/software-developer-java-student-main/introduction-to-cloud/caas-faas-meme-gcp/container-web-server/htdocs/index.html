@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Meme Generator</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div align="center">
+            <h1>Meme-o-Matic</h1>
+            <div>
+                Upload your own file to base your meme on...
+                <br>
+                <input type="file" id="image-input" accept="image/*">
+            </div>
+            <div>
+                ...or select one of ours instead.
+                <div id="radio">
+                </div>
+                <table id="thumbnails"></table>
+            </div>
+            <div>
+                Enter one or more rows of text to place at the top
+                <br>
+                <textarea id="top-text"></textarea>
+            </div>
+            <div>
+                Enter one or more rows of text to place at the bottom
+                <br>
+                <textarea id="bottom-text"></textarea>
+            </div>
+            <div>
+                <button id="generate-btn" disabled>Generate!</button>
+            </div>
+            <div>
+                <canvas id="meme-canvas"></canvas>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
