@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Book from './components/Book';
+import { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [books, setBooks] = useState([
+    { id: 1, title: "The Pragmatic Programmer", author: "Andy Hunt" },
+    { id: 2, title: "Clean Code", author: "Robert C. Martin" },
+    { id: 3, title: "Refactoring", author: "Martin Fowler" }
+  ]);
+  const [cartCount, setCartCount] = useState(0);
+
+  const handleAddToCart = () => {
+    setCartCount(cartCount + 1);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h1>Bookstore</h1>
+      <p>Cart: {cartCount} item(s)</p>
+      {books.map(({ id, title, author }) => (
+        <Book key={id} title={title} author={author} onAddToCart={handleAddToCart} isFeatured={id === 1}/>
+      ))}
+    </div>
+  );
 }
 
-export default App
+export default App;

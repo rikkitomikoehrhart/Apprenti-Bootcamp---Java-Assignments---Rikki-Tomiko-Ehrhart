@@ -40,3 +40,14 @@
 .read-the-docs {
   color: #888;
 }
+
+.book {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.featured {
+  background-color: #fffbcc;
+  border-color: gold;
+}
